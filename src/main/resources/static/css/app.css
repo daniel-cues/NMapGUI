@@ -1,0 +1,177 @@
+body{
+     background-color:#2c2f32;
+     overflow-x: hidden;
+}
+.sidebar {
+     position: fixed;
+     width: 90px;
+     height: 100%;
+     z-index: 1000;
+     background: #656567;
+ }
+.sidebar div img
+{
+    width:75px; 
+    height: auto;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+.sidebar  img
+{
+    width:30px; 
+    height: auto;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+.sidebar div{
+    background-color:#2c2f32;
+}
+ .content {
+     margin-left: 90px;
+     width: auto;
+     position: relative;
+     overflow: auto;
+     z-index: 1;
+ }
+
+.off-canvas.is-open {
+    -webkit-transform: translateX(500px);
+    -ms-transform: translateX(500px);
+    transform: translateX(500px);
+}
+
+
+.off-canvas.position-left {
+  width: 500px;
+  left: -500px;
+}
+
+
+
+.off-canvas-wrapper, .off-canvas-content{
+     overflow:hidden;
+}
+.position-left.is-open ~ .off-canvas-content { 
+	transform: translateX(500px);  
+    width: calc(100% - 500px);
+
+}
+
+.off-canvas{
+     margin-left:90px;
+     background-color:#252526;
+}
+.header-bar{
+     position: fixed;
+     background-color:#656567;
+     height:75px;
+     width: 100%;
+
+}
+.menu-bar{
+     background-color:#111111;
+     color:#FFFFFF;
+     height:75px;
+     width: 100%;     
+
+}
+.wrapper{
+     width: 100%;
+     height: 75px;
+     padding-left: 30px;
+     display:table-cell; 
+     vertical-align:middle;
+}
+.menu-bar .wrapper h2{
+     font-size:20px;
+     font-family: "Helvetica",'Arial', sans-serif;
+     font-weight: bold;
+     margin: 0;
+}
+
+.sidebar-button{
+    display: inline-block;
+    width: 100%;
+    height:75px;
+    color: #FFFFFF;
+}
+.sidebar-button:hover{
+    background-color:#111111;
+}
+
+.selected{
+    background-color:#252526;
+}
+
+
+.console{
+    width: 100%;
+    height: 80px;
+    color: #EEEEEE;
+}
+
+
+.console form {
+    margin-top: 20px;
+}
+.console form label{
+    margin-top: 4px;
+    color: #EEEEEE;
+    margin-left:10px;
+    font-size:17px;
+    float: left;
+}
+.console form input[type="text"]
+{
+    display: inline;
+    background: transparent;
+    width: calc(100% - 100px);
+    border: none;
+    outline: none;
+    box-shadow: none;
+    color:#EEEEEE
+}
+
+.console form input[type="submit"]
+{
+    float: right;
+    margin-right:10px;
+    display: inline;
+    border: none;
+    background: #000000;
+    margin-top: 12px;
+    color:#EEEEEE
+
+}
+.container {    
+    display:-webkit-box;
+    display:-webkit-flex;
+    display:-ms-flexbox;
+    display:flex;
+    height: calc(100vh - 100px);
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    will-change: overflow;
+    
+}
+.out_container {
+    overflow: auto;
+    height: auto;
+    padding: 1rem;
+    -webkit-overflow-scrolling: touch;
+    -ms-overflow-style: none;
+    flex:1;
+    color: white;
+    font-size: 14px;
+}
+
+    
+    
+    
+    
+    

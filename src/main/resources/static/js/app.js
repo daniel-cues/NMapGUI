@@ -17,6 +17,18 @@ $(function() {
 });
 
 function performPost() {
+	/*If backend tells the app that command is finished, stops executing*/
+	/* Updates output from backend */
+	var settings_end = {
+		type : 'GET',
+		url : '/nmap/update-finished'
+	};
+	/* And writes it on its place */
+	$.ajax(settings_end).done(function(result) {
+		if (result==true)
+			clearInterval(loop);
+	});
+
 	/* Updates output from backend */
 	var settings = {
 		type : 'GET',
@@ -26,6 +38,9 @@ function performPost() {
 	$.ajax(settings).done(function(result) {
 		$('#out-fragment').html(result);
 	});
+	
+	
+	
 }
 
 var loop;

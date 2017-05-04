@@ -10,10 +10,13 @@ import com.uniovi.nmapgui.model.*;
 
 @Service
 public class CommandExecutor {
-	public Output out=new Output();
+	public Output out = new Output();
+	private Command cmd;
+
 	
 	@Async
 	public void execute(Command command){
+		cmd=command;
 		out = new Output();
 		String[] commands = (String[])ArrayUtils.addAll(new String[]{"nmap"},command.getText().split(" "));
 		try {
@@ -32,6 +35,7 @@ public class CommandExecutor {
 			      } catch (Exception e) {
 			        // TODO
 			      } finally {
+			    	cmd.setFinished(true);
 			        if (reader != null) {
 			          try {
 			            reader.close();

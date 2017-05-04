@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.uniovi.nmapgui.executor.CommandExecutor;
 import com.uniovi.nmapgui.model.Command;
@@ -40,6 +41,11 @@ public class WebController {
     	model.addAttribute("command", command);
 
     	return "index :: out-fragment";
+    }
+
+    @GetMapping("/nmap/update-finished")
+    public @ResponseBody Boolean updateEnd(Model model) {
+    	return command.isFinished();
     }
 
 }

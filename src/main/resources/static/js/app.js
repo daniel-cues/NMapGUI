@@ -36,7 +36,7 @@ function performPost() {
 	};
 	/* And writes it on its place */
 	$.ajax(settings).done(function(result) {
-		$('#out-fragment').html(result);
+		$('#out-container').html(result);
 	});
 	
 	

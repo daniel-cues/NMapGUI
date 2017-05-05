@@ -31,7 +31,7 @@ public class WebController {
 		executor.execute(command);
         model.addAttribute("output",executor.out);
     	model.addAttribute("command", command);
-        return "index :: out-fragment";
+        return "index :: output";
     }
     
     
@@ -40,7 +40,7 @@ public class WebController {
     	model.addAttribute("output",executor.out);
     	model.addAttribute("command", command);
 
-    	return "index :: out-fragment";
+    	return "index :: output";
     }
 
     @GetMapping("/nmap/update-finished")

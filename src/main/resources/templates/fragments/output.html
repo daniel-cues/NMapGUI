@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  </head>
+  <body>
+    <div th:fragment="output" id="out-fragment" class="out_container">
+      <div class="single-output">
+       <div class="command-header">    	
+       </div>
+       <div class="command-nav-bar">    	
+       </div> 
+       <h2 class="command target">
+       </h2> 
+       <div class="result">
+			<p th:text="'Executed command: nmap ' + ${command.text}"></p>
+			<p th:utext="${output.text}"></p>
+	   </div>
+	  </div>
+    </div>
+  </body>
+</html>

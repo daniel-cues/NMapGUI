@@ -20,7 +20,6 @@ public class WebController {
     	command = new Command();
     	executor = new CommandExecutor();
     	model.addAttribute("command", command);
-        model.addAttribute("output",executor.out);
 
         return "index";
     }
@@ -29,7 +28,6 @@ public class WebController {
     public String command(Model model, @RequestParam String code) {
     	command.setText(code);
 		executor.execute(command);
-        model.addAttribute("output",executor.out);
     	model.addAttribute("command", command);
         return "index :: output";
     }
@@ -37,7 +35,6 @@ public class WebController {
     
     @GetMapping("/nmap/update")
     public String updateOut(Model model) {  
-    	model.addAttribute("output",executor.out);
     	model.addAttribute("command", command);
 
     	return "index :: output";

@@ -13,7 +13,7 @@
        </h2> 
        <div class="result">
 			<p th:text="'Executed command: nmap ' + ${command.text}"></p>
-			<p th:utext="${output.text}"></p>
+			<p th:utext="${command.output.text}"></p>
 	   </div>
 	  </div>
     </div>

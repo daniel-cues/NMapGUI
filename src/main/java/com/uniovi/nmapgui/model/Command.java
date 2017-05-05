@@ -4,6 +4,7 @@ public class Command {
 	
 	private String text;
 	private boolean finished = false;
+	private Output output = new Output();
    
     public String getText() {
         return text;
@@ -19,6 +20,14 @@ public class Command {
 
 	public void setFinished(boolean finished) {
 		this.finished = finished;
+	}
+
+	public Output getOutput() {
+		return output;
+	}
+
+	public void setCommand(Output output) {
+		this.output = output;
 	}
     
 

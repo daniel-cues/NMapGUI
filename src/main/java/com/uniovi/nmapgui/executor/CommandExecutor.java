@@ -38,7 +38,7 @@ public class CommandExecutor {
 			          try {
 			            reader.close();
 			          } catch (IOException e) {
-			            // ignore
+					    cmd.setFinished(true);
 			          }
 			        }
 			      }

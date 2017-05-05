@@ -6,7 +6,13 @@ public class Command {
 	private boolean finished = false;
 	private Output output = new Output();
    
-    public String getText() {
+	public Command() {}
+
+    public Command(String text) {
+    	setText(text);	
+    }
+
+	public String getText() {
         return text;
     }
 

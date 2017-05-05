@@ -126,12 +126,9 @@
 
 				</form>
 			</div>
-			<div class="container">
-				<div class="out_container">
-					<div id="out-fragment" th:fragment="out-fragment" class="result">
-						<p th:text="'Executed command: nmap ' + ${command.text}"></p>
-						<p th:utext="${output.text}"></p>
-					</div>
+			<div class="container" id="out-container">
+				<div class="out_container" th:replace="fragments/output :: output" 
+				th:fragment="output" id="out-fragment">
 				</div>
 			</div>
 		</div>

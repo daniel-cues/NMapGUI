@@ -11,6 +11,7 @@ public class NMapGuiApplicationTests {
 
 	@Test
 	public void contextLoads() {
+		assert(true);
 	}
 
 }

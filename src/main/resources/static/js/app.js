@@ -2,6 +2,9 @@ $(document).ready(function() {
 	$(document).foundation();
 });
 
+var loop;
+
+
 $(function() {
 	$(".sidebar-button").click(
 			function() {
@@ -19,14 +22,15 @@ $(function() {
 function performPost() {
 	/*If backend tells the app that command is finished, stops executing*/
 	/* Updates output from backend */
-	var settings_end = {
+	var settingsEnd = {
 		type : "GET",
 		url : "/nmap/update-finished"
 	};
 	/* And writes it on its place */
-	$.ajax(settings_end).done(function(result) {
-		if (result==true)
+	$.ajax(settingsEnd).done(function(result) {
+		if (result===true){
 			clearInterval(loop);
+		}
 	});
 
 	/* Updates output from backend */
@@ -43,14 +47,13 @@ function performPost() {
 	
 }
 
-var loop;
 
 function startLoop() {
 
 	/* Get Url to send the command */
 	var urlvar = "/nmap-exe";
 
-	if (document.getElementById("command").value != "") {
+	if (document.getElementById("command").value !== "") {
 		urlvar = urlvar + "?code=" + document.getElementById("command").value;
 	}
 	/* Execute ajax command request */
@@ -60,7 +63,8 @@ function startLoop() {
 	};
 	$.ajax(settings);
 	/* Stops any current output refreshing and starts live feed from console */
-	if (loop != null)
+	if (loop != null){
 		clearInterval(loop);
+	}
 	loop = window.setInterval(performPost, 1000);
 }

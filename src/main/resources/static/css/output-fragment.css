@@ -1,0 +1,80 @@
+.single-output{
+	box-shadow: 1px 2px 10px #000000;
+	color: white;
+    margin: 25px;
+    font-size: 14px;
+    background-color: #191c1e;
+	
+}
+.command-header{
+	height: 55px;
+	background-color: #191c1e;
+	border: 0.25px solid #191c1e;
+	text-align: left;
+	vertical-align: middle;
+	padding-left: 30px;
+	font-size: 16px;
+	font-weight: normal;
+	
+}
+.command-nav-bar{
+    width: 60px;
+    background-color: #3e4244;
+    border: 0.25px solid #393939;
+    padding:0px !important;
+    vertical-align:top;
+
+}
+.command-target{
+	height: 40px;
+	background-color: #4d5254;
+	border: 0.25px solid #3e4244;
+	border-left: none;
+	
+}
+.result{
+	background-color: #191c1e;
+	border: 0.25px solid #191c1e;
+	padding-left: 20px;
+	padding-right: 20px;
+}
+.command-displaying{
+	height: 40px;
+	background-color: #292c2d;
+	border: 0.25px solid #191c1e;
+	border-left: none;	
+}
+.output-table{
+	border: none;
+	border-spacing: 0;	
+}
+
+.command-sidebar-button{
+    display: inline-block;
+    width: 100%;
+    font-size: 10px;
+    font-weight: bold;
+    height:90px;
+    color: #FFFFFF;
+}
+.command-sidebar-button:hover{
+    background-color:#111111;
+}
+.command-sidebar-button  img
+{
+    width:40px; 
+    height: auto;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.selected{
+    background-color:#252526;
+}
+
+
+
+
+
+

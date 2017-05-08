@@ -1,21 +1,38 @@
 <!DOCTYPE html>
 <html>
   <head>
-  	<link rel="stylesheet" th:href="@{css/output-fragment.css}" href="../../css/output-fragment.css" />
   </head>
   <body>
     <div th:fragment="output" id="out-fragment" class="out_container">
       <div class="single-output" th:each="cmd : ${commands}">
-       <div class="command-header">    	
-       </div>
-       <div class="command-nav-bar">    	
-       </div> 
-       <h2 class="command target">
-       </h2> 
-       <div class="result">
-			<p th:text="'Executed command: nmap ' + ${cmd.text}"></p>
-			<p th:utext="${cmd.output.text}"></p>
-	   </div>
+      <table class="output-table">
+         <tr>
+       		<th colspan="2" class="command-header" th:text="'$ &ensp; &ensp; nmap ' + ${cmd.text}">
+       		</th> 
+          </tr>	
+       <tr>
+	       <td rowspan="3" class="command-nav-bar">
+	       		<button class="command-sidebar-button" id="cb1" type="button">
+					<img th:src="@{img/code.png}" src="../../img/code.png" />Output
+				</button>
+				<button class="command-sidebar-button " id="cb2" type="button">
+					<img th:src="@{img/html.png}" src="../../img/html.png" />HTML
+				</button>
+				<button class="command-sidebar-button " id="cb3" type="button">
+					<img th:src="@{img/graph.png}" src="../../img/graph.png" />Graph
+				</button>
+			</td>
+	       <td class="command-target"><h2></h2></td>
+	   </tr>
+	   <tr>   
+	       <td class="result"><div>
+				<p th:utext="${cmd.output.text}"></p>
+		   </div></td>
+	   </tr>
+	   <tr>   
+		   <td class="command-displaying"><h2></h2></td>		   
+	   </tr>
+	  </table>
 	  </div>
     </div>
   </body>

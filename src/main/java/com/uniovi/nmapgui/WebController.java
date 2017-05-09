@@ -51,11 +51,38 @@ public class WebController {
     }
 
     @GetMapping("/nmap/update-finished")
-    public @ResponseBody Boolean updateEnd(Model model) {
+    public @ResponseBody Boolean updateEnd() {
     	for(Command cmd : commands)
     		if(!cmd.isFinished())
     			return false;
     	return true;
     }
+    
+//    @GetMapping("/nmap/update-finished-list")
+//    public @ResponseBody List<Integer> updateEndList() {
+//    	List<Integer> ids = new ArrayList<Integer>();
+//    	int index=0;
+//    	for(Command cmd : commands)
+//    	{
+//    		if(!cmd.isFinished())
+//    			ids.add(++index);
+//    		else if(!cmd.isChkUpdateFlag()){
+//    			cmd.setChkUpdateFlag(true);
+//    			ids.add(++index);
+//    		}
+//    	}
+//    	return ids;
+//    }
+//    
+//    @GetMapping("/nmap/updateid")
+//    public String updateOut(Model model, @RequestParam int id) {  
+//    	model.addAttribute("command", command);
+//    	model.addAttribute("commands", commands);
+//
+//
+//    	return "index :: out"+id;
+//    }
+//    
+//    
 
 }

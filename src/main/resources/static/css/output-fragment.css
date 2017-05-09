@@ -57,6 +57,10 @@
     height:90px;
     color: #FFFFFF;
 }
+
+.selected{
+    background-color:#252526;
+}
 .command-sidebar-button:hover{
     background-color:#111111;
 }
@@ -69,9 +73,7 @@
     margin-right: auto;
 }
 
-.selected{
-    background-color:#252526;
-}
+
 
 
 

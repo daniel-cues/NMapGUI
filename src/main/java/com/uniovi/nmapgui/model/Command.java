@@ -5,6 +5,7 @@ public class Command {
 	private String text;
 	private boolean finished = false;
 	private Output output = new Output();
+	private boolean chkUpdateFlag = false;
    
 	public Command() {}
 
@@ -34,6 +35,14 @@ public class Command {
 
 	public void setCommand(Output output) {
 		this.output = output;
+	}
+
+	public boolean isChkUpdateFlag() {
+		return chkUpdateFlag;
+	}
+
+	public void setChkUpdateFlag(boolean chkUpdateFlag) {
+		this.chkUpdateFlag = chkUpdateFlag;
 	}
     
 

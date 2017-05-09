@@ -41,7 +41,9 @@ function performPost() {
 	};
 	/* And writes it on its place */
 	$.ajax(settings).done(function(result) {
+		var tempScrollTop = $("#out-fragment").scrollTop();
 		$("#out-container").html(result);
+		$("#out-fragment").scrollTop(tempScrollTop);
 		
 		$('#out-container').on("click", ".command-sidebar-button", function() {
 			// remove classes from all

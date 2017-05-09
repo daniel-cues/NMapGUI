@@ -9,9 +9,13 @@ $(function() {
 	$(".sidebar-button").click(
 		function() {
 			// remove classes from all
-			$(".sidebar-button").removeClass("selected");
+			if(!$(this).hasClass("selected")){
+				$(".sidebar-button").removeClass("selected");
+				$(this).addClass("selected");
+			}
+			else{ $(".sidebar-button").removeClass("selected"); }
 			// add class to the one we clicked
-			$(this).addClass("selected");
+			
 			$(".off-canvas").not(
 					document.getElementById($(this).attr("data-toggle")))
 					.foundation("close");

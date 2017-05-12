@@ -49,7 +49,7 @@ function performPost() {
 		$("#out-container").html(result);
 		$("#out-fragment").scrollTop(tempScrollTop);
 		
-		$('#out-container').on("click", ".command-sidebar-button", function() {
+		$("#out-container").on("click", ".command-sidebar-button", function() {
 			// remove classes from all
 			$(".command-sidebar-button").removeClass("selected");
 			// add class to the one we clicked

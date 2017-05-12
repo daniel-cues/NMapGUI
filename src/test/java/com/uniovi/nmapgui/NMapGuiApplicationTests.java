@@ -14,7 +14,6 @@ public class NMapGuiApplicationTests {
    
 	@Test
 	public void contextLoads() throws Exception {         
-		assertTrue("Tests not done yet", false);
 	}
 	
 }

@@ -10,6 +10,7 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import com.uniovi.nmapgui.model.*;
+import com.uniovi.nmapgui.util.TransInfoHtml;
 
 @Service
 public class CommandExecutor {
@@ -30,7 +31,7 @@ public class CommandExecutor {
 				.format(new Date()) + ".xml";
 		tempPath=tempPath + filename;
 		String[] commands = (String[])ArrayUtils.addAll(new String[]{"nmap"},command.getText().split(" "));
-		commands = (String[]) ArrayUtils.addAll(commands, new String[]{"-oX" , tempPath});
+		commands = (String[]) ArrayUtils.addAll(commands, new String[]{"-oX" , tempPath, "--stylesheet", "https://svn.nmap.org/nmap/docs/nmap.xsl"});
 		try {
 			
 			 Process p = Runtime.getRuntime().exec(commands);
@@ -82,9 +83,8 @@ public class CommandExecutor {
 		    	String sCurrentLine;
 		        while ((sCurrentLine = br.readLine()) != null) {
 		            sb.append(sCurrentLine);
-		        }
-
-		    cmd.getOutput().setXml(sb.toString());
+		        }		    
+		    cmd.getOutput().setXml(TransInfoHtml.transformToHtml(sb.toString()));
 
 		} catch (Exception e) {
 			e.printStackTrace();

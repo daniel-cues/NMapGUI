@@ -1,6 +1,9 @@
 package com.uniovi.nmapgui.executor;
 
 import java.io.*;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 
 import org.apache.commons.lang.ArrayUtils;
 import org.springframework.scheduling.annotation.Async;
@@ -11,12 +14,23 @@ import com.uniovi.nmapgui.model.*;
 @Service
 public class CommandExecutor {
 	private Command cmd;
+	private String tempPath;
+	private String filename;
 
 	
+	public CommandExecutor() {
+		this.setTempPath(System.getProperty("user.dir")+"/src/main/resources/static/temp/");
+	}
+
+
 	@Async
 	public void execute(Command command){
 		cmd=command;
+		filename= new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss")
+				.format(new Date()) + ".xml";
+		tempPath=tempPath + filename;
 		String[] commands = (String[])ArrayUtils.addAll(new String[]{"nmap"},command.getText().split(" "));
+		commands = (String[]) ArrayUtils.addAll(commands, new String[]{"-oX" , tempPath});
 		try {
 			
 			 Process p = Runtime.getRuntime().exec(commands);
@@ -33,6 +47,7 @@ public class CommandExecutor {
 			      } catch (Exception e) {
 			        // TODO
 			      } finally {
+			    	readXML();
 			    	cmd.setFinished(true);
 			        if (reader != null) {
 			          try {
@@ -46,6 +61,32 @@ public class CommandExecutor {
 			  }).start();
 					    
 		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+
+	public String getTempPath() {
+		return tempPath;
+	}
+
+
+	public void setTempPath(String tempPath) {
+		this.tempPath = tempPath;
+	}
+	
+	public void readXML() {
+
+			StringBuilder sb = new StringBuilder();
+		    try (BufferedReader br = new BufferedReader(new FileReader(tempPath))){
+		    	String sCurrentLine;
+		        while ((sCurrentLine = br.readLine()) != null) {
+		            sb.append(sCurrentLine);
+		        }
+
+		    cmd.getOutput().setXml(sb.toString());
+
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}

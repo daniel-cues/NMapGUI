@@ -17,7 +17,7 @@ import com.uniovi.nmapgui.model.Command;
 public class WebController {
 	private List<Command> commands;
 	private Command command;
-
+	
     @GetMapping("/nmap")
     public String command(Model model) {
     	command = new Command();

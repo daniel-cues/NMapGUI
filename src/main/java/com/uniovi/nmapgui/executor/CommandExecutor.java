@@ -2,10 +2,11 @@ package com.uniovi.nmapgui.executor;
 
 import java.io.*;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
-
-import org.apache.commons.lang.ArrayUtils;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
@@ -30,11 +31,12 @@ public class CommandExecutor {
 		filename= "nmap-scan_" + new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss")
 				.format(new Date()) + ".xml";
 		tempPath=tempPath + filename;
-		String[] commands = (String[])ArrayUtils.addAll(new String[]{"nmap"},command.getText().split(" "));
-		commands = (String[]) ArrayUtils.addAll(commands, new String[]{"-oX" , tempPath});
-		try {
-			
-			 Process p = Runtime.getRuntime().exec(commands);
+		List<String> commandsList = new ArrayList<String>();
+		commandsList.add("nmap");
+		commandsList.addAll(Arrays.asList(command.getText().split(" ")));
+		commandsList.addAll(Arrays.asList(new String[]{"-oX" , tempPath}));
+		try {			
+			 Process p = Runtime.getRuntime().exec(commandsList.toArray(new String[]{}));
 			  final InputStream stream = p.getInputStream();
 			  new Thread(new Runnable() {
 			    public void run() {

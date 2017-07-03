@@ -27,7 +27,7 @@ public class CommandExecutor {
 	@Async
 	public void execute(Command command){
 		cmd=command;
-		filename= new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss")
+		filename= "nmap-scan_" + new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss")
 				.format(new Date()) + ".xml";
 		tempPath=tempPath + filename;
 		String[] commands = (String[])ArrayUtils.addAll(new String[]{"nmap"},command.getText().split(" "));

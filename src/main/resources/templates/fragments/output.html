@@ -12,23 +12,28 @@
           </tr>	
        <tr>
 	       <td rowspan="3" class="command-nav-bar">
-	       		<button class="command-sidebar-button selected" id="cb1" type="button">
+	       		<button class="command-sidebar-button selected" id="cb1" type="button" data-listedElement="el1">
 					<img th:src="@{img/code.png}" src="../../img/code.png" />Output
 				</button>
-				<button class="command-sidebar-button " id="cb2" type="button">
+				<button class="command-sidebar-button" id="cb2" type="button" data-listedElement="el2">
 					<img th:src="@{img/html.png}" src="../../img/html.png" />HTML
 				</button>
-				<button class="command-sidebar-button " id="cb3" type="button">
+				<button class="command-sidebar-button" id="cb3" type="button" data-listedElement="el3">
 					<img th:src="@{img/graph.png}" src="../../img/graph.png" />Graph
 				</button>
 			</td>
 	       <td class="command-target"><h2></h2></td>
 	   </tr>
 	   <tr>   
-	       <td class="result"><div>
-				<p th:utext="${cmd.output.text}"></p>
-				<div class="nmap" th:utext="${cmd.output.xml}"></div>
-		   </div></td>
+	       <td class="result">
+		       <div id="el1" class = "outtoggle">
+					<p th:utext="${cmd.output.text}"></p>
+			   </div>
+			   <div id="el2" class="outtoggle nmap hidden" th:utext="${cmd.output.xml}">
+			   </div>
+			   <div id="el3" class="outtoggle nmap hidden" th:utext="${cmd.output.xml}">
+			   </div>
+		   </td>
 	   </tr>
 	   <tr>   
 		   <td class="command-displaying"><h2></h2></td>		   

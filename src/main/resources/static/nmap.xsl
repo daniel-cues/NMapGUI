@@ -69,7 +69,7 @@ generated with nmap.xsl - version
 by Benjamin Erb - http://www.benjamin-erb.de/nmap_xsl.php
 </xsl:comment>
 <style type="text/css">
-/* stylesheet print */ @media print { .nmap #menu { display:none; } .nmap h1 { font-size: 13pt; font-weight:bold; margin:4pt 0pt 0pt 0pt; padding:0; } .nmap h2 { font-size: 12pt; font-weight:bold; margin:3pt 0pt 0pt 0pt; padding:0; } .nmap h3, .nmap a:link, .nmap a:visited { font-size: 9pt; font-weight:bold; margin:1pt 0pt 0pt 20pt; padding:0; text-decoration: none; color: #FFFFFF; } .nmap p,ul { font-size: 9pt; margin:1pt 0pt 8pt 40pt; padding:0; text-align:left; } .nmap li { font-size: 9pt; margin:0; padding:0; text-align:left; } .nmap table { margin:1pt 0pt 8pt 40pt; border:0px; width:90% } .nmap td { border:0px; border-top:1px solid black; font-size: 9pt; } .nmap .head td { border:0px; font-weight:bold; font-size: 9pt; } .nmap .noprint { display: none; } } /* stylesheet screen */ @media screen { .nmap #container { text-align:left; margin: 10px auto; width: 90%; } .nmap h1 { font-family: Verdana, Helvetica, sans-serif; font-weight:bold; font-size: 14pt; color: #FFFFFF; background-color:#2A0D45; margin:10px 0px 0px 0px; padding:5px 4px 5px 4px; width: 100%; border:1px solid black; text-align: left; } .nmap h2 { font-family: Verdana, Helvetica, sans-serif; font-weight:bold; font-size: 11pt; color: #FFFFFF; margin:30px 0px 0px 0px; padding:4px; width: 100%; text-align: left; } .nmap h2.green { color: #FFFFFF; background-color:#CCFFCC; border-color:#006400; } .nmap h2.red { color: #FFFFFF; background-color:#FFCCCC; border-color:#8B0000; } .nmap h3 { font-family: Verdana, Helvetica, sans-serif; font-weight:bold; font-size: 10pt; color:#FFFFFF; width: 75%; text-align: left; } .nmap p { font-family: Verdana, Helvetica, sans-serif; font-size: 8pt; color:#FFFFFF; width: 75%; text-align: left; } .nmap p i { font-family: Verdana, Helvetica, sans-serif; font-size: 8pt; color:#FFFFFF; } .nmap ul { font-family: Verdana, Helvetica, sans-serif; font-size: 8pt; color:#FFFFFF; width: 75%; text-align: left; } .nmap a { font-family: Verdana, Helvetica, sans-serif; text-decoration: none; font-size: 8pt; color:#FFFFFF; font-weight:bold; color: #FFFFFF; } .nmap li a { font-family: Verdana, Helvetica, sans-serif; text-decoration: none; font-size: 10pt; color:#FFFFFF; font-weight:bold; color: #FFFFFF; } .nmap a:hover { text-decoration: underline; } .nmap a.up { color:#006400; } .nmap table { width: 80%; border:0px; color: #000000; background-color: #FFFFFF; margin:10px; } .nmap tr { vertical-align:top; font-family: Verdana, Helvetica, sans-serif; font-size: 8pt; color:#000000; background-color: #FFFFFF; } .nmap tr.head { background-color: #E1E1E1; color: #000000; font-weight:bold; } .nmap tr.open { background-color: #CCFFCC; color: #000000; } .nmap tr.script { background-color: #EFFFF7; color: #000000; } .nmap tr.filtered { background-color: #F2F2F2; color: #000000; } .nmap tr.closed { background-color: #F2F2F2; color: #000000; } .nmap td { padding:2px; } .nmap #menu li { display : inline; margin : 0; /*margin-right : 10px;*/ padding : 0; list-style-type : none; } .nmap #menubox { position: fixed; bottom: 0px; right: 0px; width: 120px; }
+/* stylesheet print */ @media print { .nmap #menu { display:none; } .nmap h1 { font-size: 13pt; font-weight:bold; margin:4pt 0pt 0pt 0pt; padding:0; } .nmap h2 { font-size: 12pt; font-weight:bold; margin:3pt 0pt 0pt 0pt; padding:0; } .nmap h3, .nmap a:link, .nmap a:visited { font-size: 9pt; font-weight:bold; margin:1pt 0pt 0pt 20pt; padding:0; text-decoration: none; color: #FFFFFF; } .nmap p,ul { font-size: 9pt; margin:1pt 0pt 8pt 40pt; padding:0; text-align:left; } .nmap li { font-size: 9pt; margin:0; padding:0; text-align:left; } .nmap table { margin:1pt 0pt 8pt 40pt; border:0px; width:90% } .nmap td { border:0px; border-top:1px solid black; font-size: 9pt; } .nmap .head td { border:0px; font-weight:bold; font-size: 9pt; } .nmap .noprint { display: none; } } /* stylesheet screen */ @media screen { .nmap #container { text-align:left; margin: 30px; width: 90%; } .nmap h1 { font-family: Verdana, Helvetica, sans-serif; font-weight:bold; font-size: 14pt; color: #FFFFFF; background-color:#2A0D45; margin:10px 0px 0px 0px; padding:5px 4px 5px 4px; width: 100%; border:1px solid black; text-align: left; } .nmap h2 { font-family: Verdana, Helvetica, sans-serif; font-weight:bold; font-size: 11pt; color: #FFFFFF; margin:30px 0px 0px 0px; padding:4px; width: 100%; text-align: left; } .nmap h2.green { color: #FFFFFF; background-color:#CCFFCC; border-color:#006400; } .nmap h2.red { color: #FFFFFF; background-color:#FFCCCC; border-color:#8B0000; } .nmap h3 { font-family: Verdana, Helvetica, sans-serif; font-weight:bold; font-size: 10pt; color:#FFFFFF; width: 75%; text-align: left; } .nmap p { font-family: Verdana, Helvetica, sans-serif; font-size: 8pt; color:#FFFFFF; width: 75%; text-align: left; } .nmap p i { font-family: Verdana, Helvetica, sans-serif; font-size: 8pt; color:#FFFFFF; } .nmap ul { font-family: Verdana, Helvetica, sans-serif; font-size: 8pt; color:#FFFFFF; width: 75%; text-align: left; } .nmap a { font-family: Verdana, Helvetica, sans-serif; text-decoration: none; font-size: 8pt; color:#FFFFFF; font-weight:bold; color: #FFFFFF; } .nmap li a { font-family: Verdana, Helvetica, sans-serif; text-decoration: none; font-size: 10pt; color:#FFFFFF; font-weight:bold; color: #FFFFFF; } .nmap a:hover { text-decoration: underline; } .nmap a.up { color:#006400; } .nmap table { width: 80%; border:0px; color: #000000; background-color: #FFFFFF; margin:10px; } .nmap tr { vertical-align:top; font-family: Verdana, Helvetica, sans-serif; font-size: 8pt; color:#000000; background-color: #FFFFFF; } .nmap tr.head { background-color: #E1E1E1; color: #000000; font-weight:bold; } .nmap tr.open { background-color: #CCFFCC; color: #000000; } .nmap tr.script { background-color: #EFFFF7; color: #000000; } .nmap tr.filtered { background-color: #F2F2F2; color: #000000; } .nmap tr.closed { background-color: #F2F2F2; color: #000000; } .nmap td { padding:2px; } .nmap #menu li { display : inline; margin : 0; /*margin-right : 0px;*/ padding : 0; list-style-type : none; } .nmap #menubox { position: fixed; bottom: 0px; right: 0px; width: 120px; }
 <![CDATA[
 /* This section handle's IE's refusal to honor the fixed CSS attribute */ * html div#menubox { position: absolute; top:expression(eval( document.compatMode && document.compatMode=='CSS1Compat') ? documentElement.scrollTop+(documentElement.clientHeight-this.clientHeight) : document.body.scrollTop +(document.body.clientHeight-this.clientHeight)); } /* This fixes the jerky effect when scrolling in IE*/ * html,* html body { background: #fff url(nosuchfile) fixed; }
 ]]>
@@ -88,19 +88,14 @@ Nmap Scan Report - Scanned at
 <xsl:value-of select="$start"/>
 </h1>
 <ul id="menu">
-<li>
-<a href="#scansummary">Scan Summary</a>
-</li>
 <xsl:if test="prescript/script/@id">
-<li>
-<xsl:text>|</xsl:text>
-<a href="#prescript">Pre-Scan Script Output</a>
-</li>
 </xsl:if>
+<li>
+Target:
+</li>
 <xsl:for-each select="host">
 <xsl:sort select="substring ( address/@addr, 1, string-length ( substring-before ( address/@addr, '.' ) ) )* (256*256*256) + substring ( substring-after ( address/@addr, '.' ), 1, string-length ( substring-before ( substring-after ( address/@addr, '.' ), '.' ) ) )* (256*256) + substring ( substring-after ( substring-after ( address/@addr, '.' ), '.' ), 1, string-length ( substring-before ( substring-after ( substring-after ( address/@addr, '.' ), '.' ), '.' ) ) ) * 256 + substring ( substring-after ( substring-after ( substring-after ( address/@addr, '.' ), '.' ), '.' ), 1 )" order="ascending" data-type="number"/>
 <li>
-<xsl:text>|</xsl:text>
 <xsl:element name="span">
 <xsl:attribute name="class">
 <xsl:choose>
@@ -135,10 +130,7 @@ Nmap Scan Report - Scanned at
 </li>
 </xsl:for-each>
 <xsl:if test="postscript/script/@id">
-<li>
-<xsl:text>|</xsl:text>
-<a href="#postscript">Post-Scan Script Output</a>
-</li>
+
 </xsl:if>
 </ul>
 <xsl:element name="a">

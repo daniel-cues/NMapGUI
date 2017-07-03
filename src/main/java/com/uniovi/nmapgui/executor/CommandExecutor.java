@@ -31,7 +31,7 @@ public class CommandExecutor {
 				.format(new Date()) + ".xml";
 		tempPath=tempPath + filename;
 		String[] commands = (String[])ArrayUtils.addAll(new String[]{"nmap"},command.getText().split(" "));
-		commands = (String[]) ArrayUtils.addAll(commands, new String[]{"-oX" , tempPath, "--stylesheet", "https://svn.nmap.org/nmap/docs/nmap.xsl"});
+		commands = (String[]) ArrayUtils.addAll(commands, new String[]{"-oX" , tempPath});
 		try {
 			
 			 Process p = Runtime.getRuntime().exec(commands);

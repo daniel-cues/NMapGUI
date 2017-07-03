@@ -73,7 +73,7 @@ by Benjamin Erb - http://www.benjamin-erb.de/nmap_xsl.php
 <![CDATA[
 /* This section handle's IE's refusal to honor the fixed CSS attribute */ * html div#menubox { position: absolute; top:expression(eval( document.compatMode && document.compatMode=='CSS1Compat') ? documentElement.scrollTop+(documentElement.clientHeight-this.clientHeight) : document.body.scrollTop +(document.body.clientHeight-this.clientHeight)); } /* This fixes the jerky effect when scrolling in IE*/ * html,* html body { background: #fff url(nosuchfile) fixed; }
 ]]>
-.nmap .up { color: #FFFFFF; background-color:#3f4f3f; } .nmap .down { color:#626262; background-color: #695151; } .nmap .print_only { display: none; } .nmap .hidden { display: none; } .nmap .unhidden { display: block; } }
+.nmap .up { color: #FFFFFF; background-color:#3f4f3f; } .nmap .down { color:#FFFFFF; background-color: #695151; } .nmap .print_only { display: none; } .nmap .hidden { display: none; } .nmap .unhidden { display: block; } }
 </style>
 <title>
 Nmap Scan Report - Scanned at

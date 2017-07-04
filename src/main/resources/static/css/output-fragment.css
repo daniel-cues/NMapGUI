@@ -37,6 +37,7 @@
 	border: 0.25px solid #191c1e;
 	padding-left: 20px;
 	padding-right: 20px;
+	
 }
 .command-displaying{
 	height: 40px;
@@ -46,12 +47,12 @@
 }
 .output-table{
 	border: none;
-	border-spacing: 0;	
+	border-spacing: 0;
 }
 
 .command-sidebar-button{
     display: inline-block;
-    width: 100%;
+    width: 60px;
     font-size: 10px;
     font-weight: bold;
     height:90px;
@@ -75,7 +76,6 @@
 .hidden{
 	display: none; 
 }
-
 
 
 

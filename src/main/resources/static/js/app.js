@@ -23,7 +23,6 @@ $(function() {
 });
 
 
-
 function performPost() {
 	/*If backend tells the app that command is finished, stops executing*/
 	/* Updates output from backend */
@@ -51,9 +50,12 @@ function performPost() {
 		
 		$("#out-container").on("click", ".command-sidebar-button", function() {
 			// remove classes from all
-			$(".command-sidebar-button").removeClass("selected");
 			// add class to the one we clicked
+			$(this).siblings().removeClass("selected");
 			$(this).addClass("selected");
+			$(this).parent().parent().parent().find(".outtoggle").addClass("hidden");
+			$(this).parent().parent().parent().find("#"+$(this).attr("data-listedElement")).removeClass("hidden")
+		
 		});
 	});
 	
@@ -120,3 +122,7 @@ function startLoop() {
 //	
 	loop = window.setInterval(performPost, 1000);
 }
+
+
+
+

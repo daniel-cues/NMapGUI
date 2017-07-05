@@ -43,9 +43,16 @@ public class WebController {
     
     @GetMapping("/nmap/update")
     public String updateOut(Model model) {  
+    	
     	model.addAttribute("command", command);
     	model.addAttribute("commands", commands);
-
+    	boolean notFinished=false;
+    	for(Command cmd : commands)
+    		if(notFinished=!cmd.isFinished())
+    			break;
+    	if(!notFinished)
+    		commands=new ArrayList<>();
+    	
 
     	return "index :: output";
     }

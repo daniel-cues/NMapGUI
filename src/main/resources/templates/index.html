@@ -126,10 +126,14 @@
 				</form>
 			</div>
 			<div class="container" id="out-container">
-				<div class="out_container" th:replace="fragments/output :: output" 
+			<div class="out_container">
+				<div  th:replace="fragments/output :: output" 
 				th:fragment="output" id="out-fragment">
 				</div>
+				<div id="out-container-finished">				
+				</div>
 			</div>
+			</div>			
 		</div>
 	</div>
 </body>

@@ -38,15 +38,23 @@ public class CommandExecutor {
 		try {			
 			 Process p = Runtime.getRuntime().exec(commandsList.toArray(new String[]{}));
 			  final InputStream stream = p.getInputStream();
+			  final InputStream errors = p.getErrorStream();
 			  new Thread(new Runnable() {
 			    public void run() {
 			      BufferedReader reader = null;
+			      BufferedReader errorReader = null;
+
 			      try {
 			        reader = new BufferedReader(new InputStreamReader(stream));
 			        String line = null;
 			        while ((line = reader.readLine()) != null) {
 			        	cmd.getOutput().setText(cmd.getOutput().getText()+line+"<br/>");
 			        }
+			        errorReader = new BufferedReader(new InputStreamReader(errors));
+			        while ((line = errorReader.readLine()) != null) {
+			        	cmd.getOutput().setText(cmd.getOutput().getText()+"<i>"+line+"</i><br/>");
+			        }
+
 			      } catch (Exception e) {
 			        // TODO
 			      } finally {

@@ -1,13 +1,8 @@
 package com.uniovi.nmapgui.util;
 
-
-import java.io.File;
-import java.io.FileReader;
 import java.io.InputStream;
 import java.io.StringReader;
 import java.io.StringWriter;
-import java.net.URL;
-
 import javax.xml.transform.Result;
 import javax.xml.transform.Source;
 import javax.xml.transform.Transformer;

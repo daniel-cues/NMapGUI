@@ -17,8 +17,6 @@ import com.uniovi.nmapgui.util.TransInfoHtml;
 public class CommandExecutor {
 	private Command cmd;
 	private String tempPath;
-	private String filename;
-
 	
 	public CommandExecutor() {
 		this.setTempPath(System.getProperty("user.dir")+"/src/main/resources/static/temp/");
@@ -28,7 +26,7 @@ public class CommandExecutor {
 	@Async
 	public void execute(Command command){
 		cmd=command;
-		filename= "nmap-scan_" + new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss")
+		String filename= "nmap-scan_" + new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss")
 				.format(new Date()) + ".xml";
 		tempPath=tempPath + filename;
 		List<String> commandsList = new ArrayList<String>();

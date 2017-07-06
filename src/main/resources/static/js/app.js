@@ -31,9 +31,10 @@ function performPost() {
 		url : "/nmap/update-finished"
 	};
 	/* And writes it on its place */
-	finished=false;
+	var finished = false;
 	$.ajax(settingsEnd).done(function(result) {
-		if (finished=result===true){
+		if (result===true){
+			finished=result;
 			clearInterval(loop);
 		}
 	});
@@ -55,7 +56,7 @@ function performPost() {
 				$(this).siblings().removeClass("selected");
 				$(this).addClass("selected");
 				$(this).parent().parent().parent().find(".outtoggle").addClass("hidden");
-				$(this).parent().parent().parent().find("#"+$(this).attr("data-listedElement")).removeClass("hidden")
+				$(this).parent().parent().parent().find("#"+$(this).attr("data-listedElement")).removeClass("hidden");
 			
 			});
 			
@@ -69,7 +70,7 @@ function performPost() {
 				$(this).siblings().removeClass("selected");
 				$(this).addClass("selected");
 				$(this).parent().parent().parent().find(".outtoggle").addClass("hidden");
-				$(this).parent().parent().parent().find("#"+$(this).attr("data-listedElement")).removeClass("hidden")
+				$(this).parent().parent().parent().find("#"+$(this).attr("data-listedElement")).removeClass("hidden");
 			
 			});
 		}

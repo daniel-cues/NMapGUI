@@ -22,6 +22,15 @@ $(function() {
 		});
 });
 
+function outputToggleMenu() {
+	// remove classes from all
+	// add class to the one we clicked
+	$(this).siblings().removeClass("selected");
+	$(this).addClass("selected");
+	$(this).parent().parent().parent().find(".outtoggle").addClass("hidden");
+	$(this).parent().parent().parent().find("#"+$(this).attr("data-listedElement")).removeClass("hidden");
+
+}
 
 function performPost() {
 	/*If backend tells the app that command is finished, stops executing*/
@@ -59,20 +68,8 @@ function performPost() {
 			$("#out-container").on("click", ".command-sidebar-button", outputToggleMenu);
 		}
 	});
-	
-	
-	
 }
 
-function outputToggleMenu() {
-	// remove classes from all
-	// add class to the one we clicked
-	$(this).siblings().removeClass("selected");
-	$(this).addClass("selected");
-	$(this).parent().parent().parent().find(".outtoggle").addClass("hidden");
-	$(this).parent().parent().parent().find("#"+$(this).attr("data-listedElement")).removeClass("hidden");
-
-}
 
 //var outputList = [];
 //var counter = 0;
@@ -131,7 +128,8 @@ function startLoop() {
 //
 //  $("#out-fragment").append(div);
 //	
-	loop = window.setInterval(performPost, 1000);
+	
+	loop = window.setInterval(performPost, 2000);
 }
 
 

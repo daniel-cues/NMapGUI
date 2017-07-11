@@ -34,6 +34,28 @@ function outputToggleMenu() {
 
 }
 
+function closeAction() {
+	// remove classes from all
+	// add class to the one we clicked
+	$(this).parent().parent().parent().parent().parent().remove();
+
+}
+function minimizeAction() {
+	// remove classes from all
+	// add class to the one we clicked
+	$(this).addClass("hidden");
+	$(this).parent().find(".command-action-maximize").removeClass("hidden");
+	$(this).parent().parent().parent().parent().find("tbody").addClass("hidden");
+
+}
+function maximizeAction() {
+	// remove classes from all
+	// add class to the one we clicked
+	$(this).addClass("hidden");
+	$(this).parent().find(".command-action-minimize").removeClass("hidden");
+	$(this).parent().parent().parent().parent().find("tbody").removeClass("hidden");
+
+}
 
 function performPost() {
 	/*If backend tells the app that command is finished, stops executing*/
@@ -61,8 +83,12 @@ function performPost() {
 		var tempScrollTop = $("#out-fragment").scrollTop();
 		if(finished){
 			$("#out-fragment").html(null);
-			$("#out-container-finished").prepend(result);			
+			$("#out-container-finished").prepend(result);
+			$("#out-container-finished").find("#out-fragment").replaceWith($("#out-container-finished #out-fragment").children());
 			$("#out-container-finished").on("click", ".command-sidebar-button", outputToggleMenu);
+			$("#out-container-finished").on("click", ".command-action-close", closeAction);
+			$("#out-container-finished").on("click", ".command-action-minimize", minimizeAction);
+			$("#out-container-finished").on("click", ".command-action-maximize", maximizeAction);
 
 
 			

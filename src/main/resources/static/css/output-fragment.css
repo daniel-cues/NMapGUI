@@ -20,6 +20,7 @@
 .command-header > *{
 	vertical-align: middle;
 	display: inline-block;
+	color: white;
 }
 .command-header > div{
 	width: calc(100% - 80px);

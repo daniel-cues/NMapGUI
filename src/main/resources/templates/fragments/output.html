@@ -7,7 +7,17 @@
       <div class="single-output" th:each="cmd : ${commands}">
       <table class="output-table">
          <tr>
-       		<th colspan="2" class="command-header" th:text="'$ &ensp; &ensp; nmap ' + ${cmd.text}">
+       		<th colspan="2" class="command-header">
+       			<div th:text="'$ &ensp; &ensp; nmap ' + ${cmd.text}"></div>
+       			<button class="command-action command-action-save" type="button">
+					<img th:src="@{img/save.png}" src="../../img/save.png" />
+				</button>
+				<button class="command-action command-action-minimize" type="button">
+					<img th:src="@{img/minimize.png}" src="../../img/minimize.png" />
+				</button>
+				<button class="command-action command-action-close" type="button">
+					<img th:src="@{img/close.png}" src="../../img/close.png" />
+				</button>
        		</th> 
           </tr>	
        <tr>

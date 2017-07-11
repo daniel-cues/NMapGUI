@@ -22,6 +22,8 @@ $(function() {
 		});
 });
 
+
+
 function outputToggleMenu() {
 	// remove classes from all
 	// add class to the one we clicked
@@ -31,6 +33,7 @@ function outputToggleMenu() {
 	$(this).parent().parent().parent().find("#"+$(this).attr("data-listedElement")).removeClass("hidden");
 
 }
+
 
 function performPost() {
 	/*If backend tells the app that command is finished, stops executing*/
@@ -60,12 +63,12 @@ function performPost() {
 			$("#out-fragment").html(null);
 			$("#out-container-finished").prepend(result);			
 			$("#out-container-finished").on("click", ".command-sidebar-button", outputToggleMenu);
+
+
 			
 		}else{
 			$("#out-fragment").replaceWith(result);
 			$("#out-fragment").scrollTop(tempScrollTop);
-			
-			$("#out-container").on("click", ".command-sidebar-button", outputToggleMenu);
 		}
 	});
 }

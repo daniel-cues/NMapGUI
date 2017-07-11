@@ -17,6 +17,24 @@
 	font-weight: normal;
 	
 }
+.command-header > *{
+	vertical-align: middle;
+	display: inline-block;
+}
+.command-header > div{
+	width: calc(100% - 80px);
+}
+
+.command-action {
+	width: 20px;
+    height: auto;
+}
+
+.command-action img:active {
+    padding-top: 5px;
+}
+
+
 .command-nav-bar{
     width: 60px;
     background-color: #3e4244;

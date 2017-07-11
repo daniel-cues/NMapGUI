@@ -6,38 +6,57 @@
     <div th:fragment="output" id="out-fragment" class="out_container">
       <div class="single-output" th:each="cmd : ${commands}">
       <table class="output-table">
+      	 <thead>
          <tr>
-       		<th colspan="2" class="command-header" th:text="'$ &ensp; &ensp; nmap ' + ${cmd.text}">
+       		<th colspan="2" class="command-header">
+       			<div th:text="'$ &ensp; &ensp; nmap ' + ${cmd.text}"></div>
+       			<form target="_blank" th:action="@{'/nmap/download/' + ${cmd.output.filename}}">
+	       			<button class="command-action command-action-save" type="submit">
+						<img th:src="@{img/save.png}" src="../../img/save.png" />
+					</button>
+				</form>
+				<button class="command-action command-action-minimize" type="button">
+					<img th:src="@{img/minimize.png}" src="../../img/minimize.png" />
+				</button>
+				<button class="command-action command-action-maximize hidden" type="button">
+					<img th:src="@{img/maximize.png}" src="../../img/maxiimize.png" />
+				</button>
+				<button class="command-action command-action-close" type="button">
+					<img th:src="@{img/close.png}" src="../../img/close.png" />
+				</button>
        		</th> 
-          </tr>	
-       <tr>
-	       <td rowspan="3" class="command-nav-bar">
-	       		<button class="command-sidebar-button selected" id="cb1" type="button" data-listedElement="el1">
-					<img th:src="@{img/code.png}" src="../../img/code.png" />Output
-				</button>
-				<button class="command-sidebar-button" id="cb2" type="button" data-listedElement="el2">
-					<img th:src="@{img/html.png}" src="../../img/html.png" />HTML
-				</button>
-				<button class="command-sidebar-button" id="cb3" type="button" data-listedElement="el3">
-					<img th:src="@{img/graph.png}" src="../../img/graph.png" />Graph
-				</button>
-			</td>
-	       <td class="command-target"><h2></h2></td>
-	   </tr>
-	   <tr>   
-	       <td class="result">
-		       <div id="el1" class = "outtoggle">
-					<p th:utext="${cmd.output.text}"></p>
-			   </div>
-			   <div id="el2" class="outtoggle nmap hidden" th:utext="${cmd.output.xml}">
-			   </div>
-			   <div id="el3" class="outtoggle nmap hidden">
-			   </div>
-		   </td>
-	   </tr>
-	   <tr>   
-		   <td class="command-displaying"><h2></h2></td>		   
-	   </tr>
+          </tr>
+          </thead>
+          <tbody>
+	       <tr>
+		       <td rowspan="3" class="command-nav-bar">
+		       		<button class="command-sidebar-button selected" id="cb1" type="button" data-listedElement="el1">
+						<img th:src="@{img/code.png}" src="../../img/code.png" />Output
+					</button>
+					<button class="command-sidebar-button" id="cb2" type="button" data-listedElement="el2">
+						<img th:src="@{img/html.png}" src="../../img/html.png" />HTML
+					</button>
+					<button class="command-sidebar-button" id="cb3" type="button" data-listedElement="el3">
+						<img th:src="@{img/graph.png}" src="../../img/graph.png" />Graph
+					</button>
+				</td>
+		       <td class="command-target"><h2></h2></td>
+		   </tr>
+		   <tr>   
+		       <td class="result">
+			       <div id="el1" class = "outtoggle">
+						<p th:utext="${cmd.output.text}"></p>
+				   </div>
+				   <div id="el2" class="outtoggle nmap hidden" th:utext="${cmd.output.xml}">
+				   </div>
+				   <div id="el3" class="outtoggle nmap hidden">
+				   </div>
+			   </td>
+		   </tr>
+		   <tr>   
+			   <td class="command-displaying" th:text="${cmd.output.filename}"></td>		   
+		   </tr>
+		   </tbody>
 	  </table>
 	  </div>
     </div>

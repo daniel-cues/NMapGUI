@@ -10,9 +10,11 @@
          <tr>
        		<th colspan="2" class="command-header">
        			<div th:text="'$ &ensp; &ensp; nmap ' + ${cmd.text}"></div>
-       			<button class="command-action command-action-save" type="button">
-					<img th:src="@{img/save.png}" src="../../img/save.png" />
-				</button>
+       			<form target="_blank" th:action="@{'/nmap/download/' + ${cmd.output.filename}}">
+	       			<button class="command-action command-action-save" type="submit">
+						<img th:src="@{img/save.png}" src="../../img/save.png" />
+					</button>
+				</form>
 				<button class="command-action command-action-minimize" type="button">
 					<img th:src="@{img/minimize.png}" src="../../img/minimize.png" />
 				</button>
@@ -52,7 +54,7 @@
 			   </td>
 		   </tr>
 		   <tr>   
-			   <td class="command-displaying"><h2></h2></td>		   
+			   <td class="command-displaying" th:text="${cmd.output.filename}"></td>		   
 		   </tr>
 		   </tbody>
 	  </table>

@@ -6,7 +6,7 @@ public class Command {
 	private boolean finished = false;
 	private Output output = new Output();
 	private boolean chkUpdateFlag = false;
-   
+
 	public Command() {}
 
     public Command(String text) {

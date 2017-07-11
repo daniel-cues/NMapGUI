@@ -89,6 +89,7 @@ function performPost() {
 			$("#out-container-finished").on("click", ".command-action-close", closeAction);
 			$("#out-container-finished").on("click", ".command-action-minimize", minimizeAction);
 			$("#out-container-finished").on("click", ".command-action-maximize", maximizeAction);
+			$("#out-container-finished").on("click", ".command-action-save", saveAction);
 
 
 			

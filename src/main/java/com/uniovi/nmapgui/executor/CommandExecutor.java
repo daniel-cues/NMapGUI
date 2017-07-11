@@ -27,7 +27,8 @@ public class CommandExecutor {
 	public void execute(Command command){
 		cmd=command;
 		String filename= "nmap-scan_" + new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss")
-				.format(new Date()) + ".xml";
+				.format(new Date())+ ".xml";
+		this.cmd.getOutput().setFilename(filename);
 		tempPath=tempPath + filename;
 		List<String> commandsList = new ArrayList<String>();
 		commandsList.add("nmap");
@@ -85,7 +86,6 @@ public class CommandExecutor {
 	}
 	
 	public void readXML() {
-
 			StringBuilder sb = new StringBuilder();
 		    try (BufferedReader br = new BufferedReader(new FileReader(tempPath))){
 		    	String sCurrentLine;

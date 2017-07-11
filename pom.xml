@@ -9,7 +9,7 @@
 	<packaging>jar</packaging>
 
 	<name>NMapGUI</name>
-	<description>GUI forn NMap</description>
+	<description>GUI for NMap</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -34,12 +34,6 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>
-				spring-boot-starter-data-elasticsearch
-			</artifactId>
 		</dependency>
 	</dependencies>
 

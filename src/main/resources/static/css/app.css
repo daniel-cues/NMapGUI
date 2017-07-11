@@ -52,9 +52,14 @@ body{
 
 .off-canvas-wrapper, .off-canvas-content{
      overflow:hidden;
+     
+}
+
+.off-canvas-content  {
+	  transition: width 0.5s ease, translate 0.5s ease ;	
 }
 .position-left.is-open ~ .off-canvas-content { 
-	transform: translateX(500px);  
+	transform: translateX(500px);
     width: calc(100% - 500px);
 
 }
@@ -62,6 +67,7 @@ body{
 .off-canvas{
      margin-left:90px;
      background-color:#252526;
+     
 }
 .header-bar{
      position: fixed;
@@ -150,25 +156,27 @@ body{
     display:-webkit-flex;
     display:-ms-flexbox;
     display:flex;
-    height: calc(100vh - 100px);
+    height: calc(100vh - 75px);
     overflow: hidden;
     position: relative;
     width: 100%;
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
     will-change: overflow;
+    margin-top: -25px;
+    
+    
     
 }
 .out_container {
     overflow: auto;
     height: auto;
-    padding: 1rem;
     -webkit-overflow-scrolling: touch;
     -ms-overflow-style: none;
     flex:1;
-    color: white;
-    font-size: 14px;
+    flex-basis:100%;
 }
+
 
     
     

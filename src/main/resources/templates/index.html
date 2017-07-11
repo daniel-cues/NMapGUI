@@ -1,180 +1,140 @@
 <!doctype html>
-<html xmlns:th="http://www.thymeleaf.org" class="no-js" lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8"/>
-    <meta http-equiv="x-ua-compatible" content="ie=edge"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Foundation for Sites</title>
-    <link rel="stylesheet" th:href="@{css/foundation.css}" href="../../css/foundation.css"/>
-    <link rel="stylesheet" th:href="@{css/app.css}" 	   href="../../css/app.css"/>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script>
-	$(function() {
-	   $(".sidebar-button").click(function() {
-	      // remove classes from all
-	      $(".sidebar-button").removeClass("selected");
-	      // add class to the one we clicked
-		$(this).addClass("selected");
-		$('.off-canvas').not(document.getElementById($(this).attr('data-toggle')))
-		.foundation( 'close');	
-	      
-	   });
-	});
-	
-	 function performPost() {
-	    	/*Updates output from backend*/
-	        var settings = {
-	            type: 'GET',
-	            url:'/nmap/update'
-	        };
-	        /*And writes it on its place*/
-	        $.ajax(settings).done(function(result) {
-	        	$('#out-fragment').html(result);
-	        });
-	    }
-	    
-	    var loop;
-	        
-	    function startLoop(){
-	    	
-	        /*Get Url to send the command*/
-	    	var urlvar = '/nmap-exe';
-
-	        if (document.getElementById('command').value != '') {
-	        	urlvar = urlvar + '?code=' + document.getElementById('command').value ;
-	        }
-	        /*Execute ajax command request*/
-	        var settings = {
-	                type: 'GET',
-	                url:urlvar
-	            };
-	        $.ajax(settings)
-			/*Stops any current output refreshing and starts live feed from console*/
-	        if(loop!=null)
-	        	clearInterval(loop);
-	    	loop=window.setInterval(performPost, 1000);
-	    }
-	    
-     </script>
-
-  </head>
-  <body>
-
-
-
-<div id="sidebar" class="sidebar">
-<div>
-   <img src="https://nmap.org/images/nmap-logo-256x256.png"/>
-</div>
-    <button class="sidebar-button" id="b1" type="button" data-toggle="offCanvas">
-      <img th:src="@{img/ethernet.png}" src="../../img/ethernet.png"/> 
-    </button>
-    <button class="sidebar-button "  id="b2" type="button" data-toggle="offCanvas2">
-      <img th:src="@{img/network.png}" src="../../img/network.png"/> 
-    </button>
-    <button class="sidebar-button "  id="b3" type="button" data-toggle="offCanvas3">
-      <img th:src="@{img/script.png}" src="../../img/script.png"/> 
-    </button>
-    <button class="sidebar-button " id="b4" type="button" data-toggle="offCanvas4">
-      <img th:src="@{img/assignment.png}" src="../../img/assignment.png"/> 
-    </button>
-    <button class="sidebar-button " id="b5" type="button" data-toggle="offCanvas5">
-      <img th:src="@{img/settings.png}" src="../../img/settings.png"/> 
-    </button>
-</div>
-<div class="header-bar">
-</div>   
-
-<div class="content off-canvas-wrapper" >
-
-
-<div class="off-canvas position-left" id="offCanvas" data-off-canvas="true" data-close-on-click="false" data-content-overlay="false">
-    <!-- Menu -->
-	<div class="menu-bar">
-	   <div class="wrapper">
-	     <h2>Port Scan</h2>
-	  </div>
+<html xmlns:th="http://www.thymeleaf.org" class="no-js" lang="en"
+	dir="ltr">
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="x-ua-compatible" content="ie=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>NMap GUI</title>
+	<link rel="stylesheet" th:href="@{css/foundation.css}"	href="../../css/foundation.css" />
+	<link rel="stylesheet" th:href="@{css/app.css}" href="../../css/app.css" />
+	<link rel="stylesheet" th:href="@{css/output-fragment.css}" href="../../css/output-fragment.css" />
+	<script	src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<script th:src="@{js/vendor/jquery.js}" src="../../js/vendor/jquery.js"></script>
+	<script th:src="@{js/vendor/what-input.js}"	src="../../js/vendor/what-input.js"></script>
+	<script th:src="@{js/vendor/foundation.js}"	src="../../js/vendor/foundation.js"></script>
+	<script th:src="@{js/app.js}" src="../../js/app.js"></script>
+</head>
+<body>
+	<div id="sidebar" class="sidebar">
+		<div>
+			<img src="https://nmap.org/images/nmap-logo-256x256.png" />
+		</div>
+		<button class="sidebar-button" id="b1" type="button"
+			data-toggle="offCanvas">
+			<img th:src="@{img/ethernet.png}" src="../../img/ethernet.png" />
+		</button>
+		<button class="sidebar-button " id="b2" type="button"
+			data-toggle="offCanvas2">
+			<img th:src="@{img/network.png}" src="../../img/network.png" />
+		</button>
+		<button class="sidebar-button " id="b3" type="button"
+			data-toggle="offCanvas3">
+			<img th:src="@{img/script.png}" src="../../img/script.png" />
+		</button>
+		<button class="sidebar-button " id="b4" type="button"
+			data-toggle="offCanvas4">
+			<img th:src="@{img/assignment.png}" src="../../img/assignment.png" />
+		</button>
+		<button class="sidebar-button " id="b5" type="button"
+			data-toggle="offCanvas5">
+			<img th:src="@{img/settings.png}" src="../../img/settings.png" />
+		</button>
 	</div>
-    <ul class="vertical menu">
-	
-      <li><a href="#">Menu1</a></li>
-    </ul>
+	<div class="header-bar"></div>
 
-  </div>
+	<div class="content off-canvas-wrapper">
+		<div class="off-canvas position-left" id="offCanvas"
+			data-off-canvas="true" data-close-on-click="false"
+			data-content-overlay="false">
+			<!-- Menu -->
+			<div class="menu-bar">
+				<div class="wrapper">
+					<h2>Port Scan</h2>
+				</div>
+			</div>
+			<ul class="vertical menu">
 
-<div class="off-canvas position-left" id="offCanvas2" data-off-canvas="true" data-close-on-click="false" data-content-overlay="false">  
-    <!-- Menu -->
-	<div class="menu-bar">
-	   <div class="wrapper">
-	     <h2>Host Discovery</h2>
-	  </div>
+				<li><a href="#">Menu1</a></li>
+			</ul>
+
+		</div>
+		<div class="off-canvas position-left" id="offCanvas2"
+			data-off-canvas="true" data-close-on-click="false"
+			data-content-overlay="false">
+			<!-- Menu -->
+			<div class="menu-bar">
+				<div class="wrapper">
+					<h2>Host Discovery</h2>
+				</div>
+			</div>
+			<ul class="vertical menu">
+
+				<li><a href="#">Menu2</a></li>
+			</ul>
+
+		</div>
+		<div class="off-canvas position-left" id="offCanvas3"
+			data-off-canvas="true" data-close-on-click="false"
+			data-content-overlay="false">
+			<!-- Menu -->
+			<div class="menu-bar">
+				<div class="wrapper">
+					<h2>Script Scan</h2>
+				</div>
+			</div>
+			<ul class="vertical menu">
+				<li><a href="#">Menu3</a></li>
+			</ul>
+
+		</div>
+		<div class="off-canvas position-left" id="offCanvas4"
+			data-off-canvas="true" data-close-on-click="false"
+			data-content-overlay="false">
+			<!-- Menu -->
+			<div class="menu-bar">
+				<div class="wrapper">
+					<h2>Version/OS Information</h2>
+				</div>
+			</div>
+			<ul class="vertical menu">
+				<li><a href="#">Menu4</a></li>
+			</ul>
+
+		</div>
+		<div class="off-canvas position-left" id="offCanvas5"
+			data-off-canvas="true" data-close-on-click="false"
+			data-content-overlay="false">
+			<!-- Menu -->
+			<div class="menu-bar">
+				<div class="wrapper">
+					<h2>Other Options</h2>
+				</div>
+			</div>
+			<ul class="vertical menu">
+				<li><a href="#">Menu5</a></li>
+			</ul>
+		</div>
+
+		<div class="off-canvas-content" data-off-canvas-content="true">
+			<div class="console">
+				<form th:object="${command}" onsubmit="startLoop(); return false;">
+
+					<label for="command">nmap</label> <input type="text" id="command"
+						th:field="*{text}" /> <input type="submit" value=">" />
+
+				</form>
+			</div>
+			<div class="container" id="out-container">
+			<div class="out_container">
+				<div  th:replace="fragments/output :: output" 
+				th:fragment="output" id="out-fragment">
+				</div>
+				<div id="out-container-finished">				
+				</div>
+			</div>
+			</div>			
+		</div>
 	</div>
-    <ul class="vertical menu">
-
-      <li><a href="#">Menu2</a></li>
-    </ul>
-
-  </div>
-
-<div class="off-canvas position-left" id="offCanvas3" data-off-canvas="true" data-close-on-click="false" data-content-overlay="false" >
-    <!-- Menu -->
-	<div class="menu-bar">
-	   <div class="wrapper">
-	     <h2>Script Scan</h2>
-	  </div>
-	</div>
-    <ul class="vertical menu">
-      <li><a href="#">Menu3</a></li>
-    </ul>
-
-  </div>
-<div class="off-canvas position-left" id="offCanvas4" data-off-canvas="true" data-close-on-click="false" data-content-overlay="false" >
-    <!-- Menu -->
-	<div class="menu-bar">
-	   <div class="wrapper">
-	     <h2>Version/OS Information</h2>
-	  </div>
-	</div>
-    <ul class="vertical menu">
-      <li><a href="#">Menu4</a></li>
-    </ul>
-
-  </div>
-<div class="off-canvas position-left" id="offCanvas5" data-off-canvas="true" data-close-on-click="false" data-content-overlay="false" >
-    <!-- Menu -->
-	<div class="menu-bar">
-	   <div class="wrapper">
-	     <h2>Other Options</h2>
-	  </div>
-	</div>
-    <ul class="vertical menu">
-      <li><a href="#">Menu5</a></li>
-    </ul>
-  </div>
-
-  <div class="off-canvas-content" data-off-canvas-content="true">
-	<div class="console">
-	<form th:object="${command}" onsubmit="startLoop(); return false;">
-
-	<label for="command">nmap</label>
-	<input type="text" id="command" th:field="*{text}" />
-     	<input type="submit" value=">"/> 
-
-	</form>
-  	</div>	
-  	<div class="container">
-  		<div class="out_container">
-		  	<div id="out-fragment" th:fragment="out-fragment" class="result">
-		  		<p th:text="'Executed command: nmap ' + ${command.text}"></p>    
-			    <p th:utext="${output.text}"></p>
-		  	</div>  
-		</div> 
-  	</div>  		  
-  </div>
- </div>
-    <script th:src="@{js/vendor/jquery.js}" 		src="../../js/vendor/jquery.js"></script>
-    <script th:src="@{js/vendor/what-input.js}" 	src="../../js/vendor/what-input.js"></script>
-    <script th:src="@{js/vendor/foundation.js}" 	src="../../js/vendor/foundation.js"></script>
-    <script th:src="@{js/app.js}" 					src="../../js/app.js"></script>
-  </body>
+</body>
 </html>

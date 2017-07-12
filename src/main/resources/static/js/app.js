@@ -69,7 +69,8 @@ function performPost() {
 	$.ajax(settingsEnd).done(function(result) {
 		if (result===true){
 			finished=result;
-			clearInterval(loop);
+			if(loop!=null)
+				clearInterval(loop);
 		}
 	});
 
@@ -84,14 +85,12 @@ function performPost() {
 		if(finished){
 			$("#out-fragment").html(null);
 			$("#out-container-finished").prepend(result);
-			$("#out-container-finished").find("#out-fragment").replaceWith($("#out-container-finished #out-fragment").children());
+			$("#out-container-finished #out-fragment").replaceWith($("#out-container-finished #out-fragment").children());
+			$("#out-container-finished .loading").addClass("loaded").removeClass("loading");
 			$("#out-container-finished").on("click", ".command-sidebar-button", outputToggleMenu);
 			$("#out-container-finished").on("click", ".command-action-close", closeAction);
 			$("#out-container-finished").on("click", ".command-action-minimize", minimizeAction);
 			$("#out-container-finished").on("click", ".command-action-maximize", maximizeAction);
-			$("#out-container-finished").on("click", ".command-action-save", saveAction);
-
-
 			
 		}else{
 			$("#out-fragment").replaceWith(result);
@@ -129,7 +128,6 @@ function performPost() {
 //	
 //	
 //}
-
 function startLoop() {
 
 	/* Get Url to send the command */
@@ -143,25 +141,26 @@ function startLoop() {
 		type : "GET",
 		url : urlvar
 	};
-	$.ajax(settings);
-	/* Stops any current output refreshing and starts live feed from console */
-	if (loop != null){
-		clearInterval(loop);
+	$.ajax(settings).done(
+		function(){
+			/* Stops any current output refreshing and starts live feed from console */
+			if (loop != null){
+				clearInterval(loop);
+			}
+			
+			//counter++;
+			//var div=document.createElement("div");
+			//div.setAttribute("id", "out" + counter);
+						//
+			//div.className = "single-output";
+			//outputList.push(counter);
+			//
+			//  $("#out-fragment").append(div);
+			//
+			performPost();
+			loop = window.setInterval(performPost, 2000);				
+		});
 	}
-	
-//	counter++;
-//	var div=document.createElement("div");
-//	div.setAttribute("id", "out" + counter);
-//
-//	div.className = "single-output";
-//	outputList.push(counter);
-//
-//  $("#out-fragment").append(div);
-//	
-	
-	loop = window.setInterval(performPost, 2000);
-}
-
 
 
 

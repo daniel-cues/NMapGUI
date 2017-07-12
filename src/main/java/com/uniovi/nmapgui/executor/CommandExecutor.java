@@ -33,7 +33,7 @@ public class CommandExecutor {
 		List<String> commandsList = new ArrayList<String>();
 		commandsList.add("nmap");
 		commandsList.addAll(Arrays.asList(command.getText().split(" ")));
-		commandsList.addAll(Arrays.asList(new String[]{"-oX" , tempPath}));
+		commandsList.addAll(Arrays.asList(new String[]{"-oX" , tempPath, "--webxml"}));
 		try {			
 			 Process p = Runtime.getRuntime().exec(commandsList.toArray(new String[]{}));
 			  final InputStream stream = p.getInputStream();

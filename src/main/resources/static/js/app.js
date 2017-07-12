@@ -72,31 +72,30 @@ function performPost() {
 			if(loop!=null)
 				clearInterval(loop);
 		}
-	});
-
-	/* Updates output from backend */
-	var settings = {
-		type : "GET",
-		url : "/nmap/update"
-	};
-	/* And writes it on its place */
-	$.ajax(settings).done(function(result) {
-		var tempScrollTop = $("#out-fragment").scrollTop();
-		if(finished){
-			$("#out-fragment").html(null);
-			$("#out-container-finished").prepend(result);
-			$("#out-container-finished #out-fragment").replaceWith($("#out-container-finished #out-fragment").children());
-			$("#out-container-finished .loading").addClass("loaded").removeClass("loading");
-			$("#out-container-finished").on("click", ".command-sidebar-button", outputToggleMenu);
-			$("#out-container-finished").on("click", ".command-action-close", closeAction);
-			$("#out-container-finished").on("click", ".command-action-minimize", minimizeAction);
-			$("#out-container-finished").on("click", ".command-action-maximize", maximizeAction);
-			
-		}else{
-			$("#out-fragment").replaceWith(result);
-			$("#out-fragment").scrollTop(tempScrollTop);
-		}
-	});
+		/* Updates output from backend */
+		var settings = {
+			type : "GET",
+			url : "/nmap/update"
+		};
+		/* And writes it on its place */
+		$.ajax(settings).done(function(result) {
+			var tempScrollTop = $("#out-fragment").scrollTop();
+			if(finished){
+				$("#out-fragment").html(null);
+				$("#out-container-finished").prepend(result);
+				$("#out-container-finished #out-fragment").replaceWith($("#out-container-finished #out-fragment").children());
+				$("#out-container-finished .loading").addClass("loaded").removeClass("loading");
+				$("#out-container-finished").on("click", ".command-sidebar-button", outputToggleMenu);
+				$("#out-container-finished").on("click", ".command-action-close", closeAction);
+				$("#out-container-finished").on("click", ".command-action-minimize", minimizeAction);
+				$("#out-container-finished").on("click", ".command-action-maximize", maximizeAction);
+				
+			}else{
+				$("#out-fragment").replaceWith(result);
+				$("#out-fragment").scrollTop(tempScrollTop);
+			}
+		});
+	});	
 }
 
 

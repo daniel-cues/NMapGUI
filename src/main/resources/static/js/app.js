@@ -69,13 +69,14 @@ function performPost() {
 	$.ajax(settingsEnd).done(function(result) {
 		if (result===true){
 			finished=result;
-			if(loop!=null)
+			if(loop!=null){
 				clearInterval(loop);
+			}
 		}
 		/* Updates output from backend */
 		var settings = {
 			type : "GET",
-			url : "/nmap/update"
+			url : "/nmap/update?allowDel="+finished
 		};
 		/* And writes it on its place */
 		$.ajax(settings).done(function(result) {
@@ -157,7 +158,7 @@ function startLoop() {
 			//  $("#out-fragment").append(div);
 			//
 			performPost();
-			loop = window.setInterval(performPost, 2000);				
+			loop = window.setInterval(function(){performPost();}, 2000);				
 		});
 	}
 

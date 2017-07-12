@@ -49,7 +49,7 @@ public class WebController {
     
     
     @GetMapping("/nmap/update")
-    public String updateOut(Model model) {  
+    public String updateOut(Model model, @RequestParam boolean allowDel) {  
     	
     	model.addAttribute("command", command);
     	model.addAttribute("commands", commands);
@@ -57,7 +57,7 @@ public class WebController {
     	for(Command cmd : commands)
     		if(notFinished=!cmd.isFinished())
     			break;
-    	if(!notFinished)
+    	if(!notFinished && allowDel)
     		commands=new ArrayList<>();
     	
 

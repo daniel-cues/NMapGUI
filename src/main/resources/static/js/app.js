@@ -158,7 +158,7 @@ function startLoop() {
 			//  $("#out-fragment").append(div);
 			//
 			performPost();
-			loop = window.setInterval(function(){performPost();}, 2000);				
+			loop = window.setInterval(performPost, 2000);				
 		});
 	}
 

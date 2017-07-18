@@ -2,20 +2,13 @@ language: java
 sudo: false
 jdk:
   - oraclejdk8
-  
-addons:
-  apt:
-    packages:
-      - nmap
+
   
 before_install:
+  - sudo apt-get -qq update
   - pip install --user codecov
+  - sudo apt-get install nmap
 
 after_success:
   - codecov
   
-install:
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew update && brew install nmap; npm install; npm test; fi
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-get update && sudo apt-get install -y nmap; nvm install $NODE_VERSION; npm install; npm test; fi
-
-

@@ -10,6 +10,7 @@ public class Command {
 	public Command() {}
 
     public Command(String text) {
+    	this();
     	setText(text);	
     }
 
@@ -33,7 +34,7 @@ public class Command {
 		return output;
 	}
 
-	public void setCommand(Output output) {
+	public void setOutput(Output output) {
 		this.output = output;
 	}
 

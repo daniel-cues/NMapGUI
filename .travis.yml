@@ -2,12 +2,14 @@ language: java
 sudo: false
 jdk:
   - oraclejdk8
-
+  
+addons:
+  apt:
+    packages:
+    - nmap
   
 before_install:
-  - sudo apt-get -qq update
   - pip install --user codecov
-  - sudo apt-get install nmap
 
 after_success:
   - codecov

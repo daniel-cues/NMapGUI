@@ -15,7 +15,7 @@ after_success:
   - codecov
   
 install:
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew update && brew install nmap; fi
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-get update && sudo apt-get install -y nmap; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew update && brew install nmap; npm install; npm test; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-get update && sudo apt-get install -y nmap; nvm install $NODE_VERSION; npm install; npm test; fi
 
 

@@ -1,5 +1,8 @@
 package com.uniovi.nmapgui.model;
 
+import org.springframework.stereotype.Service;
+
+@Service
 public class Command {
 	
 	private String text;

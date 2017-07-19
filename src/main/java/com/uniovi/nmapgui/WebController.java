@@ -40,7 +40,7 @@ public class WebController {
     public String command(Model model, @RequestParam String code) {
     	command =  new Command(code);
     	commands.add(0,command);
-    	new CommandExecutor().execute(command);
+    	new CommandExecutor(command).execute();
     	model.addAttribute("command", command);
     	model.addAttribute("commands", commands);
 

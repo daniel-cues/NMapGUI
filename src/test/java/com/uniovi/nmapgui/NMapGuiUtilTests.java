@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -24,7 +23,7 @@ import com.uniovi.nmapgui.util.TransInfoHtml;
 public class NMapGuiUtilTests {
 
 	@Test
-	public void FileFinderTest() {
+	public void fileFinderTest() {
 		try {
 			Files.write(Paths.get(System.getProperty("user.dir")+"/src/main/resources/static/temp/test.xml")
 				, Arrays.asList("Test"), Charset.forName("UTF-8"));		
@@ -49,11 +48,11 @@ public class NMapGuiUtilTests {
 	}
 	
 	@Test
-	public void TransInfoHTMLTest(){
+	public void transInfoHTMLTest(){
 		try {
 			Constructor<TransInfoHtml> c = TransInfoHtml.class.getDeclaredConstructor();
 			c.setAccessible(true);		
-			TransInfoHtml u = c.newInstance();
+			c.newInstance();
 		} catch (Exception e) {
 			e.printStackTrace();
 		} 

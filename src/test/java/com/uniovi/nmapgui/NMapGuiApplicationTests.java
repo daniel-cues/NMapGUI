@@ -48,7 +48,7 @@ public class NMapGuiApplicationTests {
     	executeTest();
     	this.mockMvc.perform(get("/nmap/update-finished")).andExpect(status().isOk())
                 .andExpect(content().string(containsString("false")));
-    	Thread.sleep(10000);
+    	Thread.sleep(60000);
     	this.mockMvc.perform(get("/nmap/update-finished")).andExpect(status().isOk())
         .andExpect(content().string(containsString("true")));
 

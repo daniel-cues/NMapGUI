@@ -36,19 +36,27 @@ public class NMapGuiApplicationTests {
     }	
     @Test
     public void updateTest() throws Exception {
-    	basicTest();
+    	executeTest();
     	this.mockMvc.perform(get("/nmap/update?allowDel={allowDel}", false)).andExpect(status().isOk())
                 .andExpect(content().string(containsString("<div ")));
+    	Thread.sleep(5000);
+    	this.mockMvc.perform(get("/nmap/update?allowDel={allowDel}", true)).andExpect(status().isOk())
+        .andExpect(content().string(containsString("<div ")));
     }
     @Test
     public void updateFinishedTest() throws Exception {
-    	basicTest();
-        this.mockMvc.perform(get("/nmap/update-finished")).andExpect(status().isOk())
-                .andExpect(content().string(containsString("true")));
+    	executeTest();
+    	this.mockMvc.perform(get("/nmap/update-finished")).andExpect(status().isOk())
+                .andExpect(content().string(containsString("false")));
+    	Thread.sleep(10000);
+    	this.mockMvc.perform(get("/nmap/update-finished")).andExpect(status().isOk())
+        .andExpect(content().string(containsString("true")));
+
     }
     @Test
     public void downloadTest() throws Exception {
     	basicTest();
     	this.mockMvc.perform(get("/nmap/download/{filename}", "test.xml")).andExpect(status().isNotFound());
+    	this.mockMvc.perform(get("/nmap/download/{filename}", ".gitkeep.xml")).andExpect(status().isOk());
         }
 }

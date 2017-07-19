@@ -72,15 +72,21 @@ public class WebController {
     	return true;
     }
     @GetMapping("/nmap/download/{filename}")
-    public ResponseEntity<InputStreamResource> download(@PathVariable("filename") String filename) throws FileNotFoundException {
+    public ResponseEntity<InputStreamResource> download(@PathVariable("filename") String filename) {
     	
-    	InputStream file= new Filefinder().find(filename);
-    	
-    	InputStreamResource resource = new InputStreamResource(file);
+    	InputStream file;
+		try {
+			file = new Filefinder().find(filename);
+			InputStreamResource resource = new InputStreamResource(file);
 
-        return ResponseEntity.ok()
-                .contentType(MediaType.parseMediaType("application/octect-stream"))
-                .body(resource);
+	        return ResponseEntity.ok()
+	                .contentType(MediaType.parseMediaType("application/octect-stream"))
+	                .body(resource);
+		} catch (FileNotFoundException e) {
+			return ResponseEntity.notFound().build();
+		}
+    	
+    	
     }
     
 //    @GetMapping("/nmap/update-finished-list")

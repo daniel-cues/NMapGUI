@@ -44,7 +44,7 @@ public class WebController {
     	model.addAttribute("command", command);
     	model.addAttribute("commands", commands);
 
-        return "index :: output";
+        return "fragments/contents :: output";
     }
     
     
@@ -61,7 +61,7 @@ public class WebController {
     		commands=new ArrayList<>();
     	
 
-    	return "index :: output";
+    	return "fragments/contents :: output";
     }
 
     @GetMapping("/nmap/update-finished")

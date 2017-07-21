@@ -101,6 +101,29 @@
 	padding-right: 20px;
 	
 }
+.result .open{
+	color: limegreen;
+    unicode-bidi: embed;
+    font-family: monospace;
+    white-space: pre;
+    font-weight: 900;
+}
+.result .closed{
+	color: #ff4d4d;
+    unicode-bidi: embed;
+    font-family: monospace;
+    white-space: pre;
+    font-weight: 900;
+    
+}
+.result .filtered{
+	color: orange;
+    unicode-bidi: embed;
+    font-family: monospace;
+    white-space: pre;
+    font-weight: 900;
+}
+
 .command-displaying{
 	height: 40px;
 	background-color: #292c2d;

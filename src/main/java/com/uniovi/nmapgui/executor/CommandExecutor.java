@@ -50,12 +50,20 @@ public class CommandExecutor {
 			      try {
 			        reader = new BufferedReader(new InputStreamReader(stream));
 			        String line = null;
+			        cmd.getOutput().setText("<pre></pre>");
 			        while ((line = reader.readLine()) != null) {
-			        	cmd.getOutput().setText(cmd.getOutput().getText()+line+"<br/>");
+			        	if (line.contains( " open "))
+			        		line="<span class=\"open\">"+line+"</span>";
+			        	else if (line.contains( " closed "))
+			        		line="<span class=\"closed\">"+line+"</span>";
+			        	else if (line.contains( " filtered "))
+			        		line="<span class=\"filtered\">"+line+"</span>";
+			        	cmd.getOutput().setText(cmd.getOutput().getText().replaceAll("</pre>", "\n")+line+"</pre>");
 			        }
 			        errorReader = new BufferedReader(new InputStreamReader(errors));
 			        while ((line = errorReader.readLine()) != null) {
-			        	cmd.getOutput().setText(cmd.getOutput().getText()+"<i>"+line+"</i><br/>");
+		        		line="<span class=\"closed\">"+line+"</span>";
+			        	cmd.getOutput().setText(cmd.getOutput().getText().replaceAll("</pre>", "\n")+"<i>"+line+"</i></pre>");
 			        }
 
 			      } catch (Exception e) {

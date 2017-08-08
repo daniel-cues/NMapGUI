@@ -30,10 +30,51 @@
 					<h2>Host Discovery</h2>
 				</div>
 			</div>
-			<ul class="vertical menu">
-
-				<li><a href="#">Menu2</a></li>
-			</ul>
+			<div class="vertical_menu">
+				<h3>Port selection
+					<label for="fastscan">Fast Scan: <code>-F</code></label>
+				</h3>
+				<label for="ports">Ports: <code>-p <i>&lt;port ranges&gt;</i></code></label>
+				
+				<label for="exports">Excluded ports/protocols: <code>--exclude-ports <i>&lt;port ranges&gt;</i></code></label>
+				
+				<label for="derandomize">Derandomize order: <code>-r</code></label>
+				
+				<label for="ratio">Ratio bigger than: <code>--port-ratio <i>&lt;ratio&gt;</i></code></label>
+				
+				<label for="top">Top ports: <code>--top-ports <i>&lt;n&gt;</i></code></label>
+				
+				<h3>IP protocol scan
+					<label for="ipprotocol" > <code>-sO</code></label>
+				</h3>
+				<h3>
+					Port scan
+				</h3>
+				
+				<h4>TCP Scan Type</h4>
+				<select name="TCP">
+				  <option value="syn">TCP Syn: 				<code>-sS</code></option>
+				  <option value="connection">TCP Connection:<code>-sT</code></option>				  
+				  <option value="null">TCP Null: 			<code>-sN</code></option>
+				  <option value="fin">TCP Fin:				<code>-sF</code></option>
+				  <option value="xmas">TCP Xmas:			<code>-sX</code></option>					  
+				  <option value="ack">TCP Ack:				<code>-sA</code></option>
+				  <option value="window">TCP Window:		<code>-sW</code></option>
+				  <option value="maimon">TCP Maimon:		<code>-sM</code></option>				  
+				  <!-- <option value="idle">TCP Idle</option> -->
+				</select>
+				<label for="relay">Enable FTP relay (disables TCP scan): <code>-b <i>&lt;FTP relay host&gt;</i></code></label>
+				
+				<h4>UDP Scan </h4>				
+				<label for="udp">Enable UDP scan: <code>-sU</code></label>
+				
+				<h4>SCTP Scan Type</h4>
+				<select name="STCP">
+				  <option value="init">SCTP Init:		  <code>-sY</code></option>
+				  <option value="cookie">SCTP Cookie Echo: <code>-sZ</code></option>
+				</select>
+				
+			</div>
 		</div>
 		
 		
@@ -46,7 +87,7 @@
 					<h2>Script Scan</h2>
 				</div>
 			</div>
-			<ul class="vertical menu">
+			<ul class="vertical_menu">
 				<li><a href="#">Menu3</a></li>
 			</ul>
 		</div>
@@ -61,9 +102,29 @@
 					<h2>Version/OS Information</h2>
 				</div>
 			</div>
-			<ul class="vertical menu">
-				<li><a href="#">Menu4</a></li>
-			</ul>
+			<div class="vertical_menu">
+				<h3>
+					Version detection				
+					<label for="versiones"> <code>-sV</code></label>
+				</h3>
+				
+				
+				<label for="9100">Include port 9100 in scan: <code>--allports</code></label>
+				
+				<label for="customintensity">Intensity: <code>--version-intensity <i>&lt;intensity&gt;</i></code></label>
+				<label for="light" >Light scan: 		<code>--version-light</code></label>
+				<label for="all" >Heavy scan: 			<code>--version-heavy</code></label>
+				
+				<label for="vtrace">Debug info about version: <code>--version-trace</code></label>
+				
+				<h3>
+					OS detection
+					<label for="os">  <code>-O</code> </label>
+				</h3>
+				<label for="limit">Limit OS scan: <code>--osscan-limit</code></label>
+				<label for="fuzzy">Guess results: <code>-osscan-guess, --fuzzy</code></label>
+				<label for="maxtries">Max number of tries  <code>--max-os-tries <i>&lt;tries&gt;</i></code></label>
+			</div>
 		</div>
 		
 		
@@ -76,9 +137,24 @@
 					<h2>Other Options</h2>
 				</div>
 			</div>
-			<ul class="vertical menu">
-				<li><a href="#">Menu5</a></li>
-			</ul>
+			<div class="vertical-menu">
+				<ul class="tabs" data-tabs="true" id="example-tabs">
+				  <li class="tabs-title is-active"><a href="#panelO1" aria-selected="true">Output</a></li>
+				  <li class="tabs-title"><a href="#panelO2">Spoofing</a></li>
+				  <li class="tabs-title"><a href="#panelO3">Performance</a></li>
+				  <li class="tabs-title"><a href="#panelO4">Misc</a></li>				  
+				</ul>
+				<div class="tabs-content" data-tabs-content="example-tabs">
+				  <div class="tabs-panel is-active" id="panelO1">				 
+				  </div>
+				  <div class="tabs-panel" id="panelO2">
+				  </div>
+				  <div class="tabs-panel" id="panelO3">
+				  </div>
+				  <div class="tabs-panel" id="panelO4">
+				  </div>
+				</div>
+			</div>
 		</div>
 
 

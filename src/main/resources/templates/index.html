@@ -20,24 +20,25 @@
 		<div>
 			<img src="https://nmap.org/images/nmap-logo-256x256.png" />
 		</div>
-		<button class="sidebar-button" id="b1" type="button"
-			data-toggle="offCanvas">
-			<img th:src="@{img/ethernet.png}" src="../../img/ethernet.png" />
-		</button>
-		<button class="sidebar-button " id="b2" type="button"
-			data-toggle="offCanvas2">
+		<button class="sidebar-button" id="hostButton" type="button"
+			data-toggle="hostCanvas">
 			<img th:src="@{img/network.png}" src="../../img/network.png" />
 		</button>
-		<button class="sidebar-button " id="b3" type="button"
-			data-toggle="offCanvas3">
+		<button class="sidebar-button" id="portButton" type="button"
+			data-toggle="portCanvas">
+			<img th:src="@{img/ethernet.png}" src="../../img/ethernet.png" />
+		</button>
+		
+		<button class="sidebar-button" id="scriptButton" type="button"
+			data-toggle="scriptCanvas">
 			<img th:src="@{img/script.png}" src="../../img/script.png" />
 		</button>
-		<button class="sidebar-button " id="b4" type="button"
-			data-toggle="offCanvas4">
+		<button class="sidebar-button" id="versionOsButton" type="button"
+			data-toggle="versionOsCanvas">
 			<img th:src="@{img/assignment.png}" src="../../img/assignment.png" />
 		</button>
-		<button class="sidebar-button " id="b5" type="button"
-			data-toggle="offCanvas5">
+		<button class="sidebar-button" id="optionButton" type="button"
+			data-toggle="optionCanvas">
 			<img th:src="@{img/settings.png}" src="../../img/settings.png" />
 		</button>
 	</div>

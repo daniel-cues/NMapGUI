@@ -5,29 +5,66 @@
   <body>
 	<div th:fragment="contents" id="contents" class="content off-canvas-wrapper">
 		
-		<div class="off-canvas position-left" id="offCanvas"
-			data-off-canvas="true" data-close-on-click="false"
-			data-content-overlay="false">
-			<!-- Menu -->
-			<div class="menu-bar">
-				<div class="wrapper">
-					<h2>Port Scan</h2>
-				</div>
-			</div>
-			<ul class="vertical menu">
-
-				<li><a href="#">Menu1</a></li>
-			</ul>
-		</div>
 		
-		
-		<div class="off-canvas position-left" id="offCanvas2"
+		<div class="off-canvas position-left" id="hostCanvas"
 			data-off-canvas="true" data-close-on-click="false"
 			data-content-overlay="false">
 			<!-- Menu -->
 			<div class="menu-bar">
 				<div class="wrapper">
 					<h2>Host Discovery</h2>
+				</div>
+			</div>
+			<div class="vertical_menu">
+				<h3>Target specification</h3>
+				<label for="hostFile">Hosts file: <code>-iL <i>&lt;inputfilename&gt;</i></code></label>
+				
+				<label for="randomHosts">Random hosts in range: <code>-iR <i>&lt;num hosts&gt;</i></code></label>
+				
+				<label for="excludeHost">Exclude hosts: <code>--exclude <i>&lt;host1[,host2],...&gt;</i></code></label>
+				
+				<label for="excludeHostFile">Exclude host file: <code>--excludefile <i>&lt;exclude_file&gt;</i></code></label>
+				
+				
+				<h3>
+					Host scan
+				</h3>
+				
+				<label for="list">Only list hosts: <code>-sL</code></label>
+				
+				<label for="skipPort">Skip port scan: <code>-sn</code></label>
+				
+				<label for="skipHost">Skip host scan: <code>-Pn</code></label>
+				
+				<label for="pingType">Ping type: <code>-PS/PA/PU/PY (SYN,ACK,UDP &amp; SCTP) <i>&lt;port list&gt;</i></code></label>
+				
+				<label for="echoReq">Perform echo request: <code>-PE/PP/PM (Echo, timestamp &amp; mask)</code></label>
+				
+				<label for="IPPing">IP protocol ping scan<code>-PO <i>&lt;protocol number list&gt;</i></code></label>
+				
+				<label for="ARPPing">Local network ARP ping: <code>-PR</code></label>
+				
+				<label for="disableARPPing">Disable default local ARP ping: <code>--disable-arp-ping</code></label>
+				
+				<label for="traceroute">Show route to host: <code>--traceroute</code></label>
+				
+				<label for="reverseDNS">Disable/Force reverse DNS: <code>-n/-R</code></label>
+				
+				<label for="sysDNS">Use system's DNS resolver: <code>--system-dns</code></label>
+				
+				<label for="chooseDNS">Use this DNS<code>-dns-servers <i>&lt;server1 [,...]&gt;</i></code></label>
+						
+			</div>
+		</div>
+		
+		
+		<div class="off-canvas position-left" id="portCanvas"
+			data-off-canvas="true" data-close-on-click="false"
+			data-content-overlay="false">
+			<!-- Menu -->
+			<div class="menu-bar">
+				<div class="wrapper">
+					<h2>Port Scan</h2>
 				</div>
 			</div>
 			<div class="vertical_menu">
@@ -53,14 +90,14 @@
 				
 				<h4>TCP Scan Type</h4>
 				<select name="TCP">
-				  <option value="syn">TCP Syn: 				<code>-sS</code></option>
-				  <option value="connection">TCP Connection:<code>-sT</code></option>				  
-				  <option value="null">TCP Null: 			<code>-sN</code></option>
-				  <option value="fin">TCP Fin:				<code>-sF</code></option>
-				  <option value="xmas">TCP Xmas:			<code>-sX</code></option>					  
-				  <option value="ack">TCP Ack:				<code>-sA</code></option>
-				  <option value="window">TCP Window:		<code>-sW</code></option>
-				  <option value="maimon">TCP Maimon:		<code>-sM</code></option>				  
+				  <option value="syn">TCP Syn: 				 -sS</option>
+				  <option value="connection">TCP Connection: -sT</option>				  
+				  <option value="null">TCP Null: 			 -sN</option>
+				  <option value="fin">TCP Fin:				 -sF</option>
+				  <option value="xmas">TCP Xmas:			 -sX</option>					  
+				  <option value="ack">TCP Ack:				 -sA</option>
+				  <option value="window">TCP Window:		 -sW</option>
+				  <option value="maimon">TCP Maimon:		 -sM</option>				  
 				  <!-- <option value="idle">TCP Idle</option> -->
 				</select>
 				<label for="relay">Enable FTP relay (disables TCP scan): <code>-b <i>&lt;FTP relay host&gt;</i></code></label>
@@ -70,15 +107,15 @@
 				
 				<h4>SCTP Scan Type</h4>
 				<select name="STCP">
-				  <option value="init">SCTP Init:		  <code>-sY</code></option>
-				  <option value="cookie">SCTP Cookie Echo: <code>-sZ</code></option>
+				  <option value="init">SCTP Init:		   -sY</option>
+				  <option value="cookie">SCTP Cookie Echo: -sZ</option>
 				</select>
 				
 			</div>
 		</div>
 		
-		
-		<div class="off-canvas position-left" id="offCanvas3"
+			
+		<div class="off-canvas position-left" id="scriptCanvas"
 			data-off-canvas="true" data-close-on-click="false"
 			data-content-overlay="false">
 			<!-- Menu -->
@@ -93,7 +130,7 @@
 		</div>
 		
 		
-		<div class="off-canvas position-left" id="offCanvas4"
+		<div class="off-canvas position-left" id="versionOsCanvas"
 			data-off-canvas="true" data-close-on-click="false"
 			data-content-overlay="false">
 			<!-- Menu -->
@@ -128,7 +165,7 @@
 		</div>
 		
 		
-		<div class="off-canvas position-left" id="offCanvas5"
+		<div class="off-canvas position-left" id="optionCanvas"
 			data-off-canvas="true" data-close-on-click="false"
 			data-content-overlay="false">
 			<!-- Menu -->

@@ -52,6 +52,10 @@ public class CommandExecutor {
 			        String line = null;
 			        cmd.getOutput().setText("<pre></pre>");
 			        while ((line = reader.readLine()) != null) {
+			        	line = line.replace("&", "&amp;");
+			        	line = line.replace( "\"", "&quot;");
+			        	line = line.replace( "<", "&lt;");
+			        	line = line.replace( ">", "&gt;");
 			        	if (line.contains( " open "))
 			        		line="<span class=\"open\">"+line+"</span>";
 			        	else if (line.contains( " closed "))
@@ -62,6 +66,10 @@ public class CommandExecutor {
 			        }
 			        errorReader = new BufferedReader(new InputStreamReader(errors));
 			        while ((line = errorReader.readLine()) != null) {
+			        	line = line.replace("&", "&amp;");
+			        	line = line.replace( "\"", "&quot;");
+			        	line = line.replace( "<", "&lt;");
+			        	line = line.replace( ">", "&gt;");
 		        		line="<span class=\"closed\">"+line+"</span>";
 			        	cmd.getOutput().setText(cmd.getOutput().getText().replaceAll("</pre>", "\n")+"<i>"+line+"</i></pre>");
 			        }

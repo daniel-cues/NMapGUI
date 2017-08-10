@@ -228,6 +228,7 @@ body{
 .tabs-content, .tabs-panel{
 	background-color: transparent;
 	border: none;
+    padding: 0;
 }
 
 

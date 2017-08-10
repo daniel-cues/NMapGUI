@@ -26,9 +26,7 @@
 				<label for="excludeHostFile">Exclude host file: <code>--excludefile <i>&lt;exclude_file&gt;</i></code></label>
 				
 				
-				<h3>
-					Host scan
-				</h3>
+				<h3>Host scan</h3>
 				
 				<label for="list">Only list hosts: <code>-sL</code></label>
 				
@@ -124,9 +122,36 @@
 					<h2>Script Scan</h2>
 				</div>
 			</div>
-			<ul class="vertical_menu">
-				<li><a href="#">Menu3</a></li>
-			</ul>
+			<div>
+				<ul class="tabs" data-tabs="true" id="script-tabs">
+				  <li class="tabs-title is-active"><a href="#panelGeneral" aria-selected="true">General</a></li>
+				  <li class="tabs-title"><a href="#panelList">Script list</a></li>
+				</ul>
+				<div class="tabs-content vertical_menu" data-tabs-content="script-tabs">
+				  	<div class="tabs-panel is-active" id="panelGeneral">
+						<h3>General</h3>
+						
+						<label for="default">Run default set scripts: <code>-sC</code></label>
+						
+						<label for="script">Run script: <code><i>&lt;filename | category | dir | expression&gt;</i></code></label>
+						
+						<label for="scriptArgs">Script arguments: <code><i>&lt;n1&gt;=&lt;v1&gt;, &lt;n4&gt;={&lt;v4&gt;,&lt;v5&gt;}</i></code></label>
+						
+						<label for="scriptArgsFile">Script argument file: <code><i>&lt;filename&gt;</i></code></label>
+						
+						<label for="scriptHelp">Script help: <code><i>&lt;filename | category | dir | expression&gt;</i></code></label>
+						
+						<label for="scriptTrace">Enable script trace: <code>--script-trace</code></label>
+						
+						<label for="scriptUpdate">Update script database: <code>--script-updatedb</code></label>
+					
+						
+				  	</div>
+					<div class="tabs-panel " id="panelList">
+						<h3>Script list</h3>
+					</div>
+				</div>
+			</div>
 		</div>
 		
 		
@@ -174,22 +199,118 @@
 					<h2>Other Options</h2>
 				</div>
 			</div>
-			<div class="vertical-menu">
-				<ul class="tabs" data-tabs="true" id="example-tabs">
-				  <li class="tabs-title is-active"><a href="#panelO1" aria-selected="true">Output</a></li>
-				  <li class="tabs-title"><a href="#panelO2">Spoofing</a></li>
-				  <li class="tabs-title"><a href="#panelO3">Performance</a></li>
-				  <li class="tabs-title"><a href="#panelO4">Misc</a></li>				  
+			<div>
+				<ul class="tabs" data-tabs="true" id="option-tabs">
+				  <li class="tabs-title is-active"><a href="#panelOutput" aria-selected="true">Output</a></li>
+				  <li class="tabs-title"><a href="#panelSpoof">Spoofing</a></li>
+				  <li class="tabs-title"><a href="#panelPerformance">Performance</a></li>
+				  <li class="tabs-title"><a href="#panelMisc">Misc</a></li>				  
 				</ul>
-				<div class="tabs-content" data-tabs-content="example-tabs">
-				  <div class="tabs-panel is-active" id="panelO1">				 
-				  </div>
-				  <div class="tabs-panel" id="panelO2">
-				  </div>
-				  <div class="tabs-panel" id="panelO3">
-				  </div>
-				  <div class="tabs-panel" id="panelO4">
-				  </div>
+				<div class="tabs-content vertical_menu" data-tabs-content="option-tabs">
+				  	<div class="tabs-panel is-active" id="panelOutput">
+						<h3>Output</h3>
+						
+						<label for="verbosity">Verbosity: <code>-v, -vv , -vvv, [...] -v<i>&lt;level&gt;</i></code></label>
+						
+						<label for="debug">Debug: <code>-d, -dd , -ddd, [...] -d<i>&lt;level&gt;</i></code></label>
+						
+						<label for="reason">Include port reason: <code>--reason</code></label>
+						
+						<label for="stats">Stats every: <code>--stats-every <i>&lt;time&gt;</i></code></label>
+						
+						<label for="traces">Traces: <code>--packet-trace, --script-trace, --version-trace</code></label>
+						
+						<label for="open">Only show open and unfiltered ports: <code>--open</code></label>
+						
+						<label for="iflist">Show interface list only: <code>--iflist</code></label>
+						
+						<label for="resume">Resume scan: <code>--resume <i>&lt;filename&gt;</i></code></label>						
+				  	</div>
+					<div class="tabs-panel " id="panelSpoof">
+						<h3>Spoofing</h3>
+						
+						<label for="fragmentation">Fragment packages: <code>-f, --mtu <i>&lt;offset&gt;</i></code></label>
+						
+						<label for="decoys">Use decoys: <code>-D <i>&lt;decoy1&gt;, [RND] [RND:&lt;number&gt;] [ME] [...]</i></code></label>
+						
+						<label for="spoofIP">Spoof IP: <code>-S <i>&lt;IP_Address&gt;</i></code></label>
+						
+						<label for="interface">Choose inteface: <code>-e <i>&lt;interface&gt;</i></code></label>
+						
+						<label for="chosenPort">Output port: <code>--source-port <i>&lt;portnumber&gt;</i>, -g <i>&lt;portnumber&gt;</i></code></label>
+						
+						<label for="payloadHex">Include hexadecimal payload: <code>--data <i>&lt;hex string&gt;</i></code></label>
+						
+						<label for="payloadStr">Include string payload: <code>--data-string <i>&lt;string&gt;</i></code></label>
+						
+						<label for="payloadRnd">Include random payload: <code>--data-length <i>&lt;length&gt;</i></code></label>
+						
+						<label for="ttl">Change TTL: <code>--ttl <i>&lt;time&gt;</i></code></label>
+						
+						<label for="spoofMAC">Spoof MAC: <code>--spoof-mac <i>&lt;MAC, prefix, or vendor name&gt;</i></code></label>
+						
+						<label for="proxies">Use proxies: <code>--proxies<i>&lt;comma separated proxy URL list&gt;</i></code></label>
+
+						<label for="badsum">Send wrong checksum: <code>--badsum</code></label>
+						
+						<label for="adler32">Use Adler32 for checksum: <code>--adler32</code></label>
+						
+					</div>
+					<div class="tabs-panel " id="panelPerformance">
+						<h3>Performance</h3>
+						
+						<label for="hostgroup">Hostgroup: <code>--min-hostgroup, --max-hostgroup <i>&lt;numhosts&gt;</i></code></label>
+						
+						<label for="paralelism">Paralell probes: <code>--min-parallelism, --max-parallelism <i>&lt;numprobes&gt;</i></code></label>
+						
+						<label for="timeout">Probe timeout: <code>--initial-rtt-timeout, --min-rtt-timeout, --max-rtt-timeout <i>&lt;time&gt;</i></code></label>
+						
+						<label for="retries">Max retries: <code>--max-retries <i>&lt;numtries&gt;</i></code></label>
+						
+						<label for="hostTimeout">Max host timeout: <code>--host-timeout <i>&lt;time&gt;</i></code></label>
+						
+						<label for="scriptTimeout">Max script timeout: <code>--script-timeout <i>&lt;time&gt;</i></code></label>
+						
+						<label for="delay">Max probe delay: <code>--scan-delay, --max-scan-delay <i>&lt;time&gt;</i></code></label>
+
+						<label for="rate">Min/max dynamic scan rate: <code>--min-rate, --max-rate <i>&lt;number&gt;</i></code></label>
+
+						<label for="defeatRST">Ignore RTS limit time adjustment: <code>--defeat-rst-ratelimit</code></label>
+
+						<label for="defeatICMP">Ignore non reachable UDP adjustment: <code>--defeat-icmp-ratelimit</code></label>
+
+						<label for="nsock">Force nsock engine: <code>--nsock-engine <i>epoll | kqueue | poll | select</i></code></label>
+
+						<label for="aggressiveness">Aggressiveness: <code>-T <i>paranoid | sneaky | polite | normal | aggressive | insane</i></code></label>
+
+					</div>
+					<div class="tabs-panel " id="panelMisc">
+						<h3>Miscellaneous</h3>
+						
+						<label for="ipv6">Enable IPv6 scan: <code>-6</code></label>
+						
+						<label for="aScan">Enable aggressive scan: <code>-A</code></label>
+												
+						<label for="dataDir">Specify nmap config dir: <code>--datadir <i>&lt;dir&gt;</i></code></label>
+
+						<label for="servicedb">Specify nmap service file: <code>--servicedb <i>&lt;file&gt;</i></code></label>
+
+						<label for="versiondb">Specify nmap probesfile: <code>--versiondb <i>&lt;file&gt;</i></code></label>
+						
+						<label for="sEth">Send data link layer packages: <code>--send-eth</code></label>
+						
+						<label for="sIp">Send network layer packages: <code>--send-ip</code></label>
+						
+						<label for="priv">Assume privileges: <code>--privileged</code></label>
+						
+						<label for="unpriv">Assume not having privileges: <code>--unprivileged</code></label>
+						
+						<label for="releasemem">Release memory before closing <code>--release-memory</code></label>
+						
+						<label for="version">Show version: <code>-V, --version </code></label>
+						
+						<label for="help">Show help: <code>-h, --help </code></label>					
+					</div>
 				</div>
 			</div>
 		</div>

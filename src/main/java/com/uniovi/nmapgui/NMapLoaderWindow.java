@@ -2,12 +2,17 @@ package com.uniovi.nmapgui;
 
 import java.awt.BorderLayout;
 import java.awt.Container;
+import java.awt.Desktop;
+import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
 
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
@@ -19,16 +24,21 @@ import javax.swing.JPanel;
 
 import org.springframework.context.ConfigurableApplicationContext;
 
-import com.uniovi.nmapgui.util.TransInfoHtml;
 
 public class NMapLoaderWindow extends JFrame {
 	
+	
+	private static final long serialVersionUID = 3028171478038465651L;
+
+
 	private static final String IMG_PATH = "static/img/header.jpg";
+
 	
 	private JLabel image;
 	private JButton start;
 	private JButton stop;
 	private ConfigurableApplicationContext springContext;
+	private JButton go;
 
 	
 	public NMapLoaderWindow(){
@@ -47,6 +57,7 @@ public class NMapLoaderWindow extends JFrame {
 		JPanel panel = new JPanel();
 		panel.setLayout(new BorderLayout());
 		BufferedImage img = null;
+
 		try {
 			img = ImageIO.read(NMapLoaderWindow.class.getClassLoader().getResource(IMG_PATH));
 		} catch (IOException e) {
@@ -54,6 +65,23 @@ public class NMapLoaderWindow extends JFrame {
 		}
          ImageIcon icon = new ImageIcon(img);
          image = new JLabel(icon);
+         image.setLayout(new FlowLayout(FlowLayout.RIGHT));
+
+         
+         go= new JButton("Go!");
+		 go.setEnabled(false);
+		 
+		 go.addActionListener(new ActionListener() {			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				try {
+					openWebpage(new URL("http://localhost:8080/nmap"));
+				} catch (MalformedURLException e1) {
+					e1.printStackTrace();
+				}
+			}
+		 });
+		          image.add(go);
          panel.add(image);
          
          return panel;
@@ -74,6 +102,7 @@ public class NMapLoaderWindow extends JFrame {
 				String[] args = {};
 				springContext = NMapGuiApplication.mainExec(args);
 				start.setText("NMapGUI running");
+				go.setEnabled(true);
 				stop.setText("Stop NMapGUI");
 				stop.setEnabled(true);
 			}
@@ -85,6 +114,7 @@ public class NMapLoaderWindow extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				stop.setEnabled(false);
+				go.setEnabled(false);
 				springContext.close();
 				stop.setText("NMapGUI not running");
 				start.setText("Start NMapGUI");
@@ -93,7 +123,31 @@ public class NMapLoaderWindow extends JFrame {
 		});
 		stop.setEnabled(false);
 		buttons.add(stop);
+		
+		
+		
 		return buttons;
 	}
 
+	
+	
+	
+	public static void openWebpage(URI uri) {
+	    Desktop desktop = Desktop.isDesktopSupported() ? Desktop.getDesktop() : null;
+	    if (desktop != null && desktop.isSupported(Desktop.Action.BROWSE)) {
+	        try {
+	            desktop.browse(uri);
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
+	    }
+	}
+
+	public static void openWebpage(URL url) {
+	    try {
+	        openWebpage(url.toURI());
+	    } catch (URISyntaxException e) {
+	        e.printStackTrace();
+	    }
+	}
 }

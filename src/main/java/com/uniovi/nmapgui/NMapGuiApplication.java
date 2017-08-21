@@ -4,6 +4,7 @@ import java.util.concurrent.Executor;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.scheduling.annotation.AsyncConfigurerSupport;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
@@ -12,11 +13,14 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 @EnableAsync
 public class NMapGuiApplication extends AsyncConfigurerSupport {
 
-	public static void main(String[] args) {
-		SpringApplication.run(NMapGuiApplication.class, args);
+	public static ConfigurableApplicationContext mainExec(String[] args) {
+		return SpringApplication.run(NMapGuiApplication.class, args);
 	}
 	
-	 @Override
+	public static void main(String[] args) {
+		mainExec(args);
+	}
+	@Override
     public Executor getAsyncExecutor() {
         ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
         executor.setCorePoolSize(2);

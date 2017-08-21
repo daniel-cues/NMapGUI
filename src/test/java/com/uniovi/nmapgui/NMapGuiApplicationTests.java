@@ -57,6 +57,5 @@ public class NMapGuiApplicationTests {
     public void downloadTest() throws Exception {
     	basicTest();
     	this.mockMvc.perform(get("/nmap/download/{filename}", "test.xml")).andExpect(status().isNotFound());
-    	this.mockMvc.perform(get("/nmap/download/{filename}", ".gitkeep.xml")).andExpect(status().isOk());
         }
 }

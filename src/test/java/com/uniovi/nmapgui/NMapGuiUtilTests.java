@@ -25,7 +25,7 @@ public class NMapGuiUtilTests {
 	@Test
 	public void fileFinderTest() {
 		try {
-			Files.write(Paths.get(System.getProperty("user.dir")+"/src/main/resources/static/temp/test.xml")
+			Files.write(Paths.get(System.getProperty("java.io.tmpdir")+"test.xml")
 				, Arrays.asList("Test"), Charset.forName("UTF-8"));		
 			InputStream file = new Filefinder().find("test");			
 			
@@ -34,14 +34,14 @@ public class NMapGuiUtilTests {
 			str = r.readLine();
 			
 			assertEquals("Test", str);
-			Files.delete(Paths.get(System.getProperty("user.dir")+"/src/main/resources/static/temp/test.xml"));
+			Files.delete(Paths.get(System.getProperty("java.io.tmpdir")+"test.xml"));
 
 			
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 			try {
-				Files.delete(Paths.get(System.getProperty("user.dir")+"/src/main/resources/static/temp/test.xml"));
+				Files.delete(Paths.get(System.getProperty("java.io.tmpdir")+"test.xml"));
 			} catch (IOException e1) {}
 			fail();
 		}

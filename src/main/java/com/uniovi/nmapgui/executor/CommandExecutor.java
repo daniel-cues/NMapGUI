@@ -12,26 +12,36 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.AsyncResult;
 import org.springframework.stereotype.Service;
 
+import com.uniovi.nmapgui.NMapLoaderWindow;
 import com.uniovi.nmapgui.model.*;
 import com.uniovi.nmapgui.util.TransInfoHtml;
 
 @Service
 public class CommandExecutor {
 	private Command cmd;
-	private String tempPath;
+	private String tempPath = System.getProperty("java.io.tmpdir");
 	private Thread commandThread; 
+    private String tmpfolder = System.getProperty("java.io.tmpdir");
+
 	
 	public CommandExecutor(Command command) {
-		this.setTempPath(System.getProperty("user.dir")+"/src/main/resources/static/temp/");
+		
 		cmd=command;
 	}
 
 
 	@Async
 	public Future<Boolean> execute(){
-		
 		String filename= "nmap-scan_" + new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss")
 				.format(new Date())+ ".xml";
+        try {
+			File iptmp = File.createTempFile("nmap-scan_" + new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss")
+					.format(new Date()), ".xml", new File(tmpfolder));
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
 		this.cmd.getOutput().setFilename(filename);
 		tempPath=tempPath + filename;
 		List<String> commandsList = new ArrayList<String>();

@@ -19,9 +19,11 @@ import javax.swing.JPanel;
 
 import org.springframework.context.ConfigurableApplicationContext;
 
+import com.uniovi.nmapgui.util.TransInfoHtml;
+
 public class NMapLoaderWindow extends JFrame {
 	
-	private static final String IMG_PATH = "src/main/resources/static/img/header.jpg";
+	private static final String IMG_PATH = "static/img/header.jpg";
 	
 	private JLabel image;
 	private JButton start;
@@ -46,7 +48,7 @@ public class NMapLoaderWindow extends JFrame {
 		panel.setLayout(new BorderLayout());
 		BufferedImage img = null;
 		try {
-			img = ImageIO.read(new File(IMG_PATH));
+			img = ImageIO.read(NMapLoaderWindow.class.getClassLoader().getResource(IMG_PATH));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

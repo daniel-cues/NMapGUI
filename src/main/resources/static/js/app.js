@@ -2,6 +2,11 @@ $(document).ready(function() {
 	$(document).foundation();
 });
 
+
+window.alert = function() {
+    debugger;
+}
+
 var loop;
 
 

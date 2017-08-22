@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -24,6 +25,7 @@ import com.uniovi.nmapgui.util.Filefinder;
 public class WebController {
 	private List<Command> commands;
 	private Command command;
+	
 	
     @GetMapping("/nmap")
     public String command(Model model) {

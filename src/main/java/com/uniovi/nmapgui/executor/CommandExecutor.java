@@ -6,30 +6,24 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
-import java.util.concurrent.Future;
 
-import org.springframework.scheduling.annotation.Async;
-import org.springframework.scheduling.annotation.AsyncResult;
-import org.springframework.stereotype.Service;
 
 import com.uniovi.nmapgui.model.*;
 import com.uniovi.nmapgui.util.TransInfoHtml;
 
-@Service
 public class CommandExecutor {
 	private Command cmd;
 	private String tempPath = System.getProperty("java.io.tmpdir")+"/";
 	private Thread commandThread; 
 
 	
-	public CommandExecutor(Command command) {
-		
+	public CommandExecutor(Command command) {		
 		cmd=command;
 	}
+	public CommandExecutor(){};
 
 
-	@Async
-	public Future<Boolean> execute(){
+	public boolean execute(){
 		String filename= "nmap-scan_" + new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss")
 				.format(new Date())+ ".xml";
         		
@@ -53,10 +47,7 @@ public class CommandExecutor {
 			        String line = null;
 			        cmd.getOutput().setText("<pre></pre>");
 			        while ((line = reader.readLine()) != null) {
-			        	line = line.replace("&", "&amp;");
-			        	line = line.replace( "\"", "&quot;");
-			        	line = line.replace( "<", "&lt;");
-			        	line = line.replace( ">", "&gt;");
+			        	escape(line);
 			        	if (line.contains( " open "))
 			        		line="<span class=\"open\">"+line+"</span>";
 			        	else if (line.contains( " closed "))
@@ -67,10 +58,7 @@ public class CommandExecutor {
 			        }
 			        errorReader = new BufferedReader(new InputStreamReader(errors));
 			        while ((line = errorReader.readLine()) != null) {
-			        	line = line.replace("&", "&amp;");
-			        	line = line.replace( "\"", "&quot;");
-			        	line = line.replace( "<", "&lt;");
-			        	line = line.replace( ">", "&gt;");
+			        	escape(line);
 		        		line="<span class=\"closed\">"+line+"</span>";
 			        	cmd.getOutput().setText(cmd.getOutput().getText().replaceAll("</pre>", "\n")+"<i>"+line+"</i></pre>");
 			        }
@@ -91,15 +79,18 @@ public class CommandExecutor {
 			    }
 			  });
 			  commandThread.start();
-					    
 		} catch (IOException e) {
 			e.printStackTrace();
-		}
-		
-		return new AsyncResult<Boolean>(true);
+		} 
+		return true;
     }
 
-
+	private void escape(String line) {
+		line = line.replace("&", "&amp;");
+    	line = line.replace( "\"", "&quot;");
+    	line = line.replace( "<", "&lt;");
+    	line = line.replace( ">", "&gt;");			
+	}
 	public Command getCmd() {
 		return cmd;
 	}

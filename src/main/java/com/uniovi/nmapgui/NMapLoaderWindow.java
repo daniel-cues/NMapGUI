@@ -24,6 +24,9 @@ import javax.swing.JPanel;
 
 import org.springframework.context.ConfigurableApplicationContext;
 
+import com.uniovi.nmapgui.executor.CommandExecutor;
+import com.uniovi.nmapgui.model.Command;
+
 
 public class NMapLoaderWindow extends JFrame {
 	
@@ -39,10 +42,21 @@ public class NMapLoaderWindow extends JFrame {
 	private JButton stop;
 	private ConfigurableApplicationContext springContext;
 	private JButton go;
+	private CommandExecutor executor = new CommandExecutor(new Command("-V"));
+	private boolean nmapInstalled;
 
 	
 	public NMapLoaderWindow(){
 		super("NMapGUI");
+		try {
+			executor.execute();
+			executor.getCommandThread().join();
+
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		} 
+		nmapInstalled=executor.getCmd().getOutput().getText().contains("Nmap version");
+		
 		setSize(400, 300);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		Container cp = getContentPane();
@@ -95,6 +109,11 @@ public class NMapLoaderWindow extends JFrame {
 		gl.setVgap(5);
 		buttons.setLayout(gl);
 		start = new JButton("Start NMapGUI");
+		if(!nmapInstalled){
+			start.setEnabled(false);
+			start.setText("NMap is not installed");
+
+		}
 		start.addActionListener(new ActionListener() {			
 			@Override
 			public void actionPerformed(ActionEvent e) {

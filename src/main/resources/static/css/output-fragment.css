@@ -22,8 +22,8 @@
 	display: inline-block;
 	color: white;
 }
-.command-header > div{
-	width: calc(100% - 80px);
+.command-header > .command-display{
+	width: calc(100% - 125px);
 }
 
 .command-action {
@@ -31,6 +31,49 @@
     height: auto;
 }
 
+.loading{	
+	width: 20px;
+	height: 20px;
+	margin-left:2px;
+	margin-right:20px;	
+	border: 5px solid #fff;
+	border-right-color: transparent;
+	border-radius: 50%;
+	box-shadow: 0 0 10px 2px #eee;
+	animation: spin 1s linear infinite;
+	-webkit-animation: spin 1s linear infinite;
+    -moz-animation: spin 1s linear infinite;
+    -ms-animation: spin 1s linear infinite;
+    -o-animation: spin 1s linear infinite;
+}
+@keyframes spin
+{
+	from { transform: rotate(0deg);   opacity: 0.2; }
+	50%  { transform: rotate(180deg); opacity: 1.0; }
+	to   { transform: rotate(360deg); opacity: 0.2; }
+}
+.loaded{
+	width: 24px;
+	height: 24px;
+	margin-left:2px;
+	margin-right: 17px;
+	background-size: cover;               
+    background-repeat: no-repeat;
+    background-position: center center;
+    animation: spinEnd 2s linear 1;
+	-webkit-animation: spinEnd 2s linear 1;
+    -moz-animation: spinEnd 2s linear 1;
+    -ms-animation: spinEnd 2s linear 1;
+    -o-animation: spinEnd 2s linear 1;
+}
+@keyframes spinEnd
+{
+	from { transform: rotate(0deg);  width: 25 ; height: 25; background-image: url("../img/check.png")}
+	17%  { transform: rotate(180deg); width: 20 ; height: 20}
+	33%  { transform: rotate(360deg); width: 25 ; height: 25}
+	50%  { transform: rotate(360deg); width: 20 ; height: 20}
+	to   { transform: rotate(360deg); opacity: 0.1; width: 25 ; height: 25; background-image: url("../img/check.png")}
+}
 .command-action img:active {
     padding-top: 5px;
 }
@@ -58,6 +101,29 @@
 	padding-right: 20px;
 	
 }
+.result .open{
+	color: limegreen;
+    unicode-bidi: embed;
+    font-family: monospace;
+    white-space: pre;
+    font-weight: 900;
+}
+.result .closed{
+	color: #ff4d4d;
+    unicode-bidi: embed;
+    font-family: monospace;
+    white-space: pre;
+    font-weight: 900;
+    
+}
+.result .filtered{
+	color: orange;
+    unicode-bidi: embed;
+    font-family: monospace;
+    white-space: pre;
+    font-weight: 900;
+}
+
 .command-displaying{
 	height: 40px;
 	background-color: #292c2d;

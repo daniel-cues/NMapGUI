@@ -7,38 +7,37 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
-import org.springframework.scheduling.annotation.Async;
-import org.springframework.stereotype.Service;
 
 import com.uniovi.nmapgui.model.*;
 import com.uniovi.nmapgui.util.TransInfoHtml;
 
-@Service
 public class CommandExecutor {
 	private Command cmd;
-	private String tempPath;
+	private String tempPath = System.getProperty("java.io.tmpdir")+"/";
+	private Thread commandThread; 
+
 	
-	public CommandExecutor() {
-		this.setTempPath(System.getProperty("user.dir")+"/src/main/resources/static/temp/");
-	}
-
-
-	@Async
-	public void execute(Command command){
+	public CommandExecutor(Command command) {		
 		cmd=command;
+	}
+	public CommandExecutor(){};
+
+
+	public boolean execute(){
 		String filename= "nmap-scan_" + new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss")
 				.format(new Date())+ ".xml";
+        		
 		this.cmd.getOutput().setFilename(filename);
 		tempPath=tempPath + filename;
 		List<String> commandsList = new ArrayList<String>();
 		commandsList.add("nmap");
-		commandsList.addAll(Arrays.asList(command.getText().split(" ")));
-		commandsList.addAll(Arrays.asList(new String[]{"-oX" , tempPath}));
+		commandsList.addAll(Arrays.asList(cmd.getText().split(" ")));
+		commandsList.addAll(Arrays.asList(new String[]{"-oX" , getTempPath(), "--webxml"}));
 		try {			
 			 Process p = Runtime.getRuntime().exec(commandsList.toArray(new String[]{}));
 			  final InputStream stream = p.getInputStream();
 			  final InputStream errors = p.getErrorStream();
-			  new Thread(new Runnable() {
+			  commandThread = new Thread(new Runnable() {
 			    public void run() {
 			      BufferedReader reader = null;
 			      BufferedReader errorReader = null;
@@ -46,16 +45,26 @@ public class CommandExecutor {
 			      try {
 			        reader = new BufferedReader(new InputStreamReader(stream));
 			        String line = null;
+			        cmd.getOutput().setText("<pre></pre>");
 			        while ((line = reader.readLine()) != null) {
-			        	cmd.getOutput().setText(cmd.getOutput().getText()+line+"<br/>");
+			        	escape(line);
+			        	if (line.contains( " open "))
+			        		line="<span class=\"open\">"+line+"</span>";
+			        	else if (line.contains( " closed "))
+			        		line="<span class=\"closed\">"+line+"</span>";
+			        	else if (line.contains( " filtered "))
+			        		line="<span class=\"filtered\">"+line+"</span>";
+			        	cmd.getOutput().setText(cmd.getOutput().getText().replaceAll("</pre>", "\n")+line+"</pre>");
 			        }
 			        errorReader = new BufferedReader(new InputStreamReader(errors));
 			        while ((line = errorReader.readLine()) != null) {
-			        	cmd.getOutput().setText(cmd.getOutput().getText()+"<i>"+line+"</i><br/>");
+			        	escape(line);
+		        		line="<span class=\"closed\">"+line+"</span>";
+			        	cmd.getOutput().setText(cmd.getOutput().getText().replaceAll("</pre>", "\n")+"<i>"+line+"</i></pre>");
 			        }
 
 			      } catch (Exception e) {
-			        // TODO
+			        e.printStackTrace();
 			      } finally {
 			    	readXML();
 			    	cmd.setFinished(true);
@@ -68,11 +77,32 @@ public class CommandExecutor {
 			        }
 			      }
 			    }
-			  }).start();
-					    
+			  });
+			  commandThread.start();
 		} catch (IOException e) {
 			e.printStackTrace();
-		}
+		} 
+		return true;
+    }
+
+	private void escape(String line) {
+		line = line.replace("&", "&amp;");
+    	line = line.replace( "\"", "&quot;");
+    	line = line.replace( "<", "&lt;");
+    	line = line.replace( ">", "&gt;");			
+	}
+	public Command getCmd() {
+		return cmd;
+	}
+
+
+	public void setCmd(Command cmd) {
+		this.cmd = cmd;
+	}
+
+
+	public Thread getCommandThread() {
+		return commandThread;
 	}
 
 

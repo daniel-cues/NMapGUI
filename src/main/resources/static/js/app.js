@@ -2,6 +2,11 @@ $(document).ready(function() {
 	$(document).foundation();
 });
 
+
+window.alert = function() {
+    debugger;
+}
+
 var loop;
 
 
@@ -69,35 +74,34 @@ function performPost() {
 	$.ajax(settingsEnd).done(function(result) {
 		if (result===true){
 			finished=result;
-			clearInterval(loop);
+			if(loop!=null){
+				clearInterval(loop);
+			}
 		}
-	});
-
-	/* Updates output from backend */
-	var settings = {
-		type : "GET",
-		url : "/nmap/update"
-	};
-	/* And writes it on its place */
-	$.ajax(settings).done(function(result) {
-		var tempScrollTop = $("#out-fragment").scrollTop();
-		if(finished){
-			$("#out-fragment").html(null);
-			$("#out-container-finished").prepend(result);
-			$("#out-container-finished").find("#out-fragment").replaceWith($("#out-container-finished #out-fragment").children());
-			$("#out-container-finished").on("click", ".command-sidebar-button", outputToggleMenu);
-			$("#out-container-finished").on("click", ".command-action-close", closeAction);
-			$("#out-container-finished").on("click", ".command-action-minimize", minimizeAction);
-			$("#out-container-finished").on("click", ".command-action-maximize", maximizeAction);
-			$("#out-container-finished").on("click", ".command-action-save", saveAction);
-
-
-			
-		}else{
-			$("#out-fragment").replaceWith(result);
-			$("#out-fragment").scrollTop(tempScrollTop);
-		}
-	});
+		/* Updates output from backend */
+		var settings = {
+			type : "GET",
+			url : "/nmap/update?allowDel="+finished
+		};
+		/* And writes it on its place */
+		$.ajax(settings).done(function(result) {
+			var tempScrollTop = $("#out-fragment").scrollTop();
+			if(finished){
+				$("#out-fragment").html(null);
+				$("#out-container-finished").prepend(result);
+				$("#out-container-finished #out-fragment").replaceWith($("#out-container-finished #out-fragment").children());
+				$("#out-container-finished .loading").addClass("loaded").removeClass("loading");
+				$("#out-container-finished").on("click", ".command-sidebar-button", outputToggleMenu);
+				$("#out-container-finished").on("click", ".command-action-close", closeAction);
+				$("#out-container-finished").on("click", ".command-action-minimize", minimizeAction);
+				$("#out-container-finished").on("click", ".command-action-maximize", maximizeAction);
+				
+			}else{
+				$("#out-fragment").replaceWith(result);
+				$("#out-fragment").scrollTop(tempScrollTop);
+			}
+		});
+	});	
 }
 
 
@@ -129,7 +133,6 @@ function performPost() {
 //	
 //	
 //}
-
 function startLoop() {
 
 	/* Get Url to send the command */
@@ -143,25 +146,26 @@ function startLoop() {
 		type : "GET",
 		url : urlvar
 	};
-	$.ajax(settings);
-	/* Stops any current output refreshing and starts live feed from console */
-	if (loop != null){
-		clearInterval(loop);
+	$.ajax(settings).done(
+		function(){
+			/* Stops any current output refreshing and starts live feed from console */
+			if (loop != null){
+				clearInterval(loop);
+			}
+			
+			//counter++;
+			//var div=document.createElement("div");
+			//div.setAttribute("id", "out" + counter);
+						//
+			//div.className = "single-output";
+			//outputList.push(counter);
+			//
+			//  $("#out-fragment").append(div);
+			//
+			performPost();
+			loop = window.setInterval(performPost, 2000);				
+		});
 	}
-	
-//	counter++;
-//	var div=document.createElement("div");
-//	div.setAttribute("id", "out" + counter);
-//
-//	div.className = "single-output";
-//	outputList.push(counter);
-//
-//  $("#out-fragment").append(div);
-//	
-	
-	loop = window.setInterval(performPost, 2000);
-}
-
 
 
 

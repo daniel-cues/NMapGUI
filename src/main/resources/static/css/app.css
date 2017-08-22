@@ -83,6 +83,40 @@ body{
      width: 100%;     
 
 }
+.vertical_menu, .vertical_menu label, .vertical_menu label * {
+	color: #EEEEEE;
+	background-color: transparent;
+	border: none;
+}
+.vertical_menu label{
+	font-weight: bold;	
+}
+.vertical_menu{
+	margin:25px;
+	margin-left: 40px;
+	
+}
+.vertical_menu h3{
+	font-size:20px;
+    font-weight: bold;
+    margin-top:20px;
+    margin-left:-15px;
+}
+.vertical_menu h3 label{
+	display: inline;
+}
+.vertical_menu h3:after{
+    content:' ';
+    display:block;
+    border:0.5px solid #ccc;
+}
+.vertical_menu h4{
+	font-size:16px;
+	font-weight: bold;	
+	margin-left:-10px;
+	margin-top:10px;
+	
+}
 .wrapper{
      width: 100%;
      height: 75px;
@@ -175,6 +209,26 @@ body{
     -ms-overflow-style: none;
     flex:1;
     flex-basis:100%;
+}
+.tabs{
+	background-color: #111111;
+	border:none;
+}
+.tabs-title a{
+	border-top-left-radius: 7px;
+	border-top-right-radius: 7px;
+	padding: 0.5rem 1.25rem;
+	background-color:white;
+	color: black;
+}
+.tabs-title > a:focus, .tabs-title > a[aria-selected='true']{
+	color: white;
+	background-color: #252526;
+}
+.tabs-content, .tabs-panel{
+	background-color: transparent;
+	border: none;
+    padding: 0;
 }
 
 

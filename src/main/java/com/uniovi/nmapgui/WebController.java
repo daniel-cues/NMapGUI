@@ -1,14 +1,11 @@
 package com.uniovi.nmapgui;
 
 
-import java.io.File;
-import java.io.FileInputStream;
+
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.annotation.Resource;
 
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.MediaType;
@@ -29,6 +26,7 @@ public class WebController {
 	private List<Command> commands;
 	private Command command;
 	
+	
     @GetMapping("/nmap")
     public String command(Model model) {
     	command = new Command();
@@ -44,16 +42,16 @@ public class WebController {
     public String command(Model model, @RequestParam String code) {
     	command =  new Command(code);
     	commands.add(0,command);
-    	new CommandExecutor().execute(command);
+    	new CommandExecutor(command).execute();
     	model.addAttribute("command", command);
     	model.addAttribute("commands", commands);
 
-        return "index :: output";
+        return "fragments/contents :: output";
     }
     
     
     @GetMapping("/nmap/update")
-    public String updateOut(Model model) {  
+    public String updateOut(Model model, @RequestParam boolean allowDel) {  
     	
     	model.addAttribute("command", command);
     	model.addAttribute("commands", commands);
@@ -61,11 +59,11 @@ public class WebController {
     	for(Command cmd : commands)
     		if(notFinished=!cmd.isFinished())
     			break;
-    	if(!notFinished)
+    	if(!notFinished && allowDel)
     		commands=new ArrayList<>();
     	
 
-    	return "index :: output";
+    	return "fragments/contents :: output";
     }
 
     @GetMapping("/nmap/update-finished")
@@ -76,15 +74,21 @@ public class WebController {
     	return true;
     }
     @GetMapping("/nmap/download/{filename}")
-    public ResponseEntity<InputStreamResource> download(@PathVariable("filename") String filename) throws FileNotFoundException {
+    public ResponseEntity<InputStreamResource> download(@PathVariable("filename") String filename) {
     	
-    	InputStream file= new Filefinder().find(filename);
-    	
-    	InputStreamResource resource = new InputStreamResource(file);
+    	InputStream file;
+		try {
+			file = new Filefinder().find(filename);
+			InputStreamResource resource = new InputStreamResource(file);
 
-        return ResponseEntity.ok()
-                .contentType(MediaType.parseMediaType("application/octect-stream"))
-                .body(resource);
+	        return ResponseEntity.ok()
+	                .contentType(MediaType.parseMediaType("application/octect-stream"))
+	                .body(resource);
+		} catch (FileNotFoundException e) {
+			return ResponseEntity.notFound().build();
+		}
+    	
+    	
     }
     
 //    @GetMapping("/nmap/update-finished-list")

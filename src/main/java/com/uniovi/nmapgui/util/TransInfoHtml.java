@@ -6,14 +6,16 @@ import java.io.StringWriter;
 import javax.xml.transform.Result;
 import javax.xml.transform.Source;
 import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 
 public class TransInfoHtml {
-	public static String transformToHtml(String xml){
-		try {
-			
+	private TransInfoHtml(){}
+	
+	public static String transformToHtml(String xml) throws TransformerException{
+		
 	        //InputStream xsl = new URL("https://svn.nmap.org/nmap/docs/nmap.xsl").openStream();
 	        InputStream xsl = TransInfoHtml.class.getClassLoader().getResourceAsStream("static/nmap.xsl");
 
@@ -29,12 +31,7 @@ public class TransInfoHtml {
 	
 	        String outputString = writer.toString();
 	        return outputString;
-	        
-	    }catch (Exception e) 
-	    {
-	        e.printStackTrace();
-	        return "";
-	    }
+	    
 	    
 	}
 }

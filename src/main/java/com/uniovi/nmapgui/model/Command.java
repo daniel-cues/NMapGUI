@@ -1,5 +1,8 @@
 package com.uniovi.nmapgui.model;
 
+import org.springframework.stereotype.Service;
+
+@Service
 public class Command {
 	
 	private String text;
@@ -10,6 +13,7 @@ public class Command {
 	public Command() {}
 
     public Command(String text) {
+    	this();
     	setText(text);	
     }
 
@@ -33,7 +37,7 @@ public class Command {
 		return output;
 	}
 
-	public void setCommand(Output output) {
+	public void setOutput(Output output) {
 		this.output = output;
 	}
 

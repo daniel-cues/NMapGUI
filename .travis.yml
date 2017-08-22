@@ -1,5 +1,16 @@
 language: java
+sudo: false
 jdk:
-- oraclejdk8
+  - oraclejdk8
+  
+addons:
+  apt:
+    packages:
+    - nmap
+  
+before_install:
+  - pip install --user codecov
+
 after_success:
-  - bash <(curl -s https://codecov.io/bash)
+  - codecov
+  

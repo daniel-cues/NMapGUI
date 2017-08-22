@@ -5,7 +5,7 @@
 
 	<groupId>com.uniovi.nmapgui</groupId>
 	<artifactId>nmapGUI</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.3-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<name>NMapGUI</name>
@@ -40,8 +40,38 @@
 	<build>
 		<plugins>
 			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<configuration>
+					<archive>
+						<manifest>
+							<mainClass>com.uniovi.nmapgui.NMapGuiLoader</mainClass>
+						</manifest>
+					</archive>
+				</configuration>
+			</plugin>
+			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+			  <groupId>org.jacoco</groupId>
+			  <artifactId>jacoco-maven-plugin</artifactId>
+			  <version>0.7.9</version>
+			  <executions>
+			  	<execution>
+			  		<goals>
+				  		<goal>prepare-agent</goal>
+			  		</goals>
+			  	</execution>
+			  	<execution>
+			  		<id>report</id>
+			  		<phase>test</phase>
+			  		<goals>
+				  		<goal>report</goal>
+			  		</goals>
+			  	</execution>
+			  </executions>
 			</plugin>
 		</plugins>
 	</build>

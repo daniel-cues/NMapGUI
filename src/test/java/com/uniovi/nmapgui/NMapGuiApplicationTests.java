@@ -28,5 +28,34 @@ public class NMapGuiApplicationTests {
         this.mockMvc.perform(get("/nmap")).andDo(print()).andExpect(status().isOk())
                 .andExpect(content().string(containsString("Port Scan")));
     }
-	
+    @Test
+    public void executeTest() throws Exception {
+    	basicTest();
+        this.mockMvc.perform(get("/nmap-exe?code={code}", "scanme.nmap.org")).andExpect(status().isOk())
+                .andExpect(content().string(containsString("nmap scanme.nmap.org")));
+    }	
+    @Test
+    public void updateTest() throws Exception {
+    	executeTest();
+    	this.mockMvc.perform(get("/nmap/update?allowDel={allowDel}", false)).andExpect(status().isOk())
+                .andExpect(content().string(containsString("<div ")));
+    	Thread.sleep(5000);
+    	this.mockMvc.perform(get("/nmap/update?allowDel={allowDel}", true)).andExpect(status().isOk())
+        .andExpect(content().string(containsString("<div ")));
+    }
+    @Test
+    public void updateFinishedTest() throws Exception {
+    	executeTest();
+    	this.mockMvc.perform(get("/nmap/update-finished")).andExpect(status().isOk())
+                .andExpect(content().string(containsString("false")));
+    	Thread.sleep(60000);
+    	this.mockMvc.perform(get("/nmap/update-finished")).andExpect(status().isOk())
+        .andExpect(content().string(containsString("true")));
+
+    }
+    @Test
+    public void downloadTest() throws Exception {
+    	basicTest();
+    	this.mockMvc.perform(get("/nmap/download/{filename}", "test.xml")).andExpect(status().isNotFound());
+        }
 }

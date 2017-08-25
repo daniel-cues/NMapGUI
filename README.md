@@ -1,5 +1,5 @@
-NMapGUI
-=======
+![nmapgui](https://github.com/danicuestasuarez/NMapGUI/wiki/images/header.png)
+====
 
 [![Build Status](https://travis-ci.org/danicuestasuarez/NMapGUI.svg?branch=develop)](https://travis-ci.org/danicuestasuarez/NMapGUI)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/37479ced18a04d4e8f1c38753b22003c)](https://www.codacy.com/app/danicuestasuarez/NMapGUI?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=danicuestasuarez/NMapGUI&amp;utm_campaign=Badge_Grade)
@@ -23,6 +23,9 @@ If you have any questions about NMapGUI usage or want to get in contact with me,
 * Menu to find most of nmap options.
 * Start and stop the webapp at any moment.
 
+## Screenshots
+![nmapgui](https://raw.githubusercontent.com/wiki/danicuestasuarez/NMapGUI/images/NMapGUI.png)
+![nmapgui](https://raw.githubusercontent.com/wiki/danicuestasuarez/NMapGUI/images/NMapGUIHTML.png)
 
 ## Installation
 

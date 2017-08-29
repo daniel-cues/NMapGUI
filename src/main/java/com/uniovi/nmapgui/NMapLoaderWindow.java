@@ -80,11 +80,11 @@ public class NMapLoaderWindow extends JFrame {
          ImageIcon icon = new ImageIcon(img);
          image = new JLabel(icon);
          image.setLayout(new FlowLayout(FlowLayout.RIGHT));
-
+         image.setName("image");
          
          go= new JButton("Go!");
 		 go.setEnabled(false);
-		 
+		 go.setName("go");
 		 go.addActionListener(new ActionListener() {			
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -109,6 +109,7 @@ public class NMapLoaderWindow extends JFrame {
 		gl.setVgap(5);
 		buttons.setLayout(gl);
 		start = new JButton("Start NMapGUI");
+		start.setName("start");
 		if(!nmapInstalled){
 			start.setEnabled(false);
 			start.setText("NMap is not installed");
@@ -129,6 +130,7 @@ public class NMapLoaderWindow extends JFrame {
 		buttons.add(start);
 
 		stop = new JButton("Nmap not running");
+		stop.setName("stop");
 		stop.addActionListener(new ActionListener() {			
 			@Override
 			public void actionPerformed(ActionEvent e) {

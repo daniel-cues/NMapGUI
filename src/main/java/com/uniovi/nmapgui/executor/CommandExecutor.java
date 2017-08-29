@@ -7,6 +7,8 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.Unmarshaller;
 
 import com.uniovi.nmapgui.model.*;
 import com.uniovi.nmapgui.util.TransInfoHtml;
@@ -123,8 +125,14 @@ public class CommandExecutor {
 		    	String sCurrentLine;
 		        while ((sCurrentLine = br.readLine()) != null) {
 		            sb.append(sCurrentLine);
-		        }		    
+		        }		
+	        JAXBContext jaxbContext = JAXBContext.newInstance(Scan.class);
+	        Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
+	        StringReader reader = new StringReader(sb.toString());
+	        Scan scan = (Scan) unmarshaller.unmarshal(reader);
 		    cmd.getOutput().setXml(TransInfoHtml.transformToHtml(sb.toString()));
+		    cmd.getOutput().setScan(scan);
+		    System.out.println(scan.toString());
 
 		} catch (Exception e) {
 			e.printStackTrace();

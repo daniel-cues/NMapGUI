@@ -51,7 +51,14 @@
 				   </div>
 				   <div id="el2" class="outtoggle nmap hidden" th:utext="${cmd.output.xml}">
 				   </div>
-				   <div id="el3" class="outtoggle nmap hidden">
+				   <div th:id="${cmd.output.id}" class="outtoggle nmap hidden svg-container">
+			   		<script th:inline="javascript">
+					    var traceroute = /*[[${cmd.output.scan.linkTraceroute}]]*/ ;
+					    var id = /*[[${cmd.output.id}]]*/ ;
+						if(traceroute.length > 0){						
+						    d3.select("#"+id).append(function() { return computeGraph(traceroute).node() });
+					    }
+					</script>
 				   </div>
 			   </td>
 			   

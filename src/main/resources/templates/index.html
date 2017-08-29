@@ -13,7 +13,32 @@
 	<script th:src="@{js/vendor/jquery.js}" src="../../js/vendor/jquery.js"></script>
 	<script th:src="@{js/vendor/what-input.js}"	src="../../js/vendor/what-input.js"></script>
 	<script th:src="@{js/vendor/foundation.js}"	src="../../js/vendor/foundation.js"></script>
+	<script th:src="@{js/vendor/d3.v3.min.js}" src="../../js/vendor/d3.v3.min.js"></script>	
 	<script th:src="@{js/app.js}" src="../../js/app.js"></script>
+	<script th:src="@{js/graph.js}" src="../../js/graph.js"></script>
+	
+	<style>
+		.link {
+		  fill: none;
+		  stroke: #999;
+		  stroke-width: 1.5px;
+		}
+		
+		.node circle {
+		  fill: #ccc;
+		  stroke: #fff;
+		  stroke-width: 1.5px;
+		}
+		
+		svg text {
+		  font: 10px sans-serif;
+		  fill: #FFF;
+		  pointer-events: none;
+		}
+
+	</style>
+	
+	
 </head>
 <body>
 	<div id="sidebar" class="sidebar">

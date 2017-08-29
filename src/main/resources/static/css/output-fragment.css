@@ -162,6 +162,10 @@
 	display: none; 
 }
 
+.svg-content {
+    display: inline-block;
+    overflow: hidden;
+}
 
 
 

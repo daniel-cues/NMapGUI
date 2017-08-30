@@ -132,7 +132,6 @@ public class CommandExecutor {
 	        Scan scan = (Scan) unmarshaller.unmarshal(reader);
 		    cmd.getOutput().setXml(TransInfoHtml.transformToHtml(sb.toString()));
 		    cmd.getOutput().setScan(scan);
-		    System.out.println(scan.toString());
 
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -6,6 +6,8 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import com.uniovi.nmapgui.model.Status.State;
+
 @XmlRootElement(name = "nmaprun")
 public class Scan {
 	
@@ -35,6 +37,7 @@ public class Scan {
 		ArrayList <Link> list = new ArrayList<Link>();
 		if(linkTraceroute!=null && linkTraceroute.isEmpty() && hosts!=null){
 			Host you = new Host();
+			you.getStatus().setState(State.you);
 			you.setAddress(new Address("You"));
 			for(Host host : hosts){
 			   if(host.getTrace()==null || host.getTrace().size()<=1)
@@ -42,7 +45,7 @@ public class Scan {
 			   else {
 				   Host prev = you;
 				   for(Hop hop: host.getTrace()){
-					list.add(new Link(prev, hop.toHost()));
+					   list.add(new Link(prev, hop.toHost()));
 					   prev=hop.toHost();
 				   }
 			   }

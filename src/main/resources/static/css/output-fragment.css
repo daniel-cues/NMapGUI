@@ -167,6 +167,33 @@
     overflow: hidden;
 }
 
+.link {
+		  fill: none;
+		  stroke: #999;
+		  stroke-width: 1.5px;
+		}
+		
+.node circle {
+  fill: #ccc;
+  stroke: #fff;
+  stroke-width: 1.5px;
+}
+.node .up{
+  fill: #72d66f;  
+}
+.node .you{
+  fill: #3465a4;
+
+}
+.node .down{
+  fill: #ef2929;
+}
+
+svg text {
+  font: 10px sans-serif;
+  fill: #FFF;
+  pointer-events: none;
+}
 
 
 

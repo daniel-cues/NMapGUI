@@ -15,14 +15,14 @@ function computeGraph(traceroute){
 	});
 	
 
-	
+	var radius=8;
 	
 	var force = d3.layout.force()
 	    .nodes(d3.values(nodes))
 	    .links(links)
 	    .size([2000, 800])
-	    .linkDistance(60)
-	    .charge(-200)
+	    .linkDistance(80)
+	    .charge(-300)
 	    .on("tick", tick)
 	    .start();
 	
@@ -43,8 +43,9 @@ function computeGraph(traceroute){
 	
 	var link = svg.selectAll(".link")
 	    .data(force.links())
-	   .enter().append("line")
-	    .attr("class", "link");
+	    .enter().append("line")
+	    .attr("class", "link")
+	    .attr("marker-end", "url(#triangle)");
 	
 	var node = svg.selectAll(".node")
 	    .data(force.nodes())
@@ -54,12 +55,23 @@ function computeGraph(traceroute){
 	    .on("mouseout", mouseout)
 	    .call(force.drag);
 
+	svg.append("svg:defs").append("svg:marker")
+	    .attr("id", "triangle")
+	    .attr("refX", 10)
+	    .attr("refY", 6)
+	    .attr("markerWidth", 30)
+	    .attr("markerHeight", 30)
+	    .attr("orient", "auto")
+	    .append("path")
+	    .attr("d", "M 0 2 10 6 0 10 3 6")
+	    .style("fill", "#999");
 	
 	node.append("circle")
-    	.attr("r", 8);
+		.attr("class", function(d) { return  d.host.status.state.$name; })
+    	.attr("r", radius);
 		
 	node.append("text")
-	    .attr("x", 12)
+	    .attr("x", radius+radius/2)
 	    .attr("dy", ".35em")
 	    .text(function(d) { return d.host.address.address; });
 	
@@ -77,17 +89,98 @@ function computeGraph(traceroute){
 	      .attr("r", 8);
 	}
 	
+	
 	function tick() {
 	  link
-	      .attr("x1", function(d) { return d.source.x; })
-	      .attr("y1", function(d) { return d.source.y; })
-	      .attr("x2", function(d) { return d.target.x; })
-	      .attr("y2", function(d) { return d.target.y; });
+	      .attr("x1", linkSX)
+	      .attr("y1", linkSY)
+	      .attr("x2", linkTX)
+	      .attr("y2", linkTY);
 
 	  node
 	      .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
 	}
-	
+	function linkSX(d) {
+		var sourceX = d.source.x;
+	    var sourceY = d.source.y;
+	    var targetX = d.target.x;
+	    var targetY = d.target.y;
+
+	    var theta = Math.atan((targetX - sourceX) / (targetY - sourceY));
+
+	    var sinTheta = radius * Math.sin(theta);
+	    
+	    if (d.target.y > d.source.y) {
+	        sourceX = sourceX + sinTheta;
+	    }
+	    else {
+	        sourceX = sourceX - sinTheta;
+	    }
+
+	 
+	    return sourceX;
+	}
+    function linkSY(d) {
+	    var sourceX = d.source.x;
+	    var sourceY = d.source.y;
+	    var targetX = d.target.x;
+	    var targetY = d.target.y;
+
+	    var theta = Math.atan((targetX - sourceX) / (targetY - sourceY));
+
+	    var cosTheta = radius * Math.cos(theta);
+	   
+	    if (d.target.y > d.source.y) {
+	        sourceY = sourceY + cosTheta;
+	    }
+	    else {
+	        sourceY = sourceY - cosTheta;
+	    }
+
+	  
+	    return sourceY;
+    }	    
+    function linkTX(d) {
+	    var sourceX = d.source.x;
+	    var sourceY = d.source.y;
+	    var targetX = d.target.x;
+	    var targetY = d.target.y;
+
+	    var phi = Math.atan((targetY - sourceY) / (targetX - sourceX));
+
+	    var cosPhi = radius * Math.cos(phi);
+
+	    if (d.source.x > d.target.x) {
+	        targetX = targetX + cosPhi;
+	    }
+	    else {
+	        targetX = targetX - cosPhi;
+	    }
+
+	    
+	    return targetX;
+    }				    
+	function linkTY(d) {
+	    var sourceX = d.source.x;
+	    var sourceY = d.source.y;
+	    var targetX = d.target.x;
+	    var targetY = d.target.y;
+
+	    var phi = Math.atan((targetY - sourceY) / (targetX - sourceX));
+
+	    
+	    var sinPhi = radius * Math.sin(phi);
+
+	    if (d.source.x > d.target.x) {
+	        targetY = targetY + sinPhi;    
+	    }
+	    else {
+	        targetY = targetY - sinPhi;   
+	    }
+	    
+	    return targetY;
+	    
+	}
 	function zoomed() {
 		  svg.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
 		}

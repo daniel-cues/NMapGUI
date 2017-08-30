@@ -15,6 +15,8 @@ public class Host {
 	
 	private LinkedList<Hop> trace;
 	
+	private Status status = new Status();
+	
 	@XmlElement(name="address")
 	public Address getAddress() {
 		return address;
@@ -44,11 +46,19 @@ public class Host {
 		this.trace = trace;
 	}
 
+
+	@XmlElement(name="status")
+	public Status getStatus() {
+		return status;
+	}
+
+	public void setStatus(Status status) {
+		this.status = status;
+	}
+
 	@Override
 	public String toString() {
-		return "\nHost [address=" + address + ", hostName=" + hostName + ", trace=" + trace + "]";
+		return "\nHost [address=" + address + ", hostName=" + hostName + ", trace=" + trace + ", status=" + status + "]";
 	}
-	
-	
-	
+		
 }

@@ -1,5 +1,6 @@
 package com.uniovi.nmapgui.model;
 
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Set;
 
@@ -11,7 +12,9 @@ public class Host {
 	private Address address;
 	
 	
-	private Set<Hostname> hostName;
+	private Set<Hostname> hostNames = new HashSet<Hostname>();
+	private Set<Port> ports = new HashSet<Port>();
+
 	
 	private LinkedList<Hop> trace;
 	
@@ -29,11 +32,11 @@ public class Host {
 	@XmlElementWrapper(name="hostnames")
 	@XmlElement(name="hostname")
 	public Set<Hostname> getHostName() {
-		return hostName;
+		return hostNames;
 	}
 
 	public void setHostName(Set<Hostname> hostName) {
-		this.hostName = hostName;
+		this.hostNames = hostName;
 	}
 
 	@XmlElementWrapper(name="trace")
@@ -56,9 +59,19 @@ public class Host {
 		this.status = status;
 	}
 
+	@XmlElementWrapper(name="ports")
+	@XmlElement(name="port")
+	public Set<Port> getPorts() {
+		return ports;
+	}
+
+	public void setPorts(Set<Port> ports) {
+		this.ports = ports;
+	}
+
 	@Override
 	public String toString() {
-		return "\nHost [address=" + address + ", hostName=" + hostName + ", trace=" + trace + ", status=" + status + "]";
+		return "\nHost [address=" + address + ", hostName=" + hostNames + ", trace=" + trace + ", status=" + status + "]";
 	}
 		
 }

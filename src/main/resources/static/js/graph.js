@@ -66,6 +66,7 @@ function computeGraph(traceroute){
 	    .attr("d", "M 0 2 10 6 0 10 3 6")
 	    .style("fill", "#999");
 	
+	
 	node.append("circle")
 		.attr("class", function(d) { return  d.host.status.state.$name; })
     	.attr("r", radius);
@@ -75,19 +76,58 @@ function computeGraph(traceroute){
 	    .attr("dy", ".35em")
 	    .text(function(d) { return d.host.address.address; });
 	
+	var tooltip = node.append("g")
+		.attr("class","tip hidden")
+		.attr("fill", "#f2f2f2")
+        .attr("transform", function(d) { return "translate(" + radius*5 + ", -" + radius*2.5 + ")"; });
+
+	
+	tooltip.append("rect")
+		.attr("width", 335)
+		.attr("height", 80);
+	
+	tooltip.append("path")
+		.attr("d", "M "+-20+" 20 l 21 -10 0 20 z");
+	
+	var toolText = tooltip.append("text")
+	 	.attr("transform", function(d) { return "translate(" + 10 + "," + 5 + ")"; })
+	    .attr("dy", ".35em")
+	    
+	 toolText.append("tspan")
+	 	.attr("x", "0")
+	 	.attr("dy", "1.2em")
+	    .text(function(d) { return "IP Address: " + d.host.address.address; });
+	 toolText.append("tspan")
+	 	.attr("x", "0")
+ 		.attr("dy", "1.2em")
+ 		.text(function(d) { return "IP Address: " + d.host.address.address; });
+	
 	
 
-	function mouseover() {
-	  d3.select(this).select("circle").transition()
-	      .duration(750)
-	      .attr("r", 16);
-	}
+	 function mouseover(d) {
+		  //Reorder elements to raise tooltip to the top ofd the view
+		  svg.selectAll(".node").sort(function (a, b) { // select the parent and sort the path's
+		      if (a.host.address.address != d.host.address.address) return -1;               // a is not the hovered element, send "a" to the back
+		      else return 1;                             // a is the hovered element, bring "a" to the front
+		  });
+		   
+		  d3.select(this).select("circle").transition()
+		      .duration(500)
+		      .attr("r", 16);
+		  d3.select(this).select("g").classed("hidden", false);
+		  d3.select(this).select("text").classed("hidden", true);
 
-	function mouseout() {
-	  d3.select(this).select("circle").transition()
-	      .duration(750)
-	      .attr("r", 8);
-	}
+		}
+
+		function mouseout() {
+		  d3.select(this).select("circle").transition()
+		      .duration(500)
+		      .attr("r", 8);
+		  d3.select(this).select("g").classed("hidden", true);
+		  d3.select(this).select("text").classed("hidden", false);
+
+		}
+	
 	
 	function tick() {
 	  link

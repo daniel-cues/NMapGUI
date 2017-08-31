@@ -1,8 +1,11 @@
 package com.uniovi.nmapgui.model;
 
 import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlType;
 
 public class Status {
+	
+	@XmlType(name="hostState")
 	enum State {up, down, you};
 	
 	private State state = State.up;

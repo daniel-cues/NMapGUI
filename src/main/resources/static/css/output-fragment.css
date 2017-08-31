@@ -168,10 +168,10 @@
 }
 
 .link {
-		  fill: none;
-		  stroke: #999;
-		  stroke-width: 1.5px;
-		}
+  fill: none;
+  stroke: #999;
+  stroke-width: 1.5px;
+}
 		
 .node circle {
   fill: #ccc;
@@ -194,7 +194,8 @@ svg text {
   fill: #FFF;
   pointer-events: none;
 }
-
-
-
-
+svg .tip text {
+  font: 10px sans-serif;
+  fill: #000;
+  pointer-events: none;
+}

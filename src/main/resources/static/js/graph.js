@@ -33,7 +33,7 @@ function computeGraph(traceroute){
 	  .on("zoom", zoomed);
 	
 	
-	var wrap = d3.select("body").append("svg").remove()
+	var wrap = d3.select("body").append("svg")
 		.attr("preserveAspectRatio", "xMidYMid slice")
 		.attr("viewBox", "0 0 2000 800")
 		.classed("svg-content", true).call(zoom);
@@ -49,7 +49,8 @@ function computeGraph(traceroute){
 	
 	var node = svg.selectAll(".node")
 	    .data(force.nodes())
-	    .enter().append("g")
+	    .enter()
+	    .append("g")
 	    .attr("class", "node")
 	    .on("mouseover", mouseover)
 	    .on("mouseout", mouseout)
@@ -74,17 +75,21 @@ function computeGraph(traceroute){
 	node.append("text")
 	    .attr("x", radius+radius/2)
 	    .attr("dy", ".35em")
+	    .attr("text-anchor", "start")
 	    .text(function(d) { return d.host.address.address; });
 	
 	var tooltip = node.append("g")
 		.attr("class","tip hidden")
 		.attr("fill", "#f2f2f2")
-        .attr("transform", function(d) { return "translate(" + radius*5 + ", -" + radius*2.5 + ")"; });
-
+        .attr("transform", function(d) { return "translate(" + radius*5 + ", -" + radius*2.5 + ")"; })
 	
-	tooltip.append("rect")
-		.attr("width", 335)
-		.attr("height", 80);
+
+	tooltip.append("rect")	
+	    .attr("x", 0)
+	    .attr("y", 1)
+	    .attr("width", 10)
+	    .attr("height", 10)
+	  
 	
 	tooltip.append("path")
 		.attr("d", "M "+-20+" 20 l 21 -10 0 20 z");
@@ -97,13 +102,30 @@ function computeGraph(traceroute){
 	 	.attr("x", "0")
 	 	.attr("dy", "1.2em")
 	    .text(function(d) { return "IP Address: " + d.host.address.address; });
+	
 	 toolText.append("tspan")
 	 	.attr("x", "0")
  		.attr("dy", "1.2em")
- 		.text(function(d) { return "IP Address: " + d.host.address.address; });
+ 		.text(function(d) { 
+ 			var hostnames = "Host Names: "
+ 				for(var i = 0; i < d.host.hostNames.length; i++){
+ 					if(d.host.hostNames[i].hostname!=null){
+	 					var separator = (i<d.host.hostNames.length-1) ? ", " : "";
+	 					hostnames += d.host.hostNames[i].hostname + separator;
+	 				}
+ 				}
+ 			return hostnames;
+ 		});
 	
-	
+	 
 
+	 
+	 
+	 tooltip.selectAll('rect')
+	     .attr("width",  function(d) {return this.parentNode.getBBox().width;})
+		 .attr("height", function(d) {return this.parentNode.getBBox().height+7;});
+	 
+	 
 	 function mouseover(d) {
 		  //Reorder elements to raise tooltip to the top ofd the view
 		  svg.selectAll(".node").sort(function (a, b) { // select the parent and sort the path's
@@ -224,7 +246,7 @@ function computeGraph(traceroute){
 		  svg.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
 		}
 	
-	return wrap;
+	return wrap.remove();
 }	
 
 

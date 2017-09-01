@@ -37,8 +37,9 @@ public class Hop {
 		Host host = new Host();
 		host.setAddress(new Address(address));
 		Set<Hostname> set = new HashSet<Hostname>();
-		set.add(new Hostname(this.host));
-		host.setHostName(set);
+		if (host!=null)
+			set.add(new Hostname(this.host));
+		host.setHostNames(set);
 		
 		return host;
 	}

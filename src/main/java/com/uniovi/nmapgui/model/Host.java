@@ -29,14 +29,14 @@ public class Host {
 		this.address = address;
 	}
 
-	@XmlElementWrapper(name="hostnames")
-	@XmlElement(name="hostname")
-	public Set<Hostname> getHostName() {
+	@XmlElementWrapper(name="hostnames", required=false)
+	@XmlElement(name="hostname", required=false)
+	public Set<Hostname> getHostNames() {
 		return hostNames;
 	}
 
-	public void setHostName(Set<Hostname> hostName) {
-		this.hostNames = hostName;
+	public void setHostNames(Set<Hostname> hostNames) {
+		this.hostNames = hostNames;
 	}
 
 	@XmlElementWrapper(name="trace")

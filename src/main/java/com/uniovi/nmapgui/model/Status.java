@@ -9,6 +9,7 @@ public class Status {
 	enum State {up, down, you};
 	
 	private State state = State.up;
+	private String reason;
 
 	@XmlAttribute(name="state")
 	public State getState() {
@@ -24,6 +25,13 @@ public class Status {
 		return "Status [state=" + state + "]";
 	}
 	
+	@XmlAttribute(name="reason")
+	public String getReason() {
+		return reason;
+	}
+	public void setReason(String reason) {
+		this.reason = reason;
+	}
 	
 
 }

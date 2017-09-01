@@ -117,15 +117,52 @@ function computeGraph(traceroute){
  			return hostnames;
  		});
 	
+	 toolText.append("tspan")
+	 	.attr("x", "0")
+		.attr("dy", "1.2em");
+	 toolText.append("tspan")
+	 	.attr("x", "0")
+		.attr("dy", "1.2em")
+		.text("Ports:");
 	 
-
+	 var ports = toolText
+	 	.selectAll('.port')
+	 	.data(function(d) { return d.host.ports; })
+	 	.enter();
+	 	
+	 	ports.append('tspan')
+	 	.attr("x", "0")
+		.attr("dy", "1.2em")
+		.attr("class", "port")
+ 		.text(function(d) { 
+ 			var port = d.portId+"/"+ d.protocol + "\u00a0".repeat(6) + d.state.$name ;
+ 				
+ 			return port;
+ 			});
+	 
+//	 for(var i = 0; i < node.data.host.ports.length; i++){
+//			if(node.data.host.ports[i].portId!=0){
+//				generatePortText(node.data.host.ports[i])
+//			}
+//		}
 	 
 	 
 	 tooltip.selectAll('rect')
 	     .attr("width",  function(d) {return this.parentNode.getBBox().width;})
 		 .attr("height", function(d) {return this.parentNode.getBBox().height+7;});
 	 
-	 
+	 function generatePortText(port)
+	 {
+		 toolText.append("tspan")
+		 	.attr("x", "0")
+	 		.attr("dy", "1.2em")
+	 		.text(function(d) { 
+	 			var port = port.portId+"/"+ protocol + "   " + port.state.state ;
+	 				
+	 			return port;
+	 			});
+	 }
+
 	 function mouseover(d) {
 		  //Reorder elements to raise tooltip to the top ofd the view
 		  svg.selectAll(".node").sort(function (a, b) { // select the parent and sort the path's

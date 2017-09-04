@@ -53,7 +53,7 @@ public class Host {
 	@XmlElement(name="status")
 	public Status getStatus() {
 		return status;
-	}
+	} 
 
 	public void setStatus(Status status) {
 		this.status = status;
@@ -71,7 +71,8 @@ public class Host {
 
 	@Override
 	public String toString() {
-		return "\nHost [address=" + address + ", hostName=" + hostNames + ", trace=" + trace + ", status=" + status + "]";
+		return "\nHost [address=" + getAddress() + ", hostName=" + getHostNames() + ", trace=" + getTrace() + ", status=" + getStatus() + ", ports=" + getPorts() + "]";
 	}
+
 		
 }

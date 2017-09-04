@@ -7,8 +7,8 @@ public class Link {
 	
 	public Link(Host source, Host target) {
 		super();
-		this.source = source;
-		this.target = target;
+		setSource(source);
+		setTarget(target);
 	}
 	
 	public Host getSource() {
@@ -22,6 +22,11 @@ public class Link {
 	}
 	public void setTarget(Host target) {
 		this.target = target;
+	}
+
+	@Override
+	public String toString() {
+		return "Link [source=" + getSource() + ", target=" + getTarget() + "]";
 	}
 	
 	

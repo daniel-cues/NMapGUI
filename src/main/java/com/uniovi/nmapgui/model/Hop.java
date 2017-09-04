@@ -30,7 +30,7 @@ public class Hop {
 
 	@Override
 	public String toString() {
-		return "Hop [address=" + address + ", host=" + host + "]";
+		return "Hop [address=" + getAddress() + ", host=" + getHost() + "]";
 	}
 	
 	public Host toHost(){

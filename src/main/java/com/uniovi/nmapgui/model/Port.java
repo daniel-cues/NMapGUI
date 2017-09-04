@@ -35,15 +35,24 @@ public class Port {
 	
 	@XmlTransient
 	public StateEnum getState() {
-		return state.stateVal;
+		return state.getStateVal();
 	}
 	public void setState(StateEnum state) {
 		this.state = new State();
 		this.state.setStateVal(state);
 	}
 	
+	
+	
 	// TODO Setvice, etc.
 	
+	@Override
+	public String toString() {
+		return "Port [portId=" + getPortId() + ", protocol=" + getProtocol() + ", state=" + getState() + "]";
+	}
+
+
+
 	@XmlType(name="portState")
 	private static class State{
 		

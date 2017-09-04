@@ -6,7 +6,7 @@ import javax.xml.bind.annotation.XmlType;
 public class Status {
 	
 	@XmlType(name="hostState")
-	enum State {up, down, you};
+	public enum State {up, down, you};
 	
 	private State state = State.up;
 	private String reason;
@@ -20,10 +20,6 @@ public class Status {
 		this.state = state;
 	}
 
-	@Override
-	public String toString() {
-		return "Status [state=" + state + "]";
-	}
 	
 	@XmlAttribute(name="reason")
 	public String getReason() {
@@ -32,6 +28,13 @@ public class Status {
 	public void setReason(String reason) {
 		this.reason = reason;
 	}
+
+	@Override
+	public String toString() {
+		return "Status [state=" + getState() + ", reason=" + getReason() + "]";
+	}
+	
+	
 	
 
 }

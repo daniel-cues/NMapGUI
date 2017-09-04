@@ -50,9 +50,11 @@ public class Scan {
 				   }
 			   }
 			}
-			linkTraceroute=list;
+			setLinkTraceroute(list);
 		}
 		return linkTraceroute;
 	}
+	
+	
 
 }

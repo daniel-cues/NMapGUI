@@ -7,7 +7,8 @@ public class Hostname {
 	private String hostname;
 
 	public Hostname(String hostname) {
-		this.hostname=hostname;
+		this();
+		setHostname(hostname);
 	}
 	public Hostname(){}
 

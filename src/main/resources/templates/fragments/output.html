@@ -45,8 +45,8 @@
 		   </tr>
 		   <tr>   
 		       <td class="result">
-			       <div id="el1" class = "outtoggle">
-						<p th:utext="${cmd.output.text}"></p>
+			       <div id="el1" class = "outtoggle console-output">
+						<pre th:utext="${cmd.output.text}"></pre>
 						<div class="loading"></div>
 				   </div>
 				   <div id="el2" class="outtoggle nmap hidden" th:utext="${cmd.output.xml}">

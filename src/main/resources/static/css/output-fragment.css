@@ -97,8 +97,7 @@
 .result{
 	background-color: #191c1e;
 	border: 0.25px solid #191c1e;
-	padding-left: 20px;
-	padding-right: 20px;
+	padding: 0;
 	
 }
 .result .open{
@@ -134,7 +133,9 @@
 	border: none;
 	border-spacing: 0;
 }
-
+.console-output{
+	margin:20px;	
+}
 .command-sidebar-button{
     display: inline-block;
     width: 60px;

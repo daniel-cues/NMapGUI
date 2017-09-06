@@ -20,6 +20,7 @@ public class CommandExecutor {
 
 	
 	public CommandExecutor(Command command) {		
+		this();
 		cmd=command;
 	}
 	public CommandExecutor(){};
@@ -45,9 +46,9 @@ public class CommandExecutor {
 			      BufferedReader errorReader = null;
 
 			      try {
+			    	boolean firstLine=true;
 			        reader = new BufferedReader(new InputStreamReader(stream));
 			        String line = null;
-			        cmd.getOutput().setText("<pre></pre>");
 			        while ((line = reader.readLine()) != null) {
 			        	line=escape(line);
 			        	if (line.contains( " open "))
@@ -56,13 +57,23 @@ public class CommandExecutor {
 			        		line="<span class=\"closed\">"+line+"</span>";
 			        	else if (line.contains( " filtered "))
 			        		line="<span class=\"filtered\">"+line+"</span>";
-			        	cmd.getOutput().setText(cmd.getOutput().getText().replaceAll("</pre>", "\n")+line+"</pre>");
+			        	String jump = "\n";
+			        	if(firstLine)
+			        		jump="";
+			        	cmd.getOutput().setText(cmd.getOutput().getText()+jump+line);
+			        	firstLine=false;
+
 			        }
 			        errorReader = new BufferedReader(new InputStreamReader(errors));
 			        while ((line = errorReader.readLine()) != null) {
 			        	line=escape(line);
 		        		line="<span class=\"closed\">"+line+"</span>";
-			        	cmd.getOutput().setText(cmd.getOutput().getText().replaceAll("</pre>", "\n")+"<i>"+line+"</i></pre>");
+		        		String jump = "\n";
+			        	if(firstLine)
+			        		jump="";
+			        	cmd.getOutput().setText(cmd.getOutput().getText()+jump+"<i>"+line+"</i>");
+			        	firstLine=false;
+
 			        }
 
 			      } catch (Exception e) {

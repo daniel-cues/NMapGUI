@@ -6,7 +6,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
-
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import com.uniovi.nmapgui.model.*;
 import com.uniovi.nmapgui.util.TransInfoHtml;
@@ -18,23 +19,17 @@ public class CommandExecutor {
 
 	
 	public CommandExecutor(Command command) {		
+		this();
 		cmd=command;
 	}
 	public CommandExecutor(){};
 
 
 	public boolean execute(){
-		String filename= "nmap-scan_" + new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss")
-				.format(new Date())+ ".xml";
-        		
-		this.cmd.getOutput().setFilename(filename);
-		tempPath=tempPath + filename;
-		List<String> commandsList = new ArrayList<String>();
-		commandsList.add("nmap");
-		commandsList.addAll(Arrays.asList(cmd.getText().split(" ")));
-		commandsList.addAll(Arrays.asList(new String[]{"-oX" , getTempPath(), "--webxml"}));
+		String[] command = composeCommand();
+		
 		try {			
-			 Process p = Runtime.getRuntime().exec(commandsList.toArray(new String[]{}));
+			 Process p = Runtime.getRuntime().exec(command);
 			  final InputStream stream = p.getInputStream();
 			  final InputStream errors = p.getErrorStream();
 			  commandThread = new Thread(new Runnable() {
@@ -84,6 +79,32 @@ public class CommandExecutor {
 		} 
 		return true;
     }
+	
+	private String[] composeCommand()	{
+		
+		String filename= "nmap-scan_" + new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss")
+				.format(new Date())+ ".xml";
+        		
+		this.cmd.getOutput().setFilename(filename);
+		tempPath=tempPath + filename;
+		List<String> commandList = new ArrayList<String>();
+		commandList.add("nmap");
+		commandList.addAll(splitOptions());
+		commandList.addAll(Arrays.asList(new String[]{"-oX" , getTempPath(), "--webxml"}));
+		
+		return commandList.toArray(new String[]{});
+		
+	}
+	
+	private List<String>  splitOptions(){
+		List<String> options = new ArrayList<>();
+		//Splits string by spaces other than the ones in substring quotes
+		Matcher matcher = Pattern.compile("\\s*([^(\"|\')]\\S*|\".+?\"|\'.+?\')\\s*").matcher(cmd.getText());
+		while (matcher.find())
+		    options.add(matcher.group(1));
+		
+		return options;		
+	}
 
 	private String escape(String str) {
 		String line=str;
@@ -123,7 +144,7 @@ public class CommandExecutor {
 		    	String sCurrentLine;
 		        while ((sCurrentLine = br.readLine()) != null) {
 		            sb.append(sCurrentLine);
-		        }		    
+		        }
 		    cmd.getOutput().setXml(TransInfoHtml.transformToHtml(sb.toString()));
 
 		} catch (Exception e) {

@@ -8,6 +8,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.Unmarshaller;
 
 import com.uniovi.nmapgui.model.*;
 import com.uniovi.nmapgui.util.TransInfoHtml;
@@ -38,9 +40,9 @@ public class CommandExecutor {
 			      BufferedReader errorReader = null;
 
 			      try {
+			    	boolean firstLine=true;
 			        reader = new BufferedReader(new InputStreamReader(stream));
 			        String line = null;
-			        cmd.getOutput().setText("<pre></pre>");
 			        while ((line = reader.readLine()) != null) {
 			        	line=escape(line);
 			        	if (line.contains( " open "))
@@ -49,13 +51,23 @@ public class CommandExecutor {
 			        		line="<span class=\"closed\">"+line+"</span>";
 			        	else if (line.contains( " filtered "))
 			        		line="<span class=\"filtered\">"+line+"</span>";
-			        	cmd.getOutput().setText(cmd.getOutput().getText().replaceAll("</pre>", "\n")+line+"</pre>");
+			        	String jump = "\n";
+			        	if(firstLine)
+			        		jump="";
+			        	cmd.getOutput().setText(cmd.getOutput().getText()+jump+line);
+			        	firstLine=false;
+
 			        }
 			        errorReader = new BufferedReader(new InputStreamReader(errors));
 			        while ((line = errorReader.readLine()) != null) {
 			        	line=escape(line);
 		        		line="<span class=\"closed\">"+line+"</span>";
-			        	cmd.getOutput().setText(cmd.getOutput().getText().replaceAll("</pre>", "\n")+"<i>"+line+"</i></pre>");
+		        		String jump = "\n";
+			        	if(firstLine)
+			        		jump="";
+			        	cmd.getOutput().setText(cmd.getOutput().getText()+jump+"<i>"+line+"</i>");
+			        	firstLine=false;
+
 			        }
 
 			      } catch (Exception e) {
@@ -144,8 +156,13 @@ public class CommandExecutor {
 		    	String sCurrentLine;
 		        while ((sCurrentLine = br.readLine()) != null) {
 		            sb.append(sCurrentLine);
-		        }
+		    }		
+	        JAXBContext jaxbContext = JAXBContext.newInstance(Scan.class);
+	        Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
+	        StringReader reader = new StringReader(sb.toString());
+	        Scan scan = (Scan) unmarshaller.unmarshal(reader);
 		    cmd.getOutput().setXml(TransInfoHtml.transformToHtml(sb.toString()));
+		    cmd.getOutput().setScan(scan);
 
 		} catch (Exception e) {
 			e.printStackTrace();

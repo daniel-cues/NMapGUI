@@ -35,7 +35,8 @@ function outputToggleMenu() {
 	$(this).siblings().removeClass("selected");
 	$(this).addClass("selected");
 	$(this).parent().parent().parent().find(".outtoggle").addClass("hidden");
-	$(this).parent().parent().parent().find("#"+$(this).attr("data-listedElement")).removeClass("hidden");
+	var contains = "*[id*='"+$(this).attr("data-listedElement")+"']"
+	$(this).parent().parent().parent().find(contains).removeClass("hidden");
 
 }
 

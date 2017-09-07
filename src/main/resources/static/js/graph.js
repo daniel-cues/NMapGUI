@@ -79,8 +79,7 @@ function computeGraph(traceroute){
 	    .text(function(d) { return d.host.address.address; });
 	
 	var tooltip = node.append("g")
-		.attr("class","tip hidden")
-		.attr("fill", "#f2f2f2")
+		.attr("class","tip tipHidden")
         .attr("transform", function(d) { return "translate(" + radius*5 + ", -" + radius*2.5 + ")"; })
 	
 
@@ -101,28 +100,38 @@ function computeGraph(traceroute){
 	 toolText.append("tspan")
 	 	.attr("x", "0")
 	 	.attr("dy", "1.2em")
-	    .text(function(d) { return "IP Address: " + d.host.address.address; });
+	 	.attr("class","tipTitle")
+	    .text("IP Address: ");
 	
-	 toolText.append("tspan")
+	toolText.append("tspan")
+	    .text(function(d) { return d.host.address.address; });
+	
+	toolText.append("tspan")
 	 	.attr("x", "0")
- 		.attr("dy", "1.2em")
+	 	.attr("dy", "1.2em")
+	 	.attr("class","tipTitle")	 	
+	    .text("Host Names: ");
+	
+	toolText.append("tspan")
  		.text(function(d) { 
- 			var hostnames = "Host Names: "
- 				for(var i = 0; i < d.host.hostNames.length; i++){
- 					if(d.host.hostNames[i].hostname!=null){
-	 					var separator = (i<d.host.hostNames.length-1) ? ", " : "";
-	 					hostnames += d.host.hostNames[i].hostname + separator;
-	 				}
+ 			var hostnames = "";
+			for(var i = 0; i < d.host.hostNames.length; i++){
+				if(d.host.hostNames[i].hostname!=null){
+ 					var separator = (i<d.host.hostNames.length-1) ? ", " : "";
+ 					hostnames += d.host.hostNames[i].hostname + separator;
  				}
+			}
  			return hostnames;
  		});
 	
 	 toolText.append("tspan")
 	 	.attr("x", "0")
-		.attr("dy", "1.2em");
+		.attr("dy", "1.2em")
+		.text(" ");
 	 toolText.append("tspan")
 	 	.attr("x", "0")
 		.attr("dy", "1.2em")
+		.attr("class","tipTitle")
 		.text("Ports:");
 	 
 	 var ports = toolText
@@ -134,18 +143,13 @@ function computeGraph(traceroute){
 	 	.attr("x", "0")
 		.attr("dy", "1.2em")
 		.attr("class", "port")
+		.attr("class", function(d) { return  d.state.$name; })
  		.text(function(d) { 
  			var port = d.portId+"/"+ d.protocol + "\u00a0".repeat(6) + d.state.$name ;
  				
  			return port;
  			});
-	 
-//	 for(var i = 0; i < node.data.host.ports.length; i++){
-//			if(node.data.host.ports[i].portId!=0){
-//				generatePortText(node.data.host.ports[i])
-//			}
-//		}
-	 
+	  
 	 
 	 tooltip.selectAll('rect')
 	     .attr("width",  function(d) {return this.parentNode.getBBox().width;})
@@ -163,31 +167,36 @@ function computeGraph(traceroute){
 	 			});
 	 }
 
-	 function mouseover(d) {
-		  //Reorder elements to raise tooltip to the top ofd the view
-		  svg.selectAll(".node").sort(function (a, b) { // select the parent and sort the path's
-		      if (a.host.address.address != d.host.address.address) return -1;               // a is not the hovered element, send "a" to the back
-		      else return 1;                             // a is the hovered element, bring "a" to the front
-		  });
-		   
+	 function mouseover(d) {		  
 		  d3.select(this).select("circle").transition()
 		      .duration(500)
 		      .attr("r", 16);
-		  d3.select(this).select("g").classed("hidden", false);
-		  d3.select(this).select("text").classed("hidden", true);
+		  displayTag(this);
 
-		}
-
-		function mouseout() {
+	 }
+	 function mouseout() {
 		  d3.select(this).select("circle").transition()
 		      .duration(500)
 		      .attr("r", 8);
-		  d3.select(this).select("g").classed("hidden", true);
-		  d3.select(this).select("text").classed("hidden", false);
+		  hideTag(this);
 
-		}
-	
-	
+	 }
+	 
+	 function displayTag(element){
+		//Reorder elements to raise tooltip to the top ofd the view
+		 svg.selectAll(".node").sort(function (a, b) { 						// select the parent and sort the path's
+		      if (a.host.address.address != d3.select(element).data()[0].host.address.address) return -1;  // a is not the hovered element, send "a" to the back
+		      else return 1;                             						// a is the hovered element, bring "a" to the front
+		 });
+		 d3.select(element).select("g").classed("tipHidden", false);
+		 d3.select(element).select("text").classed("tipHidden", true);
+	 }
+	 function hideTag(element){		 
+		 d3.select(element).select("g").classed("tipHidden", true);
+		 d3.select(element).select("text").classed("tipHidden", false);
+	 }
+
+		
 	function tick() {
 	  link
 	      .attr("x1", linkSX)

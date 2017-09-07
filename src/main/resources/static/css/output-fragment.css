@@ -195,8 +195,27 @@ svg text {
   fill: #FFF;
   pointer-events: none;
 }
+svg .tip{
+	fill: #f2f2f2;
+}
+svg .tipHidden{
+	visibility: hidden;
+}
 svg .tip text {
   font: 10px sans-serif;
   fill: #000;
   pointer-events: none;
+}
+svg .tipTitle{
+	font-weight: bold;	
+}
+svg .tip .open{
+  fill: #4e9a06;  
+}
+
+svg .tip .closed{
+  fill: #a40000;
+}
+svg .tip .filtered{
+  fill: #ce5c00;
 }

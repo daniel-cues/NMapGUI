@@ -45,8 +45,10 @@ public class Scan {
 			   else {
 				   Host prev = you;
 				   for(Hop hop: host.getTrace()){
-					   list.add(new Link(prev, hop.toHost()));
-					   prev=hop.toHost();
+					   Host next = hop.toHost();
+					   next= hosts.contains(next) ? hosts.get(hosts.indexOf(next)) : next;
+					   list.add(new Link(prev, next));
+					   prev=next;
 				   }
 			   }
 			}

@@ -127,7 +127,7 @@ public class NMapGuiModelTests {
 				"\nHost [address=Address [address=10.10.10.10], hostName=[Hostname [hostname=null]], trace=null, status=Status [state=up, reason=null], ports=[]]], "+
 		 "Link [source="+
 				"\nHost [address=Address [address=10.10.10.10], hostName=[Hostname [hostname=null]], trace=null, status=Status [state=up, reason=null], ports=[]], target="+
-				"\nHost [address=Address [address=1.1.1.1], hostName=[Hostname [hostname=null]], trace=null, status=Status [state=up, reason=null], ports=[]]], "+
+				"\nHost [address=Address [address=1.1.1.1], hostName=[], trace=[Hop [address=10.10.10.10, host=null], Hop [address=1.1.1.1, host=null]], status=Status [state=up, reason=null], ports=[]]], "+
 		 "Link [source="+
 				"\nHost [address=Address [address=You], hostName=[], trace=null, status=Status [state=you, reason=null], ports=[]], target="+
 				"\nHost [address=Address [address=2.2.2.2], hostName=[], trace=null, status=Status [state=up, reason=null], ports=[]]]]",scan.getLinkTraceroute().toString());

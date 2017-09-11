@@ -18,6 +18,7 @@ If you have any questions about NMapGUI usage or want to get in contact with me,
 * Multiple command execution at the same time.
 * Standard NMap output.
 * HTML report NMap output.
+* Interactive traceroute graph output
 * Saving output as XML.
 * Output minimizing, maximizing and deleting.
 * Menu to find most of nmap options.

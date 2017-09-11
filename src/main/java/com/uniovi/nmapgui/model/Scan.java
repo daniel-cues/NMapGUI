@@ -25,7 +25,7 @@ public class Scan {
 
 	@Override
 	public String toString() {
-		return "Scan [Hosts:" + hosts + "]";
+		return "Scan [Hosts:" + getHosts() + "]";
 	}
 	
 	

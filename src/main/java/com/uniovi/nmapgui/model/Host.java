@@ -20,6 +20,11 @@ public class Host {
 	
 	private Status status = new Status();
 	
+	public Host(Address address) {
+		this.address=address;
+	}
+	public Host(){}
+
 	@XmlElement(name="address")
 	public Address getAddress() {
 		return address;
@@ -72,14 +77,6 @@ public class Host {
 	@Override
 	public String toString() {
 		return "\nHost [address=" + getAddress() + ", hostName=" + getHostNames() + ", trace=" + getTrace() + ", status=" + getStatus() + ", ports=" + getPorts() + "]";
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((address == null) ? 0 : address.hashCode());
-		return result;
 	}
 
 	@Override

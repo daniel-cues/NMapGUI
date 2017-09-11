@@ -22,6 +22,16 @@ public class NMapGuiModelTests {
 	public void addressTest(){
 		address = new Address("1.1.1.1");
 		assertEquals("Address [address=1.1.1.1]", address.toString());
+		assertEquals(true,address.equals(address));
+		assertEquals(false,address.equals(null));
+		assertEquals(false,address.equals(new Port()));
+		assertEquals(false,new Address().equals(address));
+		assertEquals(false,address.equals(new Address("2.2.2.2")));
+		assertEquals(true,address.equals(new Address("1.1.1.1")));
+
+
+
+
 	}
 	@Test
 	public void hopTest(){
@@ -78,6 +88,15 @@ public class NMapGuiModelTests {
 		LinkedList<Hop> trace = new LinkedList<Hop>();
 		trace.add(hop);
 		host.setTrace(trace);
+		
+		
+		assertEquals(true,host.equals(host));
+		assertEquals(false,host.equals(null));
+		assertEquals(false,host.equals(new Port()));
+		assertEquals(false,new Host().equals(host));
+		assertEquals(false,host.equals(new Host(new Address("2.2.2.2"))));
+		assertEquals(true,host.equals(new Host(new Address("1.1.1.1"))));
+		
 		assertEquals("\nHost [address=Address [address=1.1.1.1], hostName=[Hostname [hostname=www.example.com]], "
 				+ "trace=[Hop [address=1.1.1.1, host=www.example.com]], status=Status [state=down, reason=Timed-out]" 
 				+ ", ports=[Port [portId=80, protocol=tcp, state=open]]]", host.toString());				

@@ -57,5 +57,14 @@ public class NMapGuiApplicationTests {
     public void downloadTest() throws Exception {
     	basicTest();
     	this.mockMvc.perform(get("/nmap/download/{filename}", "test.xml")).andExpect(status().isNotFound());
-        }
+    }
+    
+    @Test
+    public void localAppTest(){
+    	System.setProperty("java.awt.headless", "false"); 
+    	new NMapGuiLoader().main(new String[]{});
+    }
+    
+
 }
+

@@ -27,6 +27,7 @@ If you have any questions about NMapGUI usage or want to get in contact with me,
 ## Screenshots
 ![nmapgui](https://raw.githubusercontent.com/wiki/danicuestasuarez/NMapGUI/images/NMapGUI.png)
 ![nmapgui](https://raw.githubusercontent.com/wiki/danicuestasuarez/NMapGUI/images/NMapGUIHTML.png)
+![nmapgui](https://raw.githubusercontent.com/wiki/danicuestasuarez/NMapGUI/images/NMapGUIGraph.png)
 
 ## Installation
 

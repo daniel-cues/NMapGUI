@@ -6,7 +6,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
-
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.Unmarshaller;
 
 import com.uniovi.nmapgui.model.*;
 import com.uniovi.nmapgui.util.TransInfoHtml;
@@ -18,23 +21,17 @@ public class CommandExecutor {
 
 	
 	public CommandExecutor(Command command) {		
+		this();
 		cmd=command;
 	}
 	public CommandExecutor(){};
 
 
 	public boolean execute(){
-		String filename= "nmap-scan_" + new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss")
-				.format(new Date())+ ".xml";
-        		
-		this.cmd.getOutput().setFilename(filename);
-		tempPath=tempPath + filename;
-		List<String> commandsList = new ArrayList<String>();
-		commandsList.add("nmap");
-		commandsList.addAll(Arrays.asList(cmd.getText().split(" ")));
-		commandsList.addAll(Arrays.asList(new String[]{"-oX" , getTempPath(), "--webxml"}));
+		String[] command = composeCommand();
+		
 		try {			
-			 Process p = Runtime.getRuntime().exec(commandsList.toArray(new String[]{}));
+			 Process p = Runtime.getRuntime().exec(command);
 			  final InputStream stream = p.getInputStream();
 			  final InputStream errors = p.getErrorStream();
 			  commandThread = new Thread(new Runnable() {
@@ -43,9 +40,9 @@ public class CommandExecutor {
 			      BufferedReader errorReader = null;
 
 			      try {
+			    	boolean firstLine=true;
 			        reader = new BufferedReader(new InputStreamReader(stream));
 			        String line = null;
-			        cmd.getOutput().setText("<pre></pre>");
 			        while ((line = reader.readLine()) != null) {
 			        	line=escape(line);
 			        	if (line.contains( " open "))
@@ -54,13 +51,23 @@ public class CommandExecutor {
 			        		line="<span class=\"closed\">"+line+"</span>";
 			        	else if (line.contains( " filtered "))
 			        		line="<span class=\"filtered\">"+line+"</span>";
-			        	cmd.getOutput().setText(cmd.getOutput().getText().replaceAll("</pre>", "\n")+line+"</pre>");
+			        	String jump = "\n";
+			        	if(firstLine)
+			        		jump="";
+			        	cmd.getOutput().setText(cmd.getOutput().getText()+jump+line);
+			        	firstLine=false;
+
 			        }
 			        errorReader = new BufferedReader(new InputStreamReader(errors));
 			        while ((line = errorReader.readLine()) != null) {
 			        	line=escape(line);
 		        		line="<span class=\"closed\">"+line+"</span>";
-			        	cmd.getOutput().setText(cmd.getOutput().getText().replaceAll("</pre>", "\n")+"<i>"+line+"</i></pre>");
+		        		String jump = "\n";
+			        	if(firstLine)
+			        		jump="";
+			        	cmd.getOutput().setText(cmd.getOutput().getText()+jump+"<i>"+line+"</i>");
+			        	firstLine=false;
+
 			        }
 
 			      } catch (Exception e) {
@@ -84,6 +91,32 @@ public class CommandExecutor {
 		} 
 		return true;
     }
+	
+	private String[] composeCommand()	{
+		
+		String filename= "nmap-scan_" + new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss")
+				.format(new Date())+ ".xml";
+        		
+		this.cmd.getOutput().setFilename(filename);
+		tempPath=tempPath + filename;
+		List<String> commandList = new ArrayList<String>();
+		commandList.add("nmap");
+		commandList.addAll(splitOptions());
+		commandList.addAll(Arrays.asList(new String[]{"-oX" , getTempPath(), "--webxml"}));
+		
+		return commandList.toArray(new String[]{});
+		
+	}
+	
+	private List<String>  splitOptions(){
+		List<String> options = new ArrayList<>();
+		//Splits string by spaces other than the ones in substring quotes
+		Matcher matcher = Pattern.compile("\\s*([^(\"|\')]\\S*|\".+?\"|\'.+?\')\\s*").matcher(cmd.getText());
+		while (matcher.find())
+		    options.add(matcher.group(1));
+		
+		return options;		
+	}
 
 	private String escape(String str) {
 		String line=str;
@@ -123,8 +156,13 @@ public class CommandExecutor {
 		    	String sCurrentLine;
 		        while ((sCurrentLine = br.readLine()) != null) {
 		            sb.append(sCurrentLine);
-		        }		    
+		    }		
+	        JAXBContext jaxbContext = JAXBContext.newInstance(Scan.class);
+	        Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
+	        StringReader reader = new StringReader(sb.toString());
+	        Scan scan = (Scan) unmarshaller.unmarshal(reader);
 		    cmd.getOutput().setXml(TransInfoHtml.transformToHtml(sb.toString()));
+		    cmd.getOutput().setScan(scan);
 
 		} catch (Exception e) {
 			e.printStackTrace();

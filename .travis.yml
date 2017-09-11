@@ -10,7 +10,7 @@ addons:
 
 # setup jobs.
 env:
- - USE_FRAMEBUFFER=false _JAVA_OPTIONS="-Djava.awt.headless=true
+ - _JAVA_OPTIONS= "-Djava.awt.headless=true"
  
 before_install:
   - pip install --user codecov

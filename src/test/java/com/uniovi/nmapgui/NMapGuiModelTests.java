@@ -21,18 +21,16 @@ public class NMapGuiModelTests {
 	@Test
 	public void addressTest(){
 		address = new Address("1.1.1.1");
+		Address nul=null;
 		assertEquals("Address [address=1.1.1.1]", address.toString());
 		assertEquals(true,address.equals(address));
-		assertEquals(false,address.equals(null));
+		assertEquals(false,address.equals(nul));
 		assertEquals(false,address.equals(new Port()));
 		assertEquals(false,new Address().equals(address));
 		assertEquals(false,address.equals(new Address("2.2.2.2")));
 		assertEquals(true,address.equals(new Address("1.1.1.1")));
-
-
-
-
 	}
+	
 	@Test
 	public void hopTest(){
 		hop = new Hop();
@@ -44,6 +42,7 @@ public class NMapGuiModelTests {
 		assertEquals("1.1.1.1", host.getAddress().getAddress());
 		assertEquals("www.example.com", host.getHostNames().iterator().next().getHostname());
 	}
+	
 	@Test
 	public void statusTest(){
 		status = new Status();
@@ -58,16 +57,15 @@ public class NMapGuiModelTests {
 		assertEquals("Hostname [hostname=www.example.com]", name.toString());		
 	}
 	
-	
 	@Test
 	public void portTest(){
 		port = new Port();
 		port.setPortId(80);
 		port.setProtocol("tcp");
 		port.setState(Port.StateEnum.open);
-		assertEquals("Port [portId=80, protocol=tcp, state=open]", port.toString());		
-		
+		assertEquals("Port [portId=80, protocol=tcp, state=open]", port.toString());			
 	}
+	
 	@Test
 	public void hostTest(){
 		addressTest();
@@ -89,9 +87,9 @@ public class NMapGuiModelTests {
 		trace.add(hop);
 		host.setTrace(trace);
 		
-		
+		Host nul=null;
 		assertEquals(true,host.equals(host));
-		assertEquals(false,host.equals(null));
+		assertEquals(false,host.equals(nul));
 		assertEquals(false,host.equals(new Port()));
 		assertEquals(false,new Host().equals(host));
 		assertEquals(false,host.equals(new Host(new Address("2.2.2.2"))));
@@ -99,8 +97,7 @@ public class NMapGuiModelTests {
 		
 		assertEquals("\nHost [address=Address [address=1.1.1.1], hostName=[Hostname [hostname=www.example.com]], "
 				+ "trace=[Hop [address=1.1.1.1, host=www.example.com]], status=Status [state=down, reason=Timed-out]" 
-				+ ", ports=[Port [portId=80, protocol=tcp, state=open]]]", host.toString());				
-		;
+				+ ", ports=[Port [portId=80, protocol=tcp, state=open]]]", host.toString());
 	}
 	
 	@Test
@@ -114,7 +111,6 @@ public class NMapGuiModelTests {
 				+ "trace=null, status=Status [state=up, reason=null], ports=[]], "
 				+ "target=\nHost [address=Address [address=2.2.2.2], hostName=[], "
 				+ "trace=null, status=Status [state=up, reason=null], ports=[]]]", link.toString());
-		
 	}
 	
 	@Test
@@ -149,14 +145,7 @@ public class NMapGuiModelTests {
 				"\nHost [address=Address [address=1.1.1.1], hostName=[], trace=[Hop [address=10.10.10.10, host=null], Hop [address=1.1.1.1, host=null]], status=Status [state=up, reason=null], ports=[]]], "+
 		 "Link [source="+
 				"\nHost [address=Address [address=You], hostName=[], trace=null, status=Status [state=you, reason=null], ports=[]], target="+
-				"\nHost [address=Address [address=2.2.2.2], hostName=[], trace=null, status=Status [state=up, reason=null], ports=[]]]]",scan.getLinkTraceroute().toString());
-
-
-
-
-	
-	
-	
+				"\nHost [address=Address [address=2.2.2.2], hostName=[], trace=null, status=Status [state=up, reason=null], ports=[]]]]",scan.getLinkTraceroute().toString());	
 	}
 	
 	
@@ -172,7 +161,6 @@ public class NMapGuiModelTests {
 		assertTrue(command.isChkUpdateFlag());
 		assertEquals(output, command.getOutput());
 		assertEquals("test", command.getText());
-
 	}
 	
 	@Test
@@ -186,8 +174,6 @@ public class NMapGuiModelTests {
 		assertEquals("testText", output.getText());
 		assertEquals("testXML", output.getXml());
 		assertEquals("ID1", output.getId());
-
-
 	}
 
 }

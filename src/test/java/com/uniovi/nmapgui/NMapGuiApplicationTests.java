@@ -31,12 +31,14 @@ public class NMapGuiApplicationTests {
     @Test
     public void executeTest() throws Exception {
     	basicTest();
+    	assertNotNull("mockMvc couldn't be initiated", mockMvc);
         this.mockMvc.perform(get("/nmap-exe?code={code}", "scanme.nmap.org")).andExpect(status().isOk())
                 .andExpect(content().string(containsString("nmap scanme.nmap.org")));
     }	
     @Test
     public void updateTest() throws Exception {
     	executeTest();
+    	assertNotNull("mockMvc couldn't be initiated", mockMvc);
     	this.mockMvc.perform(get("/nmap/update?allowDel={allowDel}", false)).andExpect(status().isOk())
                 .andExpect(content().string(containsString("<div ")));
     	Thread.sleep(5000);
@@ -46,6 +48,7 @@ public class NMapGuiApplicationTests {
     @Test
     public void updateFinishedTest() throws Exception {
     	executeTest();
+    	assertNotNull("mockMvc couldn't be initiated", mockMvc);
     	this.mockMvc.perform(get("/nmap/update-finished")).andExpect(status().isOk())
                 .andExpect(content().string(containsString("false")));
     	Thread.sleep(60000);
@@ -56,12 +59,14 @@ public class NMapGuiApplicationTests {
     @Test
     public void downloadTest() throws Exception {
     	basicTest();
+    	assertNotNull("mockMvc couldn't be initiated", mockMvc);
     	this.mockMvc.perform(get("/nmap/download/{filename}", "test.xml")).andExpect(status().isNotFound());
     }
     
     @Test
     public void localAppTest(){
     	System.setProperty("java.awt.headless", "false"); 
+    	assertNotNull("mockMvc couldn't be initiated", mockMvc);
     	new NMapGuiLoader().main(new String[]{});
     }
     

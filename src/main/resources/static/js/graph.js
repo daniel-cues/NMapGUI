@@ -1,5 +1,5 @@
 function computeGraph(traceroute){
-		var links = traceroute;
+	var links = traceroute;
 	var nodes = {};
 	
 	// Compute the distinct nodes from the links.

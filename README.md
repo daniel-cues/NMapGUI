@@ -1,9 +1,12 @@
 ![nmapgui](https://github.com/danicuestasuarez/NMapGUI/wiki/images/header.png)
 ====
 
+[![GitHub (pre-)release](https://img.shields.io/github/release/danicuestasuarez/NMapGUI/all.svg)](https://github.com/danicuestasuarez/NMapGUI/releases/latest)
 [![Build Status](https://travis-ci.org/danicuestasuarez/NMapGUI.svg?branch=develop)](https://travis-ci.org/danicuestasuarez/NMapGUI)
+[![Codecov](https://codecov.io/gh/danicuestasuarez/NMapGUI/branch/develop/graph/badge.svg)](https://codecov.io/gh/danicuestasuarez/NMapGUI)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/37479ced18a04d4e8f1c38753b22003c)](https://www.codacy.com/app/danicuestasuarez/NMapGUI?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=danicuestasuarez/NMapGUI&amp;utm_campaign=Badge_Grade)
-[![codecov](https://codecov.io/gh/danicuestasuarez/NMapGUI/branch/develop/graph/badge.svg)](https://codecov.io/gh/danicuestasuarez/NMapGUI)
+[![Issues](https://img.shields.io/github/issues-raw/danicuestasuarez/NMapGUI.svg)](https://github.com/danicuestasuarez/NMapGUI/issues)
+[![Discord](https://img.shields.io/discord/357162772108148736.svg?colorB=7282ea)](https://discord.gg/5s6kUA6)
 
 
 NMapGUI is an advanced graphical user interface for NMap network analysis tool. It allows to extend and ease the typical usage of NMap by providen a visual and fast interface with the application
@@ -23,6 +26,17 @@ If you have any questions about NMapGUI usage or want to get in contact with me,
 * Output minimizing, maximizing and deleting.
 * Menu to find most of nmap options.
 * Start and stop the webapp at any moment.
+
+### Zenmap vs NMapGUI 
+| | Zenmap| NMapGUI |
+| ---: | :---: | :---: |
+| __Multiple parallel commands__ | :no_entry_sign: | :white_check_mark:|
+| __Option menu__ | :no_entry_sign: | :white_check_mark: |
+| __Automatic HTML report__ | :no_entry_sign: | :white_check_mark:|
+| __Pretty interface__ | :poop: | :white_check_mark:|
+| __Graph output__ | :white_check_mark: | :sparkles::white_check_mark::sparkles: |
+| __Unnecessary tabs and menus__ | :white_check_mark: | :no_entry_sign: |
+| __Installation method__ | Installer | Portable |
 
 ## Screenshots
 ![nmapgui](https://raw.githubusercontent.com/wiki/danicuestasuarez/NMapGUI/images/NMapGUI.png)

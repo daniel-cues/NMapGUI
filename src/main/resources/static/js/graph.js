@@ -15,6 +15,17 @@ function computeGraph(traceroute){
 		svg.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
 	}
 	
+	var force = d3.layout.force()
+		.nodes(d3.values(nodes))
+		.links(links)
+		.size([2000, 800])
+		.linkDistance(80)
+		.charge(-300)
+		.on("tick", tick)
+		.start();
+
+	force.drag().on("dragstart", function() { d3.event.sourceEvent.stopPropagation(); });
+	
 	var zoom = d3.behavior.zoom()
 	.scaleExtent([1, 10])
 	.on("zoom", zoomed);
@@ -37,8 +48,8 @@ function computeGraph(traceroute){
 	function displayTag(element){
 		//Reorder elements to raise tooltip to the top ofd the view
 		svg.selectAll(".node").sort(function (a, b) { 						// select the parent and sort the path's
-			if (a.host.address.address != d3.select(element).data()[0].host.address.address) return -1;  // a is not the hovered element, send "a" to the back
-			else return 1;                             						// a is the hovered element, bring "a" to the front
+			if (a.host.address.address !== d3.select(element).data()[0].host.address.address) {return -1;}  // a is not the hovered element, send "a" to the back
+			else {return 1;}                             						// a is the hovered element, bring "a" to the front
 		});
 		d3.select(element).select("g").classed("tipHidden", false);
 		d3.select(element).select("text").classed("tipHidden", true);
@@ -72,7 +83,7 @@ function computeGraph(traceroute){
 		var theta = Math.atan((targetX - sourceX) / (targetY - sourceY));
 
 		var sinTheta = radius * Math.sin(theta);
-	    
+
 		if (d.target.y > d.source.y) {
 			sourceX = sourceX + sinTheta;
 		}
@@ -147,20 +158,8 @@ function computeGraph(traceroute){
 			.attr("y2", linkTY);
 	
 		node
-		 	.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+			.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
 	}
-	
-	
-	var force = d3.layout.force()
-		.nodes(d3.values(nodes))
-		.links(links)
-		.size([2000, 800])
-		.linkDistance(80)
-		.charge(-300)
-		.on("tick", tick)
-		.start();
-	
-	force.drag().on("dragstart", function() { d3.event.sourceEvent.stopPropagation(); });
 	
 	 
 	var node = svg.selectAll(".node")
@@ -232,7 +231,7 @@ function computeGraph(traceroute){
 		.text(function(d) { 
 			var hostnames = "";
 			for(var i = 0; i < d.host.hostNames.length; i++){
-				if(d.host.hostNames[i].hostname != null){
+				if(d.host.hostNames[i].hostname !== null){
 					var separator = (i<d.host.hostNames.length-1) ? ", " : "";
 					hostnames += d.host.hostNames[i].hostname + separator;
 					}

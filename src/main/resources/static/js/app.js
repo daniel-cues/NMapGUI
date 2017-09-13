@@ -3,10 +3,6 @@ $(document).ready(function() {
 });
 
 
-window.alert = function() {
-    debugger;
-}
-
 var loop;
 
 

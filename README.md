@@ -38,8 +38,11 @@ If you have any questions about NMapGUI usage or want to get in contact with me,
 | __Graph output__ | :white_check_mark: | :sparkles::white_check_mark::sparkles: |
 | __Unnecessary tabs and menus__ | :white_check_mark: | :no_entry_sign: |
 | __Installation method__ | Installer | Portable |
-| __Cross-platform__ | [Compiled<sup></sup>__⁽<sup>i</sup>⁾__](#zenmap-vs-nmapgui "Custom file for each OS") | [Unique jar<sup></sup>__⁽<sup>i</sup>⁾__](#zenmap-vs-nmapgui "Unique file for any OS") |
+| __Cross-platform__ | Compiled<sup></sup>__⁽*⁾__] | Unique jar<sup></sup>__⁽*⁾__|
 
+\* Compiled: Custom file for each OS
+
+\* Unique jar: Unique file for any OS
 ## Screenshots
 ![nmapgui](https://raw.githubusercontent.com/wiki/danicuestasuarez/NMapGUI/images/NMapGUI.png)
 ![nmapgui](https://raw.githubusercontent.com/wiki/danicuestasuarez/NMapGUI/images/NMapGUIHTML.png)

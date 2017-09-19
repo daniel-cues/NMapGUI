@@ -23,6 +23,14 @@ $(function() {
 		});
 });
 
+$(function() {
+	$(".vertical_menu label").click(
+		function() {
+			var option = $(this).children("code").text();
+			$('#command').val(option + " " + $('#command').val());
+		});
+});
+
 
 
 function outputToggleMenu() {

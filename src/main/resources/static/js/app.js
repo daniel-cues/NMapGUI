@@ -30,6 +30,9 @@ $(function() {
 			if(!$('#command').val().includes(option)){
 				$('#command').val(option + " " + $('#command').val());
 			}
+			else{
+				$('#command').val($('#command').val().replace(option+" ",''));
+			}
 		});
 });
 

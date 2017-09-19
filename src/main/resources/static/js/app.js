@@ -27,7 +27,9 @@ $(function() {
 	$(".vertical_menu label").click(
 		function() {
 			var option = $(this).children("code").text();
-			$('#command').val(option + " " + $('#command').val());
+			if(!$('#command').val().includes(option)){
+				$('#command').val(option + " " + $('#command').val());
+			}
 		});
 });
 

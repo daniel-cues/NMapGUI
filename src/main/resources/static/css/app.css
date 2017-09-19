@@ -94,7 +94,8 @@ body{
 
 .vertical_menu label > *:hover{
 	color: #c6a5e5;	
-	font-weight: bold;	
+	font-weight: bold;
+	cursor: pointer;
 }
 
 .vertical_menu{

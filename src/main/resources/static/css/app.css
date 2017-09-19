@@ -83,7 +83,7 @@ body{
      width: 100%;     
 
 }
-.vertical_menu, .vertical_menu label, .vertical_menu label * {
+.vertical_menu, .vertical_menu label, .vertical_menu label > * {
 	color: #EEEEEE;
 	background-color: transparent;
 	border: none;
@@ -91,6 +91,12 @@ body{
 .vertical_menu label{
 	font-weight: bold;	
 }
+
+.vertical_menu label > *:hover{
+	color: #c6a5e5;	
+	font-weight: bold;	
+}
+
 .vertical_menu{
 	margin:25px;
 	margin-left: 40px;
@@ -230,6 +236,7 @@ body{
 	border: none;
     padding: 0;
 }
+
 
 
     

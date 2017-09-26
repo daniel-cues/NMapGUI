@@ -56,7 +56,7 @@ body{
 }
 
 .off-canvas-content  {
-	  transition: width 0.5s ease, translate 0.5s ease ;	
+	  transition: width 0.5s ease;	
 }
 .position-left.is-open ~ .off-canvas-content { 
 	transform: translateX(500px);

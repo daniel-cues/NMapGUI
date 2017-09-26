@@ -37,6 +37,22 @@ $(function() {
 });
 
 
+$(function() {
+	$(".vertical_menu select").change(
+		function() {
+			var select  = $(this).get(0);
+			var options = select.options
+			var option  = options[select.selectedIndex].value;
+			
+			for(var i=0; i<options.length; i++){
+				$('#command').val($('#command').val().replace(options[i].value+" ",''));
+			}
+			if(option!=="none")	
+				$('#command').val(option + " " + $('#command').val());
+			
+		});
+});
+
 
 function outputToggleMenu() {
 	// remove classes from all

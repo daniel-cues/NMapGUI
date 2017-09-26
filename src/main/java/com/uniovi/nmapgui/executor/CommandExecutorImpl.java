@@ -76,11 +76,13 @@ public class CommandExecutorImpl  implements CommandExecutor{
 			      } finally {
 			    	readXML();
 			    	cmd.setFinished(true);
+			    	notifyEnd();
 			        if (reader != null) {
 			          try {
 			            reader.close();
 			          } catch (IOException e) {
 					    cmd.setFinished(true);
+				    	notifyEnd();
 			          }
 			        }
 			      }
@@ -171,12 +173,18 @@ public class CommandExecutorImpl  implements CommandExecutor{
 	}
 	@Override
 	public void addObserver(CommandExecutorObserver observer) {
-		// TODO Auto-generated method stub
-		
+		this.observers.add(observer);	
 	}
 	@Override
 	public void removeObserver(CommandExecutorObserver observer) {
-		// TODO Auto-generated method stub
+		this.observers.remove(observer);		
+	}
+
+	@Override
+	public void notifyEnd() {
+		for(CommandExecutorObserver observer : observers){
+			observer.finishedCommand(cmd);
+		}
 		
 	}
 

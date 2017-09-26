@@ -58,42 +58,32 @@ public class WebController implements CommandExecutorObserver{
     
     
     @GetMapping("/nmap/update")
-    public String updateOut(Model model, @RequestParam boolean allowDel) {  
+    public String updateOut(Model model) {  
     	
     	model.addAttribute("command", command);
     	model.addAttribute("commands", ongoingCommands);
-    	model.addAttribute("finishedCommands", finishedCommands);
-
-    	boolean notFinished=false;
-    	for(Command cmd : ongoingCommands)
-    		if(notFinished=!cmd.isFinished())
-    			break;
-    		else finishedCommands.add(cmd);
-
-    	if(!notFinished && allowDel)
-    		ongoingCommands=new ArrayList<>();
-    	
 
     	return "fragments/contents :: output";
     }
     
-    @GetMapping("/nmap/update-ended")
+    @GetMapping("/nmap/update-finished")
     public String updateEnded(Model model) {  
     	
     	model.addAttribute("command", command);
     	model.addAttribute("finishedCommands", finishedCommands);
-
-
+    	finishedCommandQueued=false;
     	return "fragments/contents :: finished";
     }
 
-    @GetMapping("/nmap/update-finished")
+    @GetMapping("/nmap/finishedQueued")
     public @ResponseBody Boolean updateEnd() {
-    	for(Command cmd : ongoingCommands)
-    		if(!cmd.isFinished())
-    			return false;
-    	return true;
+    	return finishedCommandQueued;
     }
+    @GetMapping("/nmap/stopUpdating")
+    public @ResponseBody Boolean stopUpdating() {
+    	return ongoingCommands.isEmpty();
+    }
+    
     @GetMapping("/nmap/download/{filename}")
     public ResponseEntity<InputStreamResource> download(@PathVariable("filename") String filename) {
     	
@@ -115,7 +105,7 @@ public class WebController implements CommandExecutorObserver{
     
     public void finishedCommand(Command cmd){
     	ongoingCommands.remove(cmd);
-    	finishedCommands.add(cmd);
+    	finishedCommands.add(0,cmd);
     	finishedCommandQueued = true;
     }
     

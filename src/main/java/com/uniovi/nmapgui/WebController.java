@@ -108,23 +108,8 @@ public class WebController implements CommandExecutorObserver{
     	finishedCommands.add(0,cmd);
     	finishedCommandQueued = true;
     }
+
     
-//    @GetMapping("/nmap/update-finished-list")
-//    public @ResponseBody List<Integer> updateEndList() {
-//    	List<Integer> ids = new ArrayList<Integer>();
-//    	int index=0;
-//    	for(Command cmd : commands)
-//    	{
-//    		if(!cmd.isFinished())
-//    			ids.add(++index);
-//    		else if(!cmd.isChkUpdateFlag()){
-//    			cmd.setChkUpdateFlag(true);
-//    			ids.add(++index);
-//    		}
-//    	}
-//    	return ids;
-//    }
-//    
 //    @GetMapping("/nmap/updateid")
 //    public String updateOut(Model model, @RequestParam int id) {  
 //    	model.addAttribute("command", command);

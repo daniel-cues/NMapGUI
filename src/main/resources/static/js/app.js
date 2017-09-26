@@ -89,17 +89,15 @@ function maximizeAction() {
 }
 
 function performPost() {
-	/*If backend tells the app that command is finished, stops executing*/
+	/*If backend tells the app that some command is finished*/
 	/* Updates output from backend */
 	var settingsEnd = {
 		type : "GET",
-		url : "/nmap/update-finished"
+		url : "/nmap/stopUpdating"
 	};
 	/* And writes it on its place */
-	var finished = false;
 	$.ajax(settingsEnd).done(function(result) {
 		if (result===true){
-			finished=result;
 			if(loop!=null){
 				clearInterval(loop);
 			}
@@ -107,27 +105,42 @@ function performPost() {
 		/* Updates output from backend */
 		var settings = {
 			type : "GET",
-			url : "/nmap/update?allowDel="+finished
+			url : "/nmap/update"
+		};
+		var settingsFinished = {
+				type : "GET",
+				url : "/nmap/finishedQueued"
 		};
 		/* And writes it on its place */
 		$.ajax(settings).done(function(result) {
 			var tempScrollTop = $("#out-fragment").scrollTop();
-			if(finished){
-				$("#out-fragment").html(null);
-				$("#out-container-finished").prepend(result);
-				$("#out-container-finished #out-fragment").replaceWith($("#out-container-finished #out-fragment").children());
-				$("#out-container-finished .loading").addClass("loaded").removeClass("loading");
-				$("#out-container-finished").on("click", ".command-sidebar-button", outputToggleMenu);
-				$("#out-container-finished").on("click", ".command-action-close", closeAction);
-				$("#out-container-finished").on("click", ".command-action-minimize", minimizeAction);
-				$("#out-container-finished").on("click", ".command-action-maximize", maximizeAction);
-				
-			}else{
 				$("#out-fragment").replaceWith(result);
 				$("#out-fragment").scrollTop(tempScrollTop);
+		});
+		
+		/* And writes it on its place */
+		$.ajax(settingsFinished).done(function(result) {
+			if (result===true){
+				/* Updates output from backend */
+				var settings = {
+					type : "GET",
+					url : "/nmap/update-finished"
+				};
+				/* And writes it on its place */
+				$.ajax(settings).done(function(result) {
+					var tempScrollTop = $("#out-finished-fragment").scrollTop();
+						$("#out-finished-fragment").replaceWith(result);
+						$("#out-finished-fragment .loading").addClass("loaded").removeClass("loading");
+						$("#out-finished-fragment").on("click", ".command-sidebar-button", outputToggleMenu);
+						$("#out-finished-fragment").on("click", ".command-action-close", closeAction);
+						$("#out-finished-fragment").on("click", ".command-action-minimize", minimizeAction);
+						$("#out-finished-fragment").on("click", ".command-action-maximize", maximizeAction);
+						$("#out-finished-fragment").scrollTop(tempScrollTop);
+
+				});					
 			}
 		});
-	});	
+	});		
 }
 
 

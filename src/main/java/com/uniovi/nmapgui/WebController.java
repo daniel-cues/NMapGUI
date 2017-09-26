@@ -18,22 +18,26 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.uniovi.nmapgui.executor.CommandExecutor;
+import com.uniovi.nmapgui.executor.CommandExecutorImpl;
+import com.uniovi.nmapgui.executor.CommandExecutorObserver;
 import com.uniovi.nmapgui.model.Command;
 import com.uniovi.nmapgui.util.Filefinder;
 
 @Controller
-public class WebController {
-	private List<Command> commands;
+public class WebController implements CommandExecutorObserver{
+	private List<Command> ongoingCommands;
+	private List<Command> finishedCommands;
 	private Command command;
+	private boolean finishedCommandQueued;
 	
 	
     @GetMapping("/nmap")
     public String command(Model model) {
     	command = new Command();
-    	commands= new ArrayList<Command>();
+    	ongoingCommands= new ArrayList<Command>();
+    	finishedCommands= new ArrayList<Command>();
     	model.addAttribute("command", command);
-    	model.addAttribute("commands", commands);
-
+    	model.addAttribute("commands", ongoingCommands);
 
         return "index";
     }
@@ -41,38 +45,45 @@ public class WebController {
     @GetMapping("/nmap-exe")
     public String command(Model model, @RequestParam String code) {
     	command =  new Command(code);
-    	commands.add(0,command);
-    	new CommandExecutor(command).execute();
+    	ongoingCommands.add(0,command);
+    	CommandExecutor executor = new CommandExecutorImpl(command);
+    	executor.addObserver(this);
+    	executor.execute();
     	model.addAttribute("command", command);
-    	model.addAttribute("commands", commands);
+    	model.addAttribute("commands", ongoingCommands);
+
 
         return "fragments/contents :: output";
     }
     
     
     @GetMapping("/nmap/update")
-    public String updateOut(Model model, @RequestParam boolean allowDel) {  
+    public String updateOut(Model model) {  
     	
     	model.addAttribute("command", command);
-    	model.addAttribute("commands", commands);
-    	boolean notFinished=false;
-    	for(Command cmd : commands)
-    		if(notFinished=!cmd.isFinished())
-    			break;
-    	if(!notFinished && allowDel)
-    		commands=new ArrayList<>();
-    	
+    	model.addAttribute("commands", ongoingCommands);
 
     	return "fragments/contents :: output";
     }
-
+    
     @GetMapping("/nmap/update-finished")
-    public @ResponseBody Boolean updateEnd() {
-    	for(Command cmd : commands)
-    		if(!cmd.isFinished())
-    			return false;
-    	return true;
+    public String updateEnded(Model model) {  
+    	
+    	model.addAttribute("command", command);
+    	model.addAttribute("finishedCommands", finishedCommands);
+    	finishedCommandQueued=false;
+    	return "fragments/contents :: finished";
     }
+
+    @GetMapping("/nmap/finishedQueued")
+    public @ResponseBody Boolean updateEnd() {
+    	return finishedCommandQueued;
+    }
+    @GetMapping("/nmap/stopUpdating")
+    public @ResponseBody Boolean stopUpdating() {
+    	return ongoingCommands.isEmpty();
+    }
+    
     @GetMapping("/nmap/download/{filename}")
     public ResponseEntity<InputStreamResource> download(@PathVariable("filename") String filename) {
     	
@@ -89,6 +100,13 @@ public class WebController {
 		}
     	
     	
+    }
+    
+    
+    public void finishedCommand(Command cmd){
+    	ongoingCommands.remove(cmd);
+    	finishedCommands.add(0,cmd);
+    	finishedCommandQueued = true;
     }
     
 //    @GetMapping("/nmap/update-finished-list")

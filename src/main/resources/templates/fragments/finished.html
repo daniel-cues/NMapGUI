@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  </head>
+  <body>
+    <div th:fragment="finished" id="out-finished-fragment" class="out_container">
+      <div class="single-output" th:each="cmd : ${finishedCommands}">
+      <table class="output-table">
+      	 <thead>
+         <tr>
+       		<th colspan="2" class="command-header">
+       			<div class="command-display" th:text="'$ &ensp; &ensp; nmap ' + ${cmd.text}"></div>
+       			<div class="loading" > </div>
+       			<form target="_blank" th:action="@{'/nmap/download/' + ${cmd.output.filename}}">
+	       			<button class="command-action command-action-save" type="submit">
+						<img th:src="@{img/save.png}" src="../../img/save.png" />
+					</button>
+				</form>
+				<button class="command-action command-action-minimize" type="button">
+					<img th:src="@{img/minimize.png}" src="../../img/minimize.png" />
+				</button>
+				<button class="command-action command-action-maximize hidden" type="button">
+					<img th:src="@{img/maximize.png}" src="../../img/maxiimize.png" />
+				</button>
+				<button class="command-action command-action-close" type="button">
+					<img th:src="@{img/close.png}" src="../../img/close.png" />
+				</button>
+       		</th> 
+          </tr>
+          </thead>
+          <tbody>
+	       <tr>
+		       <td rowspan="3" class="command-nav-bar">
+		       		<button class="command-sidebar-button selected" id="cb1" type="button" data-listedElement="el1">
+						<img th:src="@{img/code.png}" src="../../img/code.png" />Output
+					</button>
+					<button class="command-sidebar-button" id="cb2" type="button" data-listedElement="el2">
+						<img th:src="@{img/html.png}" src="../../img/html.png" />HTML
+					</button>
+					<button class="command-sidebar-button" id="cb3" type="button" data-listedElement="el3">
+						<img th:src="@{img/graph.png}" src="../../img/graph.png" />Graph
+					</button>
+				</td>
+		       <td class="command-target"><h2></h2></td>
+		   </tr>
+		   <tr>   
+		       <td class="result">
+			       <div id="el1" class = "outtoggle console-output">
+						<pre th:utext="${cmd.output.text}"></pre>
+						<div class="loading"></div>
+				   </div>
+				   <div id="el2" class="outtoggle nmap hidden" th:utext="${cmd.output.xml}">
+				   </div>
+				   <div th:id="${cmd.output.id}" class="outtoggle nmap hidden svg-container">
+			   		<script th:inline="javascript">
+					    var traceroute = /*[[${cmd.output.scan.linkTraceroute}]]*/ ;
+					    var id = /*[[${cmd.output.id}]]*/ ;
+						if(traceroute.length > 0){						
+						    d3.select("#"+id).append(function() { return computeGraph(traceroute).node() });
+					    }
+					</script>
+				   </div>
+			   </td>
+			   
+		   </tr>
+		   <tr>   
+			   <td class="command-displaying" th:text="${cmd.output.filename}"></td>		   
+		   </tr>
+		   </tbody>
+	  </table>
+	  </div>
+    </div>
+  </body>
+</html>

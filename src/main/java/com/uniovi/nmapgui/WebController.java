@@ -33,6 +33,7 @@ public class WebController implements CommandExecutorObserver{
 	
     @GetMapping("/nmap")
     public String command(Model model) {
+    	
     	command = new Command();
     	ongoingCommands= new ArrayList<Command>();
     	finishedCommands= new ArrayList<Command>();

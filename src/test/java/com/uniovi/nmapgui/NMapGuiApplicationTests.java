@@ -51,7 +51,7 @@ public class NMapGuiApplicationTests {
     	assertNotNull("mockMvc couldn't be initiated", mockMvc);
     	this.mockMvc.perform(get("/nmap/finishedQueued")).andExpect(status().isOk())
                 .andExpect(content().string(containsString("false")));
-    	Thread.sleep(60000);
+    	Thread.sleep(6000);
     	this.mockMvc.perform(get("/nmap/finishedQueued")).andExpect(status().isOk())
         .andExpect(content().string(containsString("true")));
 

@@ -28,7 +28,7 @@ public class WebController implements CommandExecutorObserver{
 	private List<Command> ongoingCommands;
 	private List<Command> finishedCommands;
 	private Command command;
-	private boolean finishedCommandQueued;
+	private boolean finishedCommandQueued=false;
 	
 	
     @GetMapping("/nmap")
@@ -54,6 +54,16 @@ public class WebController implements CommandExecutorObserver{
 
 
         return "fragments/contents :: output";
+    }
+    
+    @GetMapping("/nmap/removeCommand")
+    public String removeCommand(Model model, @RequestParam int index) {
+    	finishedCommands.remove(index);
+    	model.addAttribute("command", command);
+    	model.addAttribute("finishedCommands", finishedCommands);
+
+
+        return "fragments/contents :: finished";
     }
     
     

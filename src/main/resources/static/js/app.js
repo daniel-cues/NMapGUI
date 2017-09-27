@@ -68,7 +68,15 @@ function outputToggleMenu() {
 function closeAction() {
 	// remove classes from all
 	// add class to the one we clicked
-	$(this).parent().parent().parent().parent().parent().remove();
+	var element= $(this).parent().parent().parent().parent().parent();
+	var settings = {
+		type : "GET",
+		url : "/nmap/removeCommand?index=" + element.index()
+	};
+	/* And writes it on its place */
+	$.ajax(settings).done(function(result) {
+		element.remove();
+	});
 
 }
 function minimizeAction() {
@@ -114,8 +122,8 @@ function performPost() {
 		/* And writes it on its place */
 		$.ajax(settings).done(function(result) {
 			var tempScrollTop = $("#out-fragment").scrollTop();
-				$("#out-fragment").replaceWith(result);
-				$("#out-fragment").scrollTop(tempScrollTop);
+			$("#out-fragment").replaceWith(result);
+			$("#out-fragment").scrollTop(tempScrollTop);
 		});
 		
 		/* And writes it on its place */

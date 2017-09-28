@@ -333,11 +333,10 @@
 			</div>
 			<div class="container" id="out-container">
 			<div class="out_container">
-				<div  th:replace="fragments/output :: output" 
-				th:fragment="output" id="out-fragment">
+				<div  th:replace="fragments/ongoing :: ongoing" 
+				th:fragment="ongoing" id="out-fragment">
 				</div>
-				<div id="out-container-finished">				
-				</div>
+				
 				<div  th:replace="fragments/finished :: finished" 
 				th:fragment="finished" id="out-finished-fragment">
 				</div>

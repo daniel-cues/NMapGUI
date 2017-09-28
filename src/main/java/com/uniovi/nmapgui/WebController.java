@@ -54,7 +54,7 @@ public class WebController implements CommandExecutorObserver{
     	model.addAttribute("commands", ongoingCommands);
 
 
-        return "fragments/contents :: output";
+        return "fragments/contents :: ongoing";
     }
     
     @GetMapping("/nmap/removeCommand")
@@ -74,7 +74,7 @@ public class WebController implements CommandExecutorObserver{
     	model.addAttribute("command", command);
     	model.addAttribute("commands", ongoingCommands);
 
-    	return "fragments/contents :: output";
+    	return "fragments/contents :: ongoing";
     }
     
     @GetMapping("/nmap/update-finished")

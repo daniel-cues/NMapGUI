@@ -17,13 +17,13 @@
 			</div>
 			<div class="vertical_menu">
 				<h3>Target specification</h3>
-				<label for="hostFile">Hosts file: <code>-iL <i>&lt;inputfilename&gt;</i></code></label>
+				<label for="hostFile">Hosts file: <code>-iL <em>&lt;inputfilename&gt;</em></code></label>
 				
-				<label for="randomHosts">Random hosts in range: <code>-iR <i>&lt;num hosts&gt;</i></code></label>
+				<label for="randomHosts">Random hosts in range: <code>-iR <em>&lt;num hosts&gt;</em></code></label>
 				
-				<label for="excludeHost">Exclude hosts: <code>--exclude <i>&lt;host1[,host2],...&gt;</i></code></label>
+				<label for="excludeHost">Exclude hosts: <code>--exclude <em>&lt;host1[,host2],...&gt;</em></code></label>
 				
-				<label for="excludeHostFile">Exclude host file: <code>--excludefile <i>&lt;exclude_file&gt;</i></code></label>
+				<label for="excludeHostFile">Exclude host file: <code>--excludefile <em>&lt;exclude_file&gt;</em></code></label>
 				
 				
 				<h3>Host scan</h3>
@@ -34,11 +34,11 @@
 				
 				<label for="skipHost">Skip host scan: <code>-Pn</code></label>
 				
-				<label for="pingType">Ping type: <code>-PS/PA/PU/PY (SYN,ACK,UDP &amp; SCTP) <i>&lt;port list&gt;</i></code></label>
+				<label for="pingType">Ping type (SYN,ACK,UDP &amp; SCTP): <code>-PS/PA/PU/PY <em>&lt;port list&gt;</em></code></label>
 				
-				<label for="echoReq">Perform echo request: <code>-PE/PP/PM (Echo, timestamp &amp; mask)</code></label>
+				<label for="echoReq">Perform echo request (Echo, timestamp &amp; mask): <code>-PE/PP/PM</code></label>
 				
-				<label for="IPPing">IP protocol ping scan<code>-PO <i>&lt;protocol number list&gt;</i></code></label>
+				<label for="IPPing">IP protocol ping scan<code>-PO <em>&lt;protocol number list&gt;</em></code></label>
 				
 				<label for="ARPPing">Local network ARP ping: <code>-PR</code></label>
 				
@@ -50,7 +50,7 @@
 				
 				<label for="sysDNS">Use system's DNS resolver: <code>--system-dns</code></label>
 				
-				<label for="chooseDNS">Use this DNS<code>-dns-servers <i>&lt;server1 [,...]&gt;</i></code></label>
+				<label for="chooseDNS">Use this DNS<code>-dns-servers <em>&lt;server1 [,...]&gt;</em></code></label>
 						
 			</div>
 		</div>
@@ -69,15 +69,15 @@
 				<h3>Port selection
 					<label for="fastscan">Fast Scan: <code>-F</code></label>
 				</h3>
-				<label for="ports">Ports: <code>-p <i>&lt;port ranges&gt;</i></code></label>
+				<label for="ports">Ports: <code>-p <em>&lt;port ranges&gt;</em></code></label>
 				
-				<label for="exports">Excluded ports/protocols: <code>--exclude-ports <i>&lt;port ranges&gt;</i></code></label>
+				<label for="exports">Excluded ports/protocols: <code>--exclude-ports <em>&lt;port ranges&gt;</em></code></label>
 				
 				<label for="derandomize">Derandomize order: <code>-r</code></label>
 				
-				<label for="ratio">Ratio bigger than: <code>--port-ratio <i>&lt;ratio&gt;</i></code></label>
+				<label for="ratio">Ratio bigger than: <code>--port-ratio <em>&lt;ratio&gt;</em></code></label>
 				
-				<label for="top">Top ports: <code>--top-ports <i>&lt;n&gt;</i></code></label>
+				<label for="top">Top ports: <code>--top-ports <em>&lt;n&gt;</em></code></label>
 				
 				<h3>IP protocol scan
 					<label for="ipprotocol" > <code>-sO</code></label>
@@ -87,26 +87,28 @@
 				</h3>
 				
 				<h4>TCP Scan Type</h4>
-				<select name="TCP">
-				  <option value="syn">TCP Syn: 				 -sS</option>
-				  <option value="connection">TCP Connection: -sT</option>				  
-				  <option value="null">TCP Null: 			 -sN</option>
-				  <option value="fin">TCP Fin:				 -sF</option>
-				  <option value="xmas">TCP Xmas:			 -sX</option>					  
-				  <option value="ack">TCP Ack:				 -sA</option>
-				  <option value="window">TCP Window:		 -sW</option>
-				  <option value="maimon">TCP Maimon:		 -sM</option>				  
+				<select  name="TCP">				  
+				  <option value="none" selected="selected">None</option>				
+				  <option value="-sS">TCP Syn: 				-sS</option>
+				  <option value="-sT">TCP Connection: 		-sT</option>				  
+				  <option value="-sN">TCP Null: 			-sN</option>
+				  <option value="-sF">TCP Fin:				-sF</option>
+				  <option value="-sX">TCP Xmas:				-sX</option>					  
+				  <option value="-sA">TCP Ack:				-sA</option>
+				  <option value="-sW">TCP Window:		 	-sW</option>
+				  <option value="-sM">TCP Maimon:		 	-sM</option>				  
 				  <!-- <option value="idle">TCP Idle</option> -->
 				</select>
-				<label for="relay">Enable FTP relay (disables TCP scan): <code>-b <i>&lt;FTP relay host&gt;</i></code></label>
+				<label for="relay">Enable FTP relay (disables TCP scan): <code>-b <em>&lt;FTP relay host&gt;</em></code></label>
 				
 				<h4>UDP Scan </h4>				
 				<label for="udp">Enable UDP scan: <code>-sU</code></label>
 				
 				<h4>SCTP Scan Type</h4>
 				<select name="STCP">
-				  <option value="init">SCTP Init:		   -sY</option>
-				  <option value="cookie">SCTP Cookie Echo: -sZ</option>
+				  <option value="none" selected="selected">	None</option>
+				  <option value="-sY">SCTP Init:			-sY</option>
+				  <option value="-sZ">SCTP Cookie Echo: 	-sZ</option>
 				</select>
 				
 			</div>
@@ -125,7 +127,7 @@
 			<div>
 				<ul class="tabs" data-tabs="true" id="script-tabs">
 				  <li class="tabs-title is-active"><a href="#panelGeneral" aria-selected="true">General</a></li>
-				  <li class="tabs-title"><a href="#panelList">Script list</a></li>
+				  <!--  <li class="tabs-title"><a href="#panelList">Script list</a></li>-->
 				</ul>
 				<div class="tabs-content vertical_menu" data-tabs-content="script-tabs">
 				  	<div class="tabs-panel is-active" id="panelGeneral">
@@ -133,13 +135,13 @@
 						
 						<label for="default">Run default set scripts: <code>-sC</code></label>
 						
-						<label for="script">Run script: <code><i>&lt;filename | category | dir | expression&gt;</i></code></label>
+						<label for="script">Run script: <code>--script <em>&lt;filename | category | dir | expr&gt;</em></code></label>
 						
-						<label for="scriptArgs">Script arguments: <code><i>&lt;n1&gt;=&lt;v1&gt;, &lt;n4&gt;={&lt;v4&gt;,&lt;v5&gt;}</i></code></label>
+						<label for="scriptArgs">Script args: <code>--script-args <em>&lt;n1&gt;=&lt;v1&gt;, &lt;n4&gt;={&lt;v4&gt;,&lt;v5&gt;}</em></code></label>
 						
-						<label for="scriptArgsFile">Script argument file: <code><i>&lt;filename&gt;</i></code></label>
+						<label for="scriptArgsFile">Script argument file: <code>--script-args-file <em>&lt;filename&gt;</em></code></label>
 						
-						<label for="scriptHelp">Script help: <code><i>&lt;filename | category | dir | expression&gt;</i></code></label>
+						<label for="scriptHelp">Help: <code>--script-help <em>&lt;filename | category | dir | expr&gt;</em></code></label>
 						
 						<label for="scriptTrace">Enable script trace: <code>--script-trace</code></label>
 						
@@ -173,7 +175,7 @@
 				
 				<label for="9100">Include port 9100 in scan: <code>--allports</code></label>
 				
-				<label for="customintensity">Intensity: <code>--version-intensity <i>&lt;intensity&gt;</i></code></label>
+				<label for="customintensity">Intensity: <code>--version-intensity <em>&lt;intensity&gt;</em></code></label>
 				<label for="light" >Light scan: 		<code>--version-light</code></label>
 				<label for="all" >Heavy scan: 			<code>--version-heavy</code></label>
 				
@@ -185,7 +187,7 @@
 				</h3>
 				<label for="limit">Limit OS scan: <code>--osscan-limit</code></label>
 				<label for="fuzzy">Guess results: <code>-osscan-guess, --fuzzy</code></label>
-				<label for="maxtries">Max number of tries  <code>--max-os-tries <i>&lt;tries&gt;</i></code></label>
+				<label for="maxtries">Max number of tries  <code>--max-os-tries <em>&lt;tries&gt;</em></code></label>
 			</div>
 		</div>
 		
@@ -210,13 +212,13 @@
 				  	<div class="tabs-panel is-active" id="panelOutput">
 						<h3>Output</h3>
 						
-						<label for="verbosity">Verbosity: <code>-v, -vv , -vvv, [...] -v<i>&lt;level&gt;</i></code></label>
+						<label for="verbosity">Verbosity: <code>-v, -vv , -vvv, [...] -v<em>&lt;level&gt;</em></code></label>
 						
-						<label for="debug">Debug: <code>-d, -dd , -ddd, [...] -d<i>&lt;level&gt;</i></code></label>
+						<label for="debug">Debug: <code>-d, -dd , -ddd, [...] -d<em>&lt;level&gt;</em></code></label>
 						
 						<label for="reason">Include port reason: <code>--reason</code></label>
 						
-						<label for="stats">Stats every: <code>--stats-every <i>&lt;time&gt;</i></code></label>
+						<label for="stats">Stats every: <code>--stats-every <em>&lt;time&gt;</em></code></label>
 						
 						<label for="traces">Traces: <code>--packet-trace, --script-trace, --version-trace</code></label>
 						
@@ -224,32 +226,32 @@
 						
 						<label for="iflist">Show interface list only: <code>--iflist</code></label>
 						
-						<label for="resume">Resume scan: <code>--resume <i>&lt;filename&gt;</i></code></label>						
+						<label for="resume">Resume scan: <code>--resume <em>&lt;filename&gt;</em></code></label>						
 				  	</div>
 					<div class="tabs-panel " id="panelSpoof">
 						<h3>Spoofing</h3>
 						
-						<label for="fragmentation">Fragment packages: <code>-f, --mtu <i>&lt;offset&gt;</i></code></label>
+						<label for="fragmentation">Fragment packages: <code>-f, --mtu <em>&lt;offset&gt;</em></code></label>
 						
-						<label for="decoys">Use decoys: <code>-D <i>&lt;decoy1&gt;, [RND] [RND:&lt;number&gt;] [ME] [...]</i></code></label>
+						<label for="decoys">Use decoys: <code>-D <em>&lt;decoy1&gt;, [RND] [RND:&lt;number&gt;] [ME] [...]</em></code></label>
 						
-						<label for="spoofIP">Spoof IP: <code>-S <i>&lt;IP_Address&gt;</i></code></label>
+						<label for="spoofIP">Spoof IP: <code>-S <em>&lt;IP_Address&gt;</em></code></label>
 						
-						<label for="interface">Choose inteface: <code>-e <i>&lt;interface&gt;</i></code></label>
+						<label for="interface">Choose inteface: <code>-e <em>&lt;interface&gt;</em></code></label>
 						
-						<label for="chosenPort">Output port: <code>--source-port <i>&lt;portnumber&gt;</i>, -g <i>&lt;portnumber&gt;</i></code></label>
+						<label for="chosenPort">Output port: <code>--source-port <em>&lt;portnumber&gt;</em>, -g <em>&lt;portnumber&gt;</em></code></label>
 						
-						<label for="payloadHex">Include hexadecimal payload: <code>--data <i>&lt;hex string&gt;</i></code></label>
+						<label for="payloadHex">Include hexadecimal payload: <code>--data <em>&lt;hex string&gt;</em></code></label>
 						
-						<label for="payloadStr">Include string payload: <code>--data-string <i>&lt;string&gt;</i></code></label>
+						<label for="payloadStr">Include string payload: <code>--data-string <em>&lt;string&gt;</em></code></label>
 						
-						<label for="payloadRnd">Include random payload: <code>--data-length <i>&lt;length&gt;</i></code></label>
+						<label for="payloadRnd">Include random payload: <code>--data-length <em>&lt;length&gt;</em></code></label>
 						
-						<label for="ttl">Change TTL: <code>--ttl <i>&lt;time&gt;</i></code></label>
+						<label for="ttl">Change TTL: <code>--ttl <em>&lt;time&gt;</em></code></label>
 						
-						<label for="spoofMAC">Spoof MAC: <code>--spoof-mac <i>&lt;MAC, prefix, or vendor name&gt;</i></code></label>
+						<label for="spoofMAC">Spoof MAC: <code>--spoof-mac <em>&lt;MAC, prefix, or vendor name&gt;</em></code></label>
 						
-						<label for="proxies">Use proxies: <code>--proxies<i>&lt;comma separated proxy URL list&gt;</i></code></label>
+						<label for="proxies">Use proxies: <code>--proxies<em>&lt;comma separated proxy URL list&gt;</em></code></label>
 
 						<label for="badsum">Send wrong checksum: <code>--badsum</code></label>
 						
@@ -259,29 +261,29 @@
 					<div class="tabs-panel " id="panelPerformance">
 						<h3>Performance</h3>
 						
-						<label for="hostgroup">Hostgroup: <code>--min-hostgroup, --max-hostgroup <i>&lt;numhosts&gt;</i></code></label>
+						<label for="hostgroup">Hostgroup: <code>--min-hostgroup, --max-hostgroup <em>&lt;numhosts&gt;</em></code></label>
 						
-						<label for="paralelism">Paralell probes: <code>--min-parallelism, --max-parallelism <i>&lt;numprobes&gt;</i></code></label>
+						<label for="paralelism">Paralell probes: <code>--min-parallelism, --max-parallelism <em>&lt;numprobes&gt;</em></code></label>
 						
-						<label for="timeout">Probe timeout: <code>--initial-rtt-timeout, --min-rtt-timeout, --max-rtt-timeout <i>&lt;time&gt;</i></code></label>
+						<label for="timeout">Probe timeout: <code>--initial-rtt-timeout, --min-rtt-timeout, --max-rtt-timeout <em>&lt;time&gt;</em></code></label>
 						
-						<label for="retries">Max retries: <code>--max-retries <i>&lt;numtries&gt;</i></code></label>
+						<label for="retries">Max retries: <code>--max-retries <em>&lt;numtries&gt;</em></code></label>
 						
-						<label for="hostTimeout">Max host timeout: <code>--host-timeout <i>&lt;time&gt;</i></code></label>
+						<label for="hostTimeout">Max host timeout: <code>--host-timeout <em>&lt;time&gt;</em></code></label>
 						
-						<label for="scriptTimeout">Max script timeout: <code>--script-timeout <i>&lt;time&gt;</i></code></label>
+						<label for="scriptTimeout">Max script timeout: <code>--script-timeout <em>&lt;time&gt;</em></code></label>
 						
-						<label for="delay">Max probe delay: <code>--scan-delay, --max-scan-delay <i>&lt;time&gt;</i></code></label>
+						<label for="delay">Max probe delay: <code>--scan-delay, --max-scan-delay <em>&lt;time&gt;</em></code></label>
 
-						<label for="rate">Min/max dynamic scan rate: <code>--min-rate, --max-rate <i>&lt;number&gt;</i></code></label>
+						<label for="rate">Min/max dynamic scan rate: <code>--min-rate, --max-rate <em>&lt;number&gt;</em></code></label>
 
 						<label for="defeatRST">Ignore RTS limit time adjustment: <code>--defeat-rst-ratelimit</code></label>
 
 						<label for="defeatICMP">Ignore non reachable UDP adjustment: <code>--defeat-icmp-ratelimit</code></label>
 
-						<label for="nsock">Force nsock engine: <code>--nsock-engine <i>epoll | kqueue | poll | select</i></code></label>
+						<label for="nsock">Force nsock engine: <code>--nsock-engine <em>epoll | kqueue | poll | select</em></code></label>
 
-						<label for="aggressiveness">Aggressiveness: <code>-T <i>paranoid | sneaky | polite | normal | aggressive | insane</i></code></label>
+						<label for="aggressiveness">Aggressiveness: <code>-T <em>paranoid | sneaky | polite | normal | aggressive | insane</em></code></label>
 
 					</div>
 					<div class="tabs-panel " id="panelMisc">
@@ -291,11 +293,11 @@
 						
 						<label for="aScan">Enable aggressive scan: <code>-A</code></label>
 												
-						<label for="dataDir">Specify nmap config dir: <code>--datadir <i>&lt;dir&gt;</i></code></label>
+						<label for="dataDir">Specify nmap config dir: <code>--datadir <em>&lt;dir&gt;</em></code></label>
 
-						<label for="servicedb">Specify nmap service file: <code>--servicedb <i>&lt;file&gt;</i></code></label>
+						<label for="servicedb">Specify nmap service file: <code>--servicedb <em>&lt;file&gt;</em></code></label>
 
-						<label for="versiondb">Specify nmap probesfile: <code>--versiondb <i>&lt;file&gt;</i></code></label>
+						<label for="versiondb">Specify nmap probesfile: <code>--versiondb <em>&lt;file&gt;</em></code></label>
 						
 						<label for="sEth">Send data link layer packages: <code>--send-eth</code></label>
 						
@@ -331,10 +333,12 @@
 			</div>
 			<div class="container" id="out-container">
 			<div class="out_container">
-				<div  th:replace="fragments/output :: output" 
-				th:fragment="output" id="out-fragment">
+				<div  th:replace="fragments/ongoing :: ongoing" 
+				th:fragment="ongoing" id="out-fragment">
 				</div>
-				<div id="out-container-finished">				
+				
+				<div  th:replace="fragments/finished :: finished" 
+				th:fragment="finished" id="out-finished-fragment">
 				</div>
 			</div>
 			</div>			

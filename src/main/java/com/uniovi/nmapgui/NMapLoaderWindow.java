@@ -24,7 +24,7 @@ import javax.swing.JPanel;
 
 import org.springframework.context.ConfigurableApplicationContext;
 
-import com.uniovi.nmapgui.executor.CommandExecutor;
+import com.uniovi.nmapgui.executor.CommandExecutorImpl;
 import com.uniovi.nmapgui.model.Command;
 
 
@@ -41,7 +41,7 @@ public class NMapLoaderWindow extends JFrame {
 	private JButton stop;
 	private ConfigurableApplicationContext springContext;
 	private JButton go;
-	private CommandExecutor executor = new CommandExecutor(new Command("-V"));
+	private CommandExecutorImpl executor = new CommandExecutorImpl(new Command("-V"));
 	private boolean nmapInstalled;
 
 	

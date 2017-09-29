@@ -39,20 +39,18 @@ public class NMapGuiApplicationTests {
     public void updateTest() throws Exception {
     	executeTest();
     	assertNotNull("mockMvc couldn't be initiated", mockMvc);
-    	this.mockMvc.perform(get("/nmap/update?allowDel={allowDel}", false)).andExpect(status().isOk())
+    	this.mockMvc.perform(get("/nmap/update", false)).andExpect(status().isOk())
                 .andExpect(content().string(containsString("<div ")));
     	Thread.sleep(5000);
-    	this.mockMvc.perform(get("/nmap/update?allowDel={allowDel}", true)).andExpect(status().isOk())
+    	this.mockMvc.perform(get("/nmap/update", true)).andExpect(status().isOk())
         .andExpect(content().string(containsString("<div ")));
     }
     @Test
-    public void updateFinishedTest() throws Exception {
+    public void finishedQueueTest() throws Exception {
     	executeTest();
     	assertNotNull("mockMvc couldn't be initiated", mockMvc);
-    	this.mockMvc.perform(get("/nmap/update-finished")).andExpect(status().isOk())
-                .andExpect(content().string(containsString("false")));
     	Thread.sleep(60000);
-    	this.mockMvc.perform(get("/nmap/update-finished")).andExpect(status().isOk())
+    	this.mockMvc.perform(get("/nmap/finishedQueued")).andExpect(status().isOk())
         .andExpect(content().string(containsString("true")));
 
     }

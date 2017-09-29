@@ -18,61 +18,82 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.uniovi.nmapgui.executor.CommandExecutor;
+import com.uniovi.nmapgui.executor.CommandExecutorImpl;
+import com.uniovi.nmapgui.executor.CommandExecutorObserver;
 import com.uniovi.nmapgui.model.Command;
 import com.uniovi.nmapgui.util.Filefinder;
 
 @Controller
-public class WebController {
-	private List<Command> commands;
+public class WebController implements CommandExecutorObserver{
+	private List<Command> ongoingCommands  = new ArrayList<Command>();
+	private List<Command> finishedCommands = new ArrayList<Command>();
 	private Command command;
+	private boolean finishedCommandQueued=false;
 	
 	
     @GetMapping("/nmap")
     public String command(Model model) {
+    	
     	command = new Command();
-    	commands= new ArrayList<Command>();
     	model.addAttribute("command", command);
-    	model.addAttribute("commands", commands);
-
-
+    	model.addAttribute("commands", ongoingCommands);
+    	model.addAttribute("commands", finishedCommands);
+    	finishedCommandQueued=true;
         return "index";
     }
     
     @GetMapping("/nmap-exe")
     public String command(Model model, @RequestParam String code) {
     	command =  new Command(code);
-    	commands.add(0,command);
-    	new CommandExecutor(command).execute();
+    	ongoingCommands.add(0,command);
+    	CommandExecutor executor = new CommandExecutorImpl(command);
+    	executor.addObserver(this);
+    	executor.execute();
     	model.addAttribute("command", command);
-    	model.addAttribute("commands", commands);
+    	model.addAttribute("commands", ongoingCommands);
 
-        return "fragments/contents :: output";
+
+        return "fragments/contents :: ongoing";
+    }
+    
+    @GetMapping("/nmap/removeCommand")
+    public String removeCommand(Model model, @RequestParam int index) {
+    	finishedCommands.remove(index);
+    	model.addAttribute("command", command);
+    	model.addAttribute("finishedCommands", finishedCommands);
+
+
+        return "fragments/contents :: finished";
     }
     
     
     @GetMapping("/nmap/update")
-    public String updateOut(Model model, @RequestParam boolean allowDel) {  
+    public String updateOut(Model model) {  
     	
     	model.addAttribute("command", command);
-    	model.addAttribute("commands", commands);
-    	boolean notFinished=false;
-    	for(Command cmd : commands)
-    		if(notFinished=!cmd.isFinished())
-    			break;
-    	if(!notFinished && allowDel)
-    		commands=new ArrayList<>();
-    	
+    	model.addAttribute("commands", ongoingCommands);
 
-    	return "fragments/contents :: output";
+    	return "fragments/contents :: ongoing";
     }
-
+    
     @GetMapping("/nmap/update-finished")
-    public @ResponseBody Boolean updateEnd() {
-    	for(Command cmd : commands)
-    		if(!cmd.isFinished())
-    			return false;
-    	return true;
+    public String updateEnded(Model model) {  
+    	
+    	model.addAttribute("command", command);
+    	model.addAttribute("finishedCommands", finishedCommands);
+    	finishedCommandQueued=false;
+    	return "fragments/contents :: finished";
     }
+
+    @GetMapping("/nmap/finishedQueued")
+    public @ResponseBody Boolean updateEnd() {
+    	return finishedCommandQueued;
+    }
+    @GetMapping("/nmap/stopUpdating")
+    public @ResponseBody Boolean stopUpdating() {
+    	return ongoingCommands.isEmpty();
+    }
+    
     @GetMapping("/nmap/download/{filename}")
     public ResponseEntity<InputStreamResource> download(@PathVariable("filename") String filename) {
     	
@@ -86,36 +107,15 @@ public class WebController {
 	                .body(resource);
 		} catch (FileNotFoundException e) {
 			return ResponseEntity.notFound().build();
-		}
-    	
+		}    	
     	
     }
     
-//    @GetMapping("/nmap/update-finished-list")
-//    public @ResponseBody List<Integer> updateEndList() {
-//    	List<Integer> ids = new ArrayList<Integer>();
-//    	int index=0;
-//    	for(Command cmd : commands)
-//    	{
-//    		if(!cmd.isFinished())
-//    			ids.add(++index);
-//    		else if(!cmd.isChkUpdateFlag()){
-//    			cmd.setChkUpdateFlag(true);
-//    			ids.add(++index);
-//    		}
-//    	}
-//    	return ids;
-//    }
-//    
-//    @GetMapping("/nmap/updateid")
-//    public String updateOut(Model model, @RequestParam int id) {  
-//    	model.addAttribute("command", command);
-//    	model.addAttribute("commands", commands);
-//
-//
-//    	return "index :: out"+id;
-//    }
-//    
-//    
+    
+    public void finishedCommand(Command cmd){
+    	ongoingCommands.remove(cmd);
+    	finishedCommands.add(0,cmd);
+    	finishedCommandQueued = true;
+    }
 
 }

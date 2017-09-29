@@ -18,6 +18,7 @@ If you have any questions about NMapGUI usage or want to get in contact with me,
 
 
 #### Features
+* Cross-platform (You can use it on Linux, Windows, MacOs, etc.)
 * Multiple command execution at the same time.
 * Standard NMap output.
 * HTML report NMap output.
@@ -37,7 +38,11 @@ If you have any questions about NMapGUI usage or want to get in contact with me,
 | __Graph output__ | :white_check_mark: | :sparkles::white_check_mark::sparkles: |
 | __Unnecessary tabs and menus__ | :white_check_mark: | :no_entry_sign: |
 | __Installation method__ | Installer | Portable |
+| __Cross-platform__ | Compiled<sup></sup>__⁽*⁾__ | Unique jar<sup></sup>__⁽*⁾__|
 
+\* Compiled: Custom file for each OS
+
+\* Unique jar: Unique file for any OS
 ## Screenshots
 ![nmapgui](https://raw.githubusercontent.com/wiki/danicuestasuarez/NMapGUI/images/NMapGUI.png)
 ![nmapgui](https://raw.githubusercontent.com/wiki/danicuestasuarez/NMapGUI/images/NMapGUIHTML.png)
@@ -54,7 +59,7 @@ On progress: Menu creation
 
 ### Starting the application
 
-For the moment, you will have to execute the jar file. If you have java properly configured in your Linux system, it should work just by double-clicking the jar file. Otherwise, you will have to launch it with your console. For that I recommend the following command: 
+For the moment, you will have to execute the jar file. If you have java properly configured in your system, it should work just by double-clicking the jar file. Otherwise, you will have to launch it with your console. For that I recommend the following command on Linux: 
  
 `nohup java -jar nmapGUI-0.4.1-snapshot.jar $`   
 

@@ -25,8 +25,8 @@ import com.uniovi.nmapgui.util.Filefinder;
 
 @Controller
 public class WebController implements CommandExecutorObserver{
-	private List<Command> ongoingCommands;
-	private List<Command> finishedCommands;
+	private List<Command> ongoingCommands  = new ArrayList<Command>();
+	private List<Command> finishedCommands = new ArrayList<Command>();
 	private Command command;
 	private boolean finishedCommandQueued=false;
 	
@@ -35,11 +35,10 @@ public class WebController implements CommandExecutorObserver{
     public String command(Model model) {
     	
     	command = new Command();
-    	ongoingCommands= new ArrayList<Command>();
-    	finishedCommands= new ArrayList<Command>();
     	model.addAttribute("command", command);
     	model.addAttribute("commands", ongoingCommands);
-
+    	model.addAttribute("commands", finishedCommands);
+    	finishedCommandQueued=true;
         return "index";
     }
     
@@ -108,8 +107,7 @@ public class WebController implements CommandExecutorObserver{
 	                .body(resource);
 		} catch (FileNotFoundException e) {
 			return ResponseEntity.notFound().build();
-		}
-    	
+		}    	
     	
     }
     
@@ -119,17 +117,5 @@ public class WebController implements CommandExecutorObserver{
     	finishedCommands.add(0,cmd);
     	finishedCommandQueued = true;
     }
-
-    
-//    @GetMapping("/nmap/updateid")
-//    public String updateOut(Model model, @RequestParam int id) {  
-//    	model.addAttribute("command", command);
-//    	model.addAttribute("commands", commands);
-//
-//
-//    	return "index :: out"+id;
-//    }
-//    
-//    
 
 }

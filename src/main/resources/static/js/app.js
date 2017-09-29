@@ -1,9 +1,12 @@
 $(document).ready(function() {
 	$(document).foundation();
+	stopUpdating();
+	startUpdating();
 });
 
 
 var loop;
+var tempScrollTop;
 
 
 $(function() {
@@ -97,89 +100,75 @@ function maximizeAction() {
 }
 
 function performPost() {
+	updateOngoing()
+	updateFinished();
+		
+}
+
+function updateOngoing(){
 	/*If backend tells the app that some command is finished*/
 	/* Updates output from backend */
 	var settingsEnd = {
-		type : "GET",
-		url : "/nmap/stopUpdating"
-	};
+			type : "GET",
+			url : "/nmap/stopUpdating"
+		};
 	/* And writes it on its place */
 	$.ajax(settingsEnd).done(function(result) {
 		if (result===true){
-			if(loop!=null){
-				clearInterval(loop);
-			}
+			stopUpdating();
 		}
 		/* Updates output from backend */
 		var settings = {
 			type : "GET",
 			url : "/nmap/update"
 		};
-		var settingsFinished = {
-				type : "GET",
-				url : "/nmap/finishedQueued"
-		};
-		/* And writes it on its place */
-		$.ajax(settings).done(function(result) {
-			var tempScrollTop = $("#out-fragment").scrollTop();
-			$("#out-fragment").replaceWith(result);
-			$("#out-fragment").scrollTop(tempScrollTop);
-		});
+		
 		
 		/* And writes it on its place */
-		$.ajax(settingsFinished).done(function(result) {
-			if (result===true){
-				/* Updates output from backend */
-				var settings = {
-					type : "GET",
-					url : "/nmap/update-finished"
-				};
-				/* And writes it on its place */
-				$.ajax(settings).done(function(result) {
-					var tempScrollTop = $("#out-finished-fragment").scrollTop();
-						$("#out-finished-fragment").replaceWith(result);
-						$("#out-finished-fragment .loading").addClass("loaded").removeClass("loading");
-						$("#out-finished-fragment").on("click", ".command-sidebar-button", outputToggleMenu);
-						$("#out-finished-fragment").on("click", ".command-action-close", closeAction);
-						$("#out-finished-fragment").on("click", ".command-action-minimize", minimizeAction);
-						$("#out-finished-fragment").on("click", ".command-action-maximize", maximizeAction);
-						$("#out-finished-fragment").scrollTop(tempScrollTop);
-
-				});					
-			}
+		$.ajax(settings).done(function(result) {
+			tempScrollTop = $("#out-fragment").scrollTop();
+			$("#out-fragment").replaceWith(result);
+			$("#out-fragment").scrollTop(tempScrollTop);
 		});
 	});		
 }
 
+function updateFinished(){
+	/*If backend tells the app that some command is finished*/
+	/* Updates output from backend */
+	var settingsFinished = {
+			type : "GET",
+			url : "/nmap/finishedQueued"
+	};
+	/* And writes it on its place */
+	$.ajax(settingsFinished).done(function(result) {
+		if (result===true){
+			/* Updates output from backend */
+			var settings = {
+				type : "GET",
+				url : "/nmap/update-finished"
+			};
+			/* And writes it on its place */
+			$.ajax(settings).done(function(result) {
+				var tempScrollTop = $("#out-finished-fragment").scrollTop();
+					$("#out-finished-fragment").replaceWith(result);
+					enableOutputActions();
+			});					
+		}
+	});
+}
 
-//var outputList = [];
-//var counter = 0;
 
-//function updateElements() {
-//	
-//	var updateList = {
-//			type : "GET",
-//			url : "/nmap/update-finished-list"
-//		};
-//		/* And writes it on its place */
-//	$.ajax(updateList).done(function(resultList) {			
-//		outputList=resultList;
-//	});
-//		
-//	for (var i = 0; i < outputList.length; i++) {		
-//		var settings = {
-//				type : "GET",
-//				url : "/nmap/updateid" + "?id=" + outputList[i]
-//			};
-//		/* And writes it on its place */
-//		$.ajax(settings).done(function(result) {
-//			$("#out" + outputList[i]).html(result);
-//		});
-//	}	
-//	
-//	
-//	
-//}
+function enableOutputActions(){
+	$("#out-finished-fragment .loading").addClass("loaded").removeClass("loading");
+	$("#out-finished-fragment").on("click", ".command-sidebar-button", outputToggleMenu);
+	$("#out-finished-fragment").on("click", ".command-action-close", closeAction);
+	$("#out-finished-fragment").on("click", ".command-action-minimize", minimizeAction);
+	$("#out-finished-fragment").on("click", ".command-action-maximize", maximizeAction);
+	$("#out-finished-fragment").scrollTop(tempScrollTop);}
+
+
+
 function startLoop() {
 
 	/* Get Url to send the command */
@@ -196,23 +185,19 @@ function startLoop() {
 	$.ajax(settings).done(
 		function(){
 			/* Stops any current output refreshing and starts live feed from console */
-			if (loop != null){
-				clearInterval(loop);
-			}
-			
-			//counter++;
-			//var div=document.createElement("div");
-			//div.setAttribute("id", "out" + counter);
-						//
-			//div.className = "single-output";
-			//outputList.push(counter);
-			//
-			//  $("#out-fragment").append(div);
-			//
-			performPost();
-			loop = window.setInterval(performPost, 2000);				
+			stopUpdating();
+			startUpdating();					
 		});
 	}
 
+function startUpdating(){
+	performPost();
+	loop = window.setInterval(performPost, 2000);
+}
 
+function stopUpdating(){
+	if (loop != null){
+		clearInterval(loop);
+	}
+}
 

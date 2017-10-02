@@ -61,7 +61,7 @@ On progress: Menu creation
 
 For the moment, you will have to execute the jar file. If you have java properly configured in your system, it should work just by double-clicking the jar file. Otherwise, you will have to launch it with your console. For that I recommend the following command on Linux: 
  
-`nohup java -jar nmapGUI-0.4.1-snapshot.jar $`   
+`nohup java -jar nmapGUI-0.5.1-snapshot.jar $`   
 
 as it will let you close the console and still use the app.
 

@@ -46,9 +46,7 @@ public class WebController implements CommandExecutorObserver{
     public String command(Model model, @RequestParam String code) {
     	command =  new Command(code);
     	ongoingCommands.add(0,command);
-    	CommandExecutor executor = new CommandExecutorImpl(command);
-    	executor.addObserver(this);
-    	executor.execute();
+    	executeCommand(command);
     	model.addAttribute("command", command);
     	model.addAttribute("commands", ongoingCommands);
 
@@ -116,6 +114,12 @@ public class WebController implements CommandExecutorObserver{
     	ongoingCommands.remove(cmd);
     	finishedCommands.add(0,cmd);
     	finishedCommandQueued = true;
+    }
+    
+    public void executeCommand(Command command){
+    	CommandExecutor executor = new CommandExecutorImpl(command);
+    	executor.addObserver(this);
+    	executor.execute();
     }
 
 }

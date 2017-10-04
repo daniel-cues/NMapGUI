@@ -151,7 +151,8 @@
 				  	</div>
 					<div class="tabs-panel " id="panelList">
 						<h3>Script list</h3>
-						<ul class="collapsibleList">
+						<input type="text" id="scriptFilter" onkeyup="scriptFilter()" placeholder="Search for script..."></input>
+						<ul class="collapsibleList" id="scriptList">
 						    <li th:each="cat : ${scriptCategories}"  th:inline="text">
 						    	[[${cat.key}]]
 						        <ul>

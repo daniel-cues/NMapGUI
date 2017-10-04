@@ -202,3 +202,36 @@ function stopUpdating(){
 	}
 }
 
+function scriptFilter() {
+    // Declare variables
+    var input, filter, li, a, i, categories;
+    input = document.getElementById('scriptFilter');
+    filter = input.value.toLowerCase();
+    categories = $("#scriptList > li");
+
+    // Loop through all list items, and hide those who don't match the search query   
+    
+    for (i = 0; i < categories.length; i++) {
+    	var scripts = categories.eq(i).find("li");
+    	var remove = true;
+    	var last = 0;
+    	for (j = 0; j < scripts.length; j++) {
+        	scripts.eq(j).removeClass("lastScript")
+	        if (scripts[j]["innerText" in scripts[j] ? "innerText" : "textContent"].toLowerCase().indexOf(filter) > -1) {
+	        	scripts[j].style.display = "";
+	            remove = false;
+	            last=j;
+	        } else {
+	        	scripts[j].style.display = "none";
+	        }
+    	}
+    	scripts.eq(last).addClass("lastScript")
+    	if (remove){
+    		categories[i].style.display="none"
+    	}
+    	else {
+    		categories[i].style.display= "";
+        }
+    }
+}
+

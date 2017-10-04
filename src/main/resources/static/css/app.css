@@ -267,7 +267,7 @@ li.collapsibleListClosed{
   	list-style-image : url('/img/button-closed.png');
   	cursor           : pointer;
 }
-.collapsibleList li li:last-child {
+.collapsibleList li li:last-child , .collapsibleList li li.lastScript{
     background-image: url('/img/list-item-last.png');
 }
 

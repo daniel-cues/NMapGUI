@@ -14,8 +14,16 @@ import com.uniovi.nmapgui.model.ScriptHelp;
 
 public class InitialConfigurator implements CommandExecutorObserver{
 
-	Map<String,List<Script>> scriptCategories = new HashMap<>();
+	private Map<String,List<Script>> scriptCategories = new HashMap<>();
 	
+	public Map<String, List<Script>> getScriptCategories() {
+		return scriptCategories;
+	}
+
+	public void setScriptCategories(Map<String, List<Script>> scriptCategories) {
+		this.scriptCategories = scriptCategories;
+	}
+
 	public void configure(){
 		Command command =  new Command("--script-help all");
 		CommandExecutor executor = new CommandExecutorImpl(command);

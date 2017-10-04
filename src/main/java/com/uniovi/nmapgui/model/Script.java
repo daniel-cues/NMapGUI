@@ -10,7 +10,19 @@ public class Script {
 	List<String> categories;
 	String description;
 	String filename;
+	String name;
 	
+	public String getName() {
+		if (name!=null)
+			return name;
+		String[] split = filename.split("/");
+		return split[split.length-1];
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
 	@XmlElementWrapper(name="categories", required=false)
 	@XmlElement(name="category", required=false)
 	public List<String> getCategories() {

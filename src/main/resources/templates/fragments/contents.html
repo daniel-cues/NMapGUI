@@ -127,7 +127,7 @@
 			<div>
 				<ul class="tabs" data-tabs="true" id="script-tabs">
 				  <li class="tabs-title is-active"><a href="#panelGeneral" aria-selected="true">General</a></li>
-				  <!--  <li class="tabs-title"><a href="#panelList">Script list</a></li>-->
+				  <li class="tabs-title"><a href="#panelList">Script list</a></li>
 				</ul>
 				<div class="tabs-content vertical_menu" data-tabs-content="script-tabs">
 				  	<div class="tabs-panel is-active" id="panelGeneral">
@@ -151,6 +151,14 @@
 				  	</div>
 					<div class="tabs-panel " id="panelList">
 						<h3>Script list</h3>
+						<ul class="collapsibleList">
+						    <li th:each="cat : ${scriptCategories}"  th:inline="text">
+						    	[[${cat.key}]]
+						        <ul>
+						            <li class="file" th:each="script : ${cat.value}" th:text="${script.name}"></li>
+						        </ul>
+						    </li>
+						</ul>
 					</div>
 				</div>
 			</div>

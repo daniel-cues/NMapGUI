@@ -1,5 +1,6 @@
 $(document).ready(function() {
 	$(document).foundation();
+	CollapsibleLists.apply();
 	stopUpdating();
 	startUpdating();
 });

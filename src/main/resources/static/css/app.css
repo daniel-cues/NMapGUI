@@ -58,6 +58,7 @@ body{
 .off-canvas-content  {
 	  transition: width 0.5s ease;	
 }
+
 .position-left.is-open ~ .off-canvas-content { 
 	transform: translateX(500px);
     width: calc(100% - 500px);
@@ -239,9 +240,47 @@ body{
 }
 
 
+.collapsibleList li{
+    padding: 0;
+    margin:0;
+    background: none no-repeat top left;
+	list-style-image : none;
+	list-style-type : none;	
+  	list-style-position: inside;
+  	line-height: 1.5;
+}
 
-    
-    
+.collapsibleList li li {
+    background-image: url('/img/list-item.png');
+    cursor: auto;
+    padding-left: 2.5em;
+    font-size: 14px;
+}
+
+li.collapsibleListOpen{
+	background-image : url('/img/list-item-root.png');
+  	list-style-image : url('/img/button-open.png');
+  	cursor           : pointer;
+}
+
+li.collapsibleListClosed{
+  	list-style-image : url('/img/button-closed.png');
+  	cursor           : pointer;
+}
+.collapsibleList li li:last-child {
+    background-image: url('/img/list-item-last.png');
+}
+
+.collapsibleList {
+	margin: 0;
+    padding: 0;
+}
+ 
+.collapsibleList ul {
+	margin: 0;
+    padding: 0;
+}
+
     
     
     

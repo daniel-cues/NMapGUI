@@ -321,7 +321,7 @@ li.collapsibleListClosed{
 
 /* Tooltip text */
 .scriptTooltip .tooltiptext {
-    visibility: hidden;
+    display: none;
     width: 350px;
     background-color: #555;
     color: #fff;
@@ -337,7 +337,6 @@ li.collapsibleListClosed{
     top: 125%;
     left: 30%;
     margin-left: -60px;
-    overflow: hidden;
 
     /* Fade in tooltip */
     opacity: 0;
@@ -358,7 +357,7 @@ li.collapsibleListClosed{
 
 /* Show the tooltip text when you mouse over the tooltip container */
 .scriptTooltip:hover .tooltiptext {
-    visibility: visible;
+    display: block;
     opacity: 1;
 }
     

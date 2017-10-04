@@ -124,7 +124,7 @@
 					<h2>Script Scan</h2>
 				</div>
 			</div>
-			<div>
+			<div class="menu-content">
 				<ul class="tabs" data-tabs="true" id="script-tabs">
 				  <li class="tabs-title is-active"><a href="#panelGeneral" aria-selected="true">General</a></li>
 				  <li class="tabs-title"><a href="#panelList">Script list</a></li>
@@ -149,10 +149,10 @@
 					
 						
 				  	</div>
-					<div class="tabs-panel " id="panelList">
+					<div class="tabs-panel" id="panelList">
 						<h3>Script list</h3>
 						<input type="text" id="scriptFilter" onkeyup="scriptFilter()" placeholder="Search for script..."></input>
-						<ul class="collapsibleList" id="scriptList">
+						<ul class="collapsibleList insideScroll" id="scriptList">
 						    <li th:each="cat : ${scriptCategories}"  th:inline="text">
 						    	[[${cat.key}]]
 						        <ul>

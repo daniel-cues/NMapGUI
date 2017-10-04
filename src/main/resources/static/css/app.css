@@ -281,6 +281,54 @@ li.collapsibleListClosed{
     padding: 0;
 }
 
+/* Tooltip container */
+.scriptTooltip {
+    position: relative;
+    display: inline-block;
+}
+
+/* Tooltip text */
+.scriptTooltip .tooltiptext {
+    visibility: hidden;
+    width: 350px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    padding: 5px;
+    border-radius: 6px;
+    font-size: 12px;
+    
+
+    /* Position the tooltip text */
+    position: absolute;
+    z-index: 1;
+    top: 125%;
+    left: 30%;
+    margin-left: -60px;
+    overflow: hidden;
+
+    /* Fade in tooltip */
+    opacity: 0;
+    transition: opacity 1s;
+}
+
+/* Tooltip arrow */
+.scriptTooltip .tooltiptext::before {
+    content: "";
+    position: absolute;
+    bottom: 100%;
+    left: 20px;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent #555 transparent;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.scriptTooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+}
     
     
     

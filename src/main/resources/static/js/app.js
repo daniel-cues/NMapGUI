@@ -217,7 +217,7 @@ function scriptFilter() {
     	var last = 0;
     	for (j = 0; j < scripts.length; j++) {
         	scripts.eq(j).removeClass("lastScript")
-	        if (scripts[j]["innerText" in scripts[j] ? "innerText" : "textContent"].toLowerCase().indexOf(filter) > -1) {
+	        if (scripts[j]["textContent"].toLowerCase().indexOf(filter) > -1) {
 	        	scripts[j].style.display = "";
 	            remove = false;
 	            last=j;

@@ -16,7 +16,7 @@ public class Script {
 		if (name!=null)
 			return name;
 		String[] split = filename.split("/");
-		return split[split.length-1];
+		return name=split[split.length-1].replace(".nse", "");
 	}
 
 	public void setName(String name) {

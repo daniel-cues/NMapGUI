@@ -101,7 +101,7 @@ body{
 	font-weight: bold;	
 }
 
-.vertical_menu label > *:hover{
+.vertical_menu label > *:hover, #scriptList li li .scriptTooltip:hover{
 	color: #c6a5e5;	
 	font-weight: bold;
 	cursor: pointer;

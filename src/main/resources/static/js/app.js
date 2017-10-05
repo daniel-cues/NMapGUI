@@ -42,6 +42,27 @@ $(function() {
 
 
 $(function() {
+	$("#scriptList li li .scriptTooltip").click(
+		function() {
+			var option = $(this).clone().children().remove().end().text().replace(/\s/g, '');
+			if(!$('#command').val().includes(option)){
+				if($('#command').val().includes("--script")){
+					$('#command').val($('#command').val().replace("--script ","--script "+option+","));
+				}
+				else{
+					$('#command').val("--script "+option + " " + $('#command').val());
+				}				
+			}
+			else{
+				$('#command').val($('#command').val().replace(option+",",''));
+				$('#command').val($('#command').val().replace(","+option,''));
+				$('#command').val($('#command').val().replace("--script "+option,''));
+			}
+		});
+});
+
+
+$(function() {
 	$(".vertical_menu select").change(
 		function() {
 			var select  = $(this).get(0);

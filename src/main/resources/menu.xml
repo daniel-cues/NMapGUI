@@ -1,0 +1,72 @@
+<menu>
+	<submenu title="Host Discovery" img="/img/network.png">
+		<category title="Target specification">	
+			<option name="Hosts file" command="-iL" parameters="inputFilename"/>
+			<option name="Random hosts in range" command="-iR" parameters="num hosts"/>			
+		</category>
+		<category title="Hosts scan">
+		</category>
+	</submenu>
+	<submenu title="Port Scan" img="/img/ethernet.png">
+		<category title="Port selection">
+			<categoryOption name="Fast Scan" command="-F"/>
+			<option name="Ports" command="-p" parameters="port ranges"/>
+			<option name="Excluded ports/protocols" command="--exclude-ports" parameters="port ranges"/>
+		</category>
+		<category title="IP protocol scan">
+			<categoryOption command="-sO"/>
+		</category>
+		<category title="Port scan">
+			<subcategory title="TCP Scan Type">
+				<selection>
+					<option name="None" command="none"/>				
+					<option name="TCP Syn" command="-sS"/>
+					<option name="TCP Connection" command="-sT"/>
+					<option name="TCP Null" command="-sN"/>
+					<option name="TCP Fin" command="-sF"/>
+					<option name="TCP Xmas" command="-sX"/>
+					<option name="TCP Ack" command="-sA"/>	
+					<option name="TCP Window" command="-sW"/>
+					<option name="TCP Maimon" command="-sM"/>				
+				</selection>
+			</subcategory>
+			<subcategory title="UDP Scan">
+				<option name="Enable UDP scan" command="-sU"/>			
+			</subcategory>
+			<subcategory title="SCTP Scan Type">
+				<selection>
+					<option name="None" command="none"/>				
+					<option name="SCTP Init" command="-sY"/>
+					<option name="SCTP Cookie Echo" command="-sZ"/>			
+				</selection>
+			</subcategory>
+		</category>
+	</submenu>
+	<submenu title="Script Scan" img="/img/script.png" tabbed="true">
+		<category title="General">	
+			<option name="Run default set scripts" command="-sC" />
+			<option name="Run script" command="--script" parameters="filename | category | dir | expr"/>			
+		</category>
+		<category title="Scripts List">
+			<serverContent id="scriptList"/>
+		</category>
+	</submenu>
+	<submenu title="Version/OS Information" img="/img/assignment.png">
+		<category title="Version detection">
+			<categoryOption command="-sV"/>			
+			<option name="Include port 9100 in scan" command="--allports"/>
+			<option name="Intensity" command="--version-intensity" parameters="intensity"/>			
+		</category>
+		<category title="Hosts scan">
+		</category>
+	</submenu>
+	<submenu title="Other Options" img="/img/settings.png" tabbed="true">
+		<category title="Output">	
+			<option name="Verbosity" command="-v, -vv , -vvv, [...] -v" parameters="level"/>
+			<option name="Debug"  	 command="-d, -dd , -ddd, [...] -d" parameters="level"/>			
+		</category>
+		<category title="Spoofing"></category>
+		<category title="Performance"></category>
+		<category title="Misc"></category>
+	</submenu>
+</menu>

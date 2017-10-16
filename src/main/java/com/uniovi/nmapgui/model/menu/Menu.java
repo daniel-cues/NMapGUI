@@ -1,7 +1,7 @@
-package com.uniovi.nmapgui.model;
+package com.uniovi.nmapgui.model.menu;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -9,14 +9,14 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name="menu")
 public class Menu {
 	
-	Set<Submenu> submenus = new HashSet<>();
+	List<Submenu> submenus = new ArrayList<>();
 
 	@XmlElement(name="submenu")
-	public Set<Submenu> getSubmenus() {
+	public List<Submenu> getSubmenus() {
 		return submenus;
 	}
 
-	public void setSubmenus(Set<Submenu> submenus) {
+	public void setSubmenus(List<Submenu> submenus) {
 		this.submenus = submenus;
 	}
 

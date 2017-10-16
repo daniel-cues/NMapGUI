@@ -1,5 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <menu>
-	<submenu title="Host Discovery" img="/img/network.png">
+	<submenu id="hostCanvas" title="Host Discovery" img="/img/network.png">
 		<category title="Target specification">	
 			<option name="Hosts file" command="-iL" parameters="inputFilename"/>
 			<option name="Random hosts in range" command="-iR" parameters="num hosts"/>			
@@ -7,7 +8,7 @@
 		<category title="Hosts scan">
 		</category>
 	</submenu>
-	<submenu title="Port Scan" img="/img/ethernet.png">
+	<submenu id="portCanvas" title="Port Scan" img="/img/ethernet.png">
 		<category title="Port selection">
 			<categoryOption name="Fast Scan" command="-F"/>
 			<option name="Ports" command="-p" parameters="port ranges"/>
@@ -42,7 +43,7 @@
 			</subcategory>
 		</category>
 	</submenu>
-	<submenu title="Script Scan" img="/img/script.png" tabbed="true">
+	<submenu id="scriptCanvas" title="Script Scan" img="/img/script.png" tabbed="true">
 		<category title="General">	
 			<option name="Run default set scripts" command="-sC" />
 			<option name="Run script" command="--script" parameters="filename | category | dir | expr"/>			
@@ -51,7 +52,7 @@
 			<serverContent id="scriptList"/>
 		</category>
 	</submenu>
-	<submenu title="Version/OS Information" img="/img/assignment.png">
+	<submenu id="versionOsCanvas" title="Version/OS Information" img="/img/assignment.png">
 		<category title="Version detection">
 			<categoryOption command="-sV"/>			
 			<option name="Include port 9100 in scan" command="--allports"/>
@@ -60,7 +61,7 @@
 		<category title="Hosts scan">
 		</category>
 	</submenu>
-	<submenu title="Other Options" img="/img/settings.png" tabbed="true">
+	<submenu id="optionCanvas" title="Other Options" img="/img/settings.png" tabbed="true">
 		<category title="Output">	
 			<option name="Verbosity" command="-v, -vv , -vvv, [...] -v" parameters="level"/>
 			<option name="Debug"  	 command="-d, -dd , -ddd, [...] -d" parameters="level"/>			

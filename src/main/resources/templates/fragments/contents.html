@@ -5,7 +5,26 @@
   <body>
 	<div th:fragment="contents" id="contents" class="content off-canvas-wrapper">
 		
-		
+		<div class="off-canvas position-left" th:each="submenu : ${menu.submenus}"
+			th:id="${submenu.id}" data-off-canvas="true" data-close-on-click="false"
+			data-content-overlay="false">
+			
+			<div class="menu-bar">
+				<div class="wrapper">
+					<h2 th:text="${submenu.title}"></h2>
+				</div>
+			</div>
+			<div th:switch="${submenu.tabbed}"> 
+				<div th:case="false" class="vertical_menu">
+					<th:block  th:each="category : ${submenu.categories}">
+						<h3 th:text="${category.title}"></h3>
+						<label th:each="option : ${category.options}" for="${option.command}" th:inline="text">
+							[[${option.name}]]: <code>[[${option.command}]] <em>[[${option.parameters}]]</em></code></label>
+					</th:block>
+				</div>		
+			</div>				
+		</div>
+			
 		<div class="off-canvas position-left" id="hostCanvas"
 			data-off-canvas="true" data-close-on-click="false"
 			data-content-overlay="false">
@@ -65,6 +84,7 @@
 					<h2>Port Scan</h2>
 				</div>
 			</div>
+			
 			<div class="vertical_menu">
 				<h3>Port selection
 					<label for="fastscan">Fast Scan: <code>-F</code></label>
@@ -157,7 +177,7 @@
 						    	[[${cat.key}]]
 						        <ul>
 						            <li class="file" th:each="script : ${cat.value}" th:inline="text">
-							            <div class="scriptTooltip">[[${script.name}]]<span class="tooltiptext" th:text="${script.descriptio b n}"></span>
+							            <div class="scriptTooltip">[[${script.name}]]<span class="tooltiptext" th:text="${script.description}"></span>
 										</div>
 						            </li>
 						        </ul>

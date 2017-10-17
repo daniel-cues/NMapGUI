@@ -18,7 +18,7 @@
 			<categoryOption command="-sO"/>
 		</category>
 		<category title="Port scan">
-			<subcategory title="TCP Scan Type">
+			<category title="TCP Scan Type">
 				<selection>
 					<option name="None" command="none"/>				
 					<option name="TCP Syn" command="-sS"/>
@@ -30,25 +30,25 @@
 					<option name="TCP Window" command="-sW"/>
 					<option name="TCP Maimon" command="-sM"/>				
 				</selection>
-			</subcategory>
-			<subcategory title="UDP Scan">
+			</category>
+			<category title="UDP Scan">
 				<option name="Enable UDP scan" command="-sU"/>			
-			</subcategory>
-			<subcategory title="SCTP Scan Type">
+			</category>
+			<category title="SCTP Scan Type">
 				<selection>
 					<option name="None" command="none"/>				
 					<option name="SCTP Init" command="-sY"/>
 					<option name="SCTP Cookie Echo" command="-sZ"/>			
 				</selection>
-			</subcategory>
+			</category>
 		</category>
 	</submenu>
 	<submenu id="scriptCanvas" title="Script Scan" img="/img/script.png" tabbed="true">
-		<category title="General">	
+		<category title="General" id="panelGeneral">	
 			<option name="Run default set scripts" command="-sC" />
 			<option name="Run script" command="--script" parameters="filename | category | dir | expr"/>			
 		</category>
-		<category title="Scripts List">
+		<category title="Scripts List" id="panelList">
 			<serverContent id="scriptList"/>
 		</category>
 	</submenu>
@@ -62,12 +62,12 @@
 		</category>
 	</submenu>
 	<submenu id="optionCanvas" title="Other Options" img="/img/settings.png" tabbed="true">
-		<category title="Output">	
+		<category title="Output" id="panelOutput">	
 			<option name="Verbosity" command="-v, -vv , -vvv, [...] -v" parameters="level"/>
 			<option name="Debug"  	 command="-d, -dd , -ddd, [...] -d" parameters="level"/>			
 		</category>
-		<category title="Spoofing"></category>
-		<category title="Performance"></category>
-		<category title="Misc"></category>
+		<category title="Spoofing" id="panelSpoof"></category>
+		<category title="Performance" id="panelPerformance"></category>
+		<category title="Misc" id="panelMisc"></category>
 	</submenu>
 </menu>

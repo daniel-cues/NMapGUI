@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  </head>
+  <body>
+  	<!-- 
+  		category: 	Category to be represented
+  		level: 		Heading deepening level
+  	-->
+  	<th:block  th:fragment="categoryFrag (category,level)">
+  		<th:block th:switch="${level}">   	
+    		<h3 th:case="1" th:text="${category.title}"></h3>
+    		<h4 th:case="2" th:text="${category.title}"></h4>
+    		<h5 th:case="3" th:text="${category.title}"></h5>
+    		<h6 th:case="4" th:text="${category.title}"></h6>
+    	</th:block>
+    	
+     	<th:block th:each="subcategory : ${category.subcategories}">
+     		<th:block th:replace="fragments/category :: categoryFrag (${subcategory},${level+1})"/>
+		</th:block>
+		<label th:each="option : ${category.options}" for="${option.command}" th:inline="text">
+			[[${option.name}]]: <code>[[${option.command}]] <em>[[${option.parameters}]]</em></code>
+		</label>
+					
+  	</th:block>
+  </body>
+</html>

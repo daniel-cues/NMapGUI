@@ -12,6 +12,7 @@ public class Category {
 	List<Option> options = new ArrayList<>();
 	List<Option> categoryOptions = new ArrayList<>();
 	List<Select> selects = new ArrayList<>();
+	List<ServerContent> serverContents= new ArrayList<>();
 
 	String title;
 	String id;
@@ -68,4 +69,14 @@ public class Category {
 	public void setCategoryOptions(List<Option> categoryOptions) {
 		this.categoryOptions = categoryOptions;
 	}
+
+	@XmlElement(name="serverContent")
+	public List<ServerContent> getServerContents() {
+		return serverContents;
+	}
+
+	public void setServerContents(List<ServerContent> serverContents) {
+		this.serverContents = serverContents;
+	}
+
 }

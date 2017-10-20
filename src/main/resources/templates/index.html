@@ -1,6 +1,5 @@
 <!doctype html>
-<html xmlns:th="http://www.thymeleaf.org" class="no-js" lang="en"
-	dir="ltr">
+<html xmlns:th="http://www.thymeleaf.org" class="no-js" lang="en" dir="ltr">
 <head>
 	<meta charset="utf-8" />
 	<meta http-equiv="x-ua-compatible" content="ie=edge" />
@@ -15,35 +14,15 @@
 	<script th:src="@{js/vendor/CollapsibleLists.js}" src="../../js/vendor/CollapsibleLists.js"></script>	
 	<script th:src="@{js/app.js}" src="../../js/app.js"></script>
 	<script th:src="@{js/graph.js}" src="../../js/graph.js"></script>
-	
-	
-	
 </head>
 <body>
 	<div id="sidebar" class="sidebar">
 		<div>
 			<img th:src="@{img/nmap-logo-256x256.png}" src="../../img/nmap-logo-256x256.png"  />
 		</div>
-		<button class="sidebar-button" id="hostButton" type="button"
-			data-toggle="hostCanvas">
-			<img th:src="@{img/network.png}" src="../../img/network.png" />
-		</button>
-		<button class="sidebar-button" id="portButton" type="button"
-			data-toggle="portCanvas">
-			<img th:src="@{img/ethernet.png}" src="../../img/ethernet.png" />
-		</button>
-		
-		<button class="sidebar-button" id="scriptButton" type="button"
-			data-toggle="scriptCanvas">
-			<img th:src="@{img/script.png}" src="../../img/script.png" />
-		</button>
-		<button class="sidebar-button" id="versionOsButton" type="button"
-			data-toggle="versionOsCanvas">
-			<img th:src="@{img/assignment.png}" src="../../img/assignment.png" />
-		</button>
-		<button class="sidebar-button" id="optionButton" type="button"
-			data-toggle="optionCanvas">
-			<img th:src="@{img/settings.png}" src="../../img/settings.png" />
+		<button class="sidebar-button" th:id="${submenu.id + 'Button'}" type="button"
+			th:each="submenu : ${menu.submenus}" th:attr="data-toggle=${submenu.id}">
+			<img th:src="@{${submenu.img}}"/>
 		</button>
 	</div>
 	<div class="header-bar"></div>

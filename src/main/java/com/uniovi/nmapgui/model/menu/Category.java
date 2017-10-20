@@ -10,6 +10,9 @@ public class Category {
 	
 	List<Category> subcategories = new ArrayList<>();
 	List<Option> options = new ArrayList<>();
+	List<Option> categoryOptions = new ArrayList<>();
+	List<Select> selects = new ArrayList<>();
+
 	String title;
 	String id;
 
@@ -46,5 +49,23 @@ public class Category {
 
 	public void setId(String id) {
 		this.id = id;
+	}
+
+	@XmlElement(name="selection")
+	public List<Select> getSelects() {
+		return selects;
+	}
+
+	public void setSelects(List<Select> selects) {
+		this.selects = selects;
+	}
+
+	@XmlElement(name="categoryOption")
+	public List<Option> getCategoryOptions() {
+		return categoryOptions;
+	}
+
+	public void setCategoryOptions(List<Option> categoryOptions) {
+		this.categoryOptions = categoryOptions;
 	}
 }

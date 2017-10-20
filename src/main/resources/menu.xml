@@ -2,10 +2,24 @@
 <menu>
 	<submenu id="hostCanvas" title="Host Discovery" img="/img/network.png">
 		<category title="Target specification">	
-			<option name="Hosts file" command="-iL" parameters="inputFilename"/>
+			<option name="Hosts file" command="-iL" parameters="input file name"/>
 			<option name="Random hosts in range" command="-iR" parameters="num hosts"/>			
+			<option name="Exclude hosts" command="--exclude" parameters="num hosts"/>			
+			<option name="Exclude host file" command="--excludefile" parameters="exclude file name"/>			
 		</category>
 		<category title="Hosts scan">
+			<option name="Only list host" command="-sL"/>
+			<option name="Skip port scan" command="-sn"/>
+			<option name="Skip host scan" command="-Pn"/>
+			<option name="Ping type (SYN,ACK,UDP &amp; SCTP)" command="-PS/PA/PU/PY" parameters="port list"/>
+			<option name="Perform echo request (Echo, timestamp &amp; mask)" command="-PE/PP/PM"/>
+			<option name="IP protocol ping scan" command="-PO" parameters="protocol number list"/>
+			<option name="Local network ARP ping" command="-PR"/>
+			<option name="Disable default local network ARP ping" command="--disable-arp-ping"/>
+			<option name="Show route to host" command="--traceroute"/>		
+			<option name="Disable/Force reverse DNS" command="-n/-R"/>
+			<option name="Use system's DNS resolver" command="--system-dns"/>
+			<option name="Use this DNS" command="-dns-servers" parameters="server1 [,...]"/>
 		</category>
 	</submenu>
 	<submenu id="portCanvas" title="Port Scan" img="/img/ethernet.png">
@@ -13,14 +27,16 @@
 			<categoryOption name="Fast Scan" command="-F"/>
 			<option name="Ports" command="-p" parameters="port ranges"/>
 			<option name="Excluded ports/protocols" command="--exclude-ports" parameters="port ranges"/>
+			<option name="Derandomize order" command="-r"/>
+			<option name="Ratio bigger than" command="--port-ratio" parameters="ratio"/>
+			<option name="Top ports" command="--top-ports" parameters="n"/>
 		</category>
 		<category title="IP protocol scan">
 			<categoryOption command="-sO"/>
 		</category>
 		<category title="Port scan">
 			<category title="TCP Scan Type">
-				<selection>
-					<option name="None" command="none"/>				
+				<selection name="TCP">
 					<option name="TCP Syn" command="-sS"/>
 					<option name="TCP Connection" command="-sT"/>
 					<option name="TCP Null" command="-sN"/>
@@ -29,14 +45,15 @@
 					<option name="TCP Ack" command="-sA"/>	
 					<option name="TCP Window" command="-sW"/>
 					<option name="TCP Maimon" command="-sM"/>				
+				  <!-- <option value="idle">TCP Idle</option> -->
 				</selection>
+				<option name="Enable FTP relay (disables TCP scan)" command="-b" parameters="FTP relay host"/>						
 			</category>
 			<category title="UDP Scan">
 				<option name="Enable UDP scan" command="-sU"/>			
 			</category>
 			<category title="SCTP Scan Type">
-				<selection>
-					<option name="None" command="none"/>				
+				<selection name="STCP">
 					<option name="SCTP Init" command="-sY"/>
 					<option name="SCTP Cookie Echo" command="-sZ"/>			
 				</selection>
@@ -47,6 +64,10 @@
 		<category title="General" id="panelGeneral">	
 			<option name="Run default set scripts" command="-sC" />
 			<option name="Run script" command="--script" parameters="filename | category | dir | expr"/>			
+			<option name="Script args" command="--script-args" parameters="&lt;n1&gt;=&lt;v1&gt;, &lt;n4&gt;={&lt;v4&gt;,&lt;v5&gt;}"/>			
+			<option name="Help" command="--script-help" parameters="filename | category | dir | expr"/>			
+			<option name="Enable script trace" command="--script-trace" />
+			<option name="Update script database" command="--script-updatedb" />
 		</category>
 		<category title="Scripts List" id="panelList">
 			<serverContent id="scriptList"/>
@@ -57,17 +78,70 @@
 			<categoryOption command="-sV"/>			
 			<option name="Include port 9100 in scan" command="--allports"/>
 			<option name="Intensity" command="--version-intensity" parameters="intensity"/>			
+			<option name="Light scan" command="--version-light"/>
+			<option name="Heavy scan" command="--version-heavy"/>
+			<option name="Debug info about version" command="--version-trace"/>
 		</category>
-		<category title="Hosts scan">
+		<category title="OS detection">
+			<categoryOption command="-O"/>
+			<option name="Limit OS scan" command="--osscan-limit"/>
+			<option name="Guess results" command="--osscan-guess/--fuzzy"/>
+			<option name="Max number of tries" command="--max-os-tries" parameters="tries"/>			
 		</category>
 	</submenu>
 	<submenu id="optionCanvas" title="Other Options" img="/img/settings.png" tabbed="true">
 		<category title="Output" id="panelOutput">	
 			<option name="Verbosity" command="-v, -vv , -vvv, [...] -v" parameters="level"/>
-			<option name="Debug"  	 command="-d, -dd , -ddd, [...] -d" parameters="level"/>			
+			<option name="Debug" command="-d, -dd , -ddd, [...] -d" parameters="level"/>			
+			<option name="Include port reason" command="--reason"/>			
+			<option name="Stats every"  command="--stats-every" parameters="time"/>	
+			<option name="Traces" command="--packet-trace, --script-trace, --version-trace"/>	
+			<option name="Only show open and unfiltered ports" command="--open"/>			
+			<option name="Show interface list only" command="--iflist"/>			
+			<option name="Resume scan"  command="--resume" parameters="filename"/>	
 		</category>
-		<category title="Spoofing" id="panelSpoof"></category>
-		<category title="Performance" id="panelPerformance"></category>
-		<category title="Misc" id="panelMisc"></category>
+		<category title="Spoofing" id="panelSpoof">
+			<option name="Fragment packages"  command="-f/--mtu" parameters="offset"/>			
+			<option name="Use decoys"  command="-D" parameters="decoy1, [RND] [RND:number] [ME] [...]"/>			
+			<option name="Spoof IP"  command="-S" parameters="IP address"/>	
+			<option name="Choose interface"  command="-e" parameters="interface"/>			
+			<option name="Output port"  command="--source-port/-g" parameters="port number"/>			
+			<option name="Include hexadecimal payload"  command="--data" parameters="hex string"/>	
+			<option name="Include string payload"  command="--data-string" parameters="string"/>	
+			<option name="Include random payload"  command="--data-length" parameters="length"/>	
+			<option name="Change TTL"  command="--ttl" parameters="time"/>	
+			<option name="Spoof MAC"  command="--spoof-mac" parameters="MAC, prefix, or vendor name"/>	
+			<option name="Use proxies"  command="--proxies" parameters="comma separated proxy URL list"/>	
+			<option name="Send wrong checksum"  command="--badsum"/>
+			<option name="Use Adler32 for checksum"  command="--adler32"/>		
+		</category>
+		<category title="Performance" id="panelPerformance">
+			<option name="Hostgroup"  command="--min-hostgroup, --max-hostgroup" parameters="numhosts"/>
+			<option name="Paralell probes"  command="--min-parallelism, --max-parallelism" parameters="numprobs"/>			
+			<option name="Probe timeout"  command="--initial-rtt-timeout, --min-rtt-timeout, --max-rtt-timeout" parameters="time"/>			
+			<option name="Max retries"  command="--max-retries" parameters="numtries"/>			
+			<option name="Max host timeout"  command="--host-timeout" parameters="time"/>			
+			<option name="Max script timeout"  command="--script-timeout" parameters="time"/>			
+			<option name="Max probe timeout"  command="--scan-delay, --max-scan-delay" parameters="time"/>			
+			<option name="Min/max dynamic scan rate"  command="--min-rate, --max-rate" parameters="number"/>			
+			<option name="Ignore RTS limit time adjustment"  command="--defeat-rst-ratelimit"/>			
+			<option name="Ignore non reachable UDP adjustment"  command="--defeat-icmp-ratelimit"/>			
+			<option name="Force nsock engine"  command="--nsock-engine" parameters="epoll | kqueue | poll | select"/>			
+			<option name="Aggressiveness"  command="-T" parameters="paranoid | sneaky | polite | normal | aggressive | insane"/>			
+		</category>
+		<category title="Miscellaneous" id="panelMisc">
+			<option name="Enable IPv6 scan"  command="-6"/>	
+			<option name="Enable aggressive scan"  command="-A"/>	
+			<option name="Specify nmap config dir"  command="--datadir" parameters="directory"/>			
+			<option name="Specify nmap service file"  command="--servicedb" parameters="file"/>			
+			<option name="Specify nmap probes file"  command="--versiondb" parameters="directory"/>			
+			<option name="Send data link layer packages"  command="--send-eth"/>	
+			<option name="Send network layer packages"  command="--send-ip"/>	
+			<option name="Assume privileges"  command="--privileged"/>	
+			<option name="Assume not having privileges"  command="--unprivileged"/>	
+			<option name="Release memory before closing"  command="--release-memory"/>	
+			<option name="Show version"  command="-V/--version"/>	
+			<option name="Show help"  command="-h/--help"/>	
+		</category>
 	</submenu>
 </menu>

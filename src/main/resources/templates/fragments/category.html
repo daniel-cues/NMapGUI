@@ -9,19 +9,36 @@
   	-->
   	<th:block  th:fragment="categoryFrag (category,level)">
   		<th:block th:switch="${level}">   	
-    		<h3 th:case="1" th:text="${category.title}"></h3>
-    		<h4 th:case="2" th:text="${category.title}"></h4>
-    		<h5 th:case="3" th:text="${category.title}"></h5>
-    		<h6 th:case="4" th:text="${category.title}"></h6>
+    		<h3 th:case="1" th:inline="text">
+		    	[[${category.title}]] <label th:replace="fragments/category :: optionsLabel (${category.categoryOptions})"/>
+			</h3>
+    		<h4 th:case="2" th:inline="text">
+		    	[[${category.title}]] <label th:replace="fragments/category :: optionsLabel (${category.categoryOptions})"/>
+			</h4>
+    		<h5 th:case="3" th:inline="text">
+		    	[[${category.title}]] <label th:replace="fragments/category :: optionsLabel (${category.categoryOptions})"/>
+			</h5>
+    		<h6 th:case="4" th:inline="text">
+		    	[[${category.title}]] <label th:replace="fragments/category :: optionsLabel (${category.categoryOptions})"/>
+			</h6>
     	</th:block>
     	
      	<th:block th:each="subcategory : ${category.subcategories}">
      		<th:block th:replace="fragments/category :: categoryFrag (${subcategory},${level+1})"/>
 		</th:block>
-		<label th:each="option : ${category.options}" for="${option.command}" th:inline="text">
-			[[${option.name}]]: <code>[[${option.command}]] <em>[[${option.parameters}]]</em></code>
-		</label>
+		<select th:each="select : ${category.selects}" th:name="${select.name}">
+			<option value="none" selected="selected">None</option>
+			<option th:each="option : ${select.options}" th:value="${option.command}" th:inline="text">
+				[[${option.name}]]: [[${option.command}]] [[${option.parameters!=''? '&lt;'+option.parameters+'&gt;':''}]]
+			</option>
+		</select>
+		
+		<label th:replace="fragments/category :: optionsLabel (${category.options})"/>
 					
   	</th:block>
+  	
+  	<label th:fragment="optionsLabel (options)" th:each="option : ${options}" th:for="${option.command}" th:inline="text">
+		[[${option.name}]]: <code>[[${option.command}]] <em>[[${option.parameters!=''? '&lt;'+option.parameters+'&gt;':''}]]</em></code>
+	</label>  	
   </body>
 </html>

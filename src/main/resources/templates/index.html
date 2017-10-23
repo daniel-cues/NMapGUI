@@ -1,13 +1,13 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org" class="no-js" lang="en" dir="ltr">
 <head>
-	<meta charset="utf-8" />
-	<meta http-equiv="x-ua-compatible" content="ie=edge" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta charset="utf-8"/>
+	<meta http-equiv="x-ua-compatible" content="ie=edge"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 	<title>NMap GUI</title>
-	<link rel="stylesheet" th:href="@{css/foundation.min.css}"	href="../../css/foundation.min.css" />
+	<link rel="stylesheet" th:href="@{css/foundation.min.css}"	href="../../css/foundation.min.css"/>
 	<link rel="stylesheet" th:href="@{css/app.css}" href="../../css/app.css" />
-	<link rel="stylesheet" th:href="@{css/output-fragment.css}" href="../../css/output-fragment.css" />
+	<link rel="stylesheet" th:href="@{css/output-fragment.css}" href="../../css/output-fragment.css"/>
 	<script th:src="@{js/vendor/jquery-3.2.1.min.js}" src="../../js/vendor/jquery-3.2.1.min.js"></script>
 	<script th:src="@{js/vendor/foundation.min.js}"	src="../../js/vendor/foundation.min.js"></script>
 	<script th:src="@{js/vendor/d3.v3.min.js}" src="../../js/vendor/d3.v3.min.js"></script>	
@@ -26,7 +26,6 @@
 		</button>
 	</div>
 	<div class="header-bar"></div>
-	<div th:replace="fragments/contents :: contents" ></div>
-	
+	<div th:replace="fragments/contents :: contents" ></div>	
 </body>
 </html>

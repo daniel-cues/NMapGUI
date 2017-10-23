@@ -1,23 +1,22 @@
 <!DOCTYPE html>
 <html>
-  <head>
-  </head>
+  <head></head>
   <body>
   	<!--category: 	Category to be represented
   		level: 		Heading deepening level-->
   	<th:block  th:fragment="categoryFrag (category,level)">
   		<th:block th:switch="${level}">   	
     		<h3 th:case="1" th:inline="text">
-		    	[[${category.title}]] <label th:replace="fragments/category :: optionsLabel (${category.categoryOptions})"/>
+		    	[[${category.title}]] <label th:replace="fragments/category :: optionsLabel (${category.categoryOptions})"/></label>
 			</h3>
 			<h4 th:case="2" th:inline="text">
-		    	[[${category.title}]] <label th:replace="fragments/category :: optionsLabel (${category.categoryOptions})"/>
+		    	[[${category.title}]] <label th:replace="fragments/category :: optionsLabel (${category.categoryOptions})"/></label>
 			</h4>
     		<h5 th:case="3" th:inline="text">
-		    	[[${category.title}]] <label th:replace="fragments/category :: optionsLabel (${category.categoryOptions})"/>
+		    	[[${category.title}]] <label th:replace="fragments/category :: optionsLabel (${category.categoryOptions})"></label>
 			</h5>
     		<h6 th:case="4" th:inline="text">
-		    	[[${category.title}]] <label th:replace="fragments/category :: optionsLabel (${category.categoryOptions})"/>
+		    	[[${category.title}]] <label th:replace="fragments/category :: optionsLabel (${category.categoryOptions})"/></label>
 			</h6>
     	</th:block>    	
      	<th:block th:each="subcategory : ${category.subcategories}">
@@ -30,7 +29,7 @@
 			</option>
 		</select>
 		
-		<label th:replace="fragments/category :: optionsLabel (${category.options})"/>
+		<label th:replace="fragments/category :: optionsLabel (${category.options})"></label>
 		
 		<th:block th:each="content : ${category.serverContents}">
 			<th:block th:replace="@{'fragments/serverContent/' + ${content.id}} :: ${content.id}"/>

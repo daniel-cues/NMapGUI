@@ -8,11 +8,11 @@ import javax.xml.bind.annotation.XmlElement;
 
 public class Submenu {
 	
-	List<Category> categories = new ArrayList<>();
-	String title;
-	String img;
-	String id;
-	boolean tabbed;
+	private List<Category> categories = new ArrayList<>();
+	private String title;
+	private String img;
+	private String id;
+	private boolean tabbed;
 
 	@XmlElement(name="category")
 	public List<Category> getCategories() {

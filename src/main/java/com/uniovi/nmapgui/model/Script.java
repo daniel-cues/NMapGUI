@@ -7,10 +7,10 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 
 public class Script {
-	List<String> categories;
-	String description;
-	String filename;
-	String name;
+	private List<String> categories;
+	private String description;
+	private String filename;
+	private String name;
 	
 	public String getName() {
 		if (name!=null)

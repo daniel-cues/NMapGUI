@@ -8,14 +8,14 @@ import javax.xml.bind.annotation.XmlElement;
 
 public class Category {
 	
-	List<Category> subcategories = new ArrayList<>();
-	List<Option> options = new ArrayList<>();
-	List<Option> categoryOptions = new ArrayList<>();
-	List<Select> selects = new ArrayList<>();
-	List<ServerContent> serverContents= new ArrayList<>();
+	private List<Category> subcategories = new ArrayList<>();
+	private List<Option> options = new ArrayList<>();
+	private List<Option> categoryOptions = new ArrayList<>();
+	private List<Select> selects = new ArrayList<>();
+	private List<ServerContent> serverContents= new ArrayList<>();
 
-	String title;
-	String id;
+	private String title;
+	private String id;
 
 	@XmlElement(name="category")
 	public List<Category> getSubcategories() {

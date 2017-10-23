@@ -5,9 +5,6 @@ import javax.xml.bind.annotation.XmlRegistry;
 @XmlRegistry
 public class ExecutionObjectFactory {
 
-	public ExecutionObjectFactory() {
-	}
-	
 	public Scan createScan() {
 	    return new Scan();
 	}

@@ -31,7 +31,7 @@ public class WebController implements CommandExecutorObserver{
 	private List<Command> finishedCommands = new ArrayList<Command>();
 	private Command command;
 	private boolean finishedCommandQueued=false;
-	InitialConfigurator config = new InitialConfigurator();
+	private InitialConfigurator config = new InitialConfigurator();
 
 	
 	@PostConstruct

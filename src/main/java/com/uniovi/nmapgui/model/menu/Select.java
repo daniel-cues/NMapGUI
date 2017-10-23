@@ -8,8 +8,8 @@ import javax.xml.bind.annotation.XmlElement;
 
 public class Select {
 	
-	List<Option> options = new ArrayList<>();
-	String name;
+	private List<Option> options = new ArrayList<>();
+	private String name;
 
 
 	@XmlElement(name="option")

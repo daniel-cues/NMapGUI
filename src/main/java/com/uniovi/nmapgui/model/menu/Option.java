@@ -3,9 +3,9 @@ package com.uniovi.nmapgui.model.menu;
 import javax.xml.bind.annotation.XmlAttribute;
 
 public class Option {
-	String name="";
-	String command;
-	String parameters="";
+	private String name="";
+	private String command;
+	private String parameters="";
 	
 	@XmlAttribute(name="name")
 	public String getName() {

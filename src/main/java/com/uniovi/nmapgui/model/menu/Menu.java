@@ -9,7 +9,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name="menu")
 public class Menu {
 	
-	List<Submenu> submenus = new ArrayList<>();
+	private List<Submenu> submenus = new ArrayList<>();
 
 	@XmlElement(name="submenu")
 	public List<Submenu> getSubmenus() {

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head></head>
+  <body>
+  	<!--category: 	Category to be represented
+  		level: 		Heading deepening level-->
+  	<th:block  th:fragment="categoryFrag (category,level)">
+  		<th:block th:switch="${level}">   	
+    		<h3 th:case="1" th:inline="text">
+		    	[[${category.title}]] <label th:replace="fragments/category :: optionsLabel (${category.categoryOptions})"/></label>
+			</h3>
+			<h4 th:case="2" th:inline="text">
+		    	[[${category.title}]] <label th:replace="fragments/category :: optionsLabel (${category.categoryOptions})"/></label>
+			</h4>
+    		<h5 th:case="3" th:inline="text">
+		    	[[${category.title}]] <label th:replace="fragments/category :: optionsLabel (${category.categoryOptions})"></label>
+			</h5>
+    		<h6 th:case="4" th:inline="text">
+		    	[[${category.title}]] <label th:replace="fragments/category :: optionsLabel (${category.categoryOptions})"/></label>
+			</h6>
+    	</th:block>    	
+     	<th:block th:each="subcategory : ${category.subcategories}">
+     		<th:block th:replace="fragments/category :: categoryFrag (${subcategory},${level+1})"/>
+		</th:block>
+		<select th:each="select : ${category.selects}" th:name="${select.name}">
+			<option value="none" selected="selected">None</option>
+			<option th:each="option : ${select.options}" th:value="${option.command}" th:inline="text">
+				[[${option.name}]]: [[${option.command}]] [[${option.parameters!=''? '&lt;'+option.parameters+'&gt;':''}]]
+			</option>
+		</select>
+		
+		<label th:replace="fragments/category :: optionsLabel (${category.options})"></label>
+		
+		<th:block th:each="content : ${category.serverContents}">
+			<th:block th:replace="@{'fragments/serverContent/' + ${content.id}} :: ${content.id}"/>
+		</th:block>					
+  	</th:block>
+  	
+  	<label th:fragment="optionsLabel (options)" th:each="option : ${options}" th:for="${option.command}" th:inline="text">
+		[[${option.name}]]: <code>[[${option.command}]] <em>[[${option.parameters!=''? '&lt;'+option.parameters+'&gt;':''}]]</em></code>
+	</label>  	
+  </body>
+</html>

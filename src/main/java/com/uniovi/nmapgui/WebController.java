@@ -45,6 +45,7 @@ public class WebController implements CommandExecutorObserver{
     	command = new Command();
     	model.addAttribute("command", command);
     	model.addAttribute("scriptCategories", config.getScriptCategories());
+    	model.addAttribute("menu", config.getMenu());
     	model.addAttribute("commands", ongoingCommands);
     	model.addAttribute("commands", finishedCommands);
     	finishedCommandQueued=true;

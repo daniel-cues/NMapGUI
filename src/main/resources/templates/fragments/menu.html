@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  </head>
+  <body>
+    <div class="off-canvas position-left" th:each="submenu : ${menu.submenus}"
+		th:id="${submenu.id}" data-off-canvas="true" data-close-on-click="false"
+		data-content-overlay="false" th:fragment="menu">
+		<!-- Submenu title -->
+		<div class="menu-bar">
+			<div class="wrapper">
+				<h2 th:text="${submenu.title}"></h2>
+			</div>
+		</div>
+		<!-- Choose betwen an ordinary or a tabbed submenu  -->
+		<th:block th:switch="${submenu.tabbed}"> 
+			<!-- Ordinary submenu -->
+			<div th:case="false" class="vertical_menu">
+				<th:block  th:each="category : ${submenu.categories}">
+					<th:block th:replace="fragments/category :: categoryFrag (${category},1)" />
+				</th:block>
+				
+			</div>
+			<!-- Tabbed submenu -->
+			<div th:case="true" class="menu-content">
+				<ul class="tabs" data-tabs="true" th:id="${submenu.id} + '-tabs'">
+				  <li th:each="category : ${submenu.categories}" th:class="'tabs-title '+ (${categoryStat.first}?'is-active':'')">
+				  	<a th:href="'#'+${category.id}" th:text="${category.title}" th:attr="aria-selected=${categoryStat.first}? 'true'"></a>
+				  </li>
+				</ul>
+				<div class="tabs-content vertical_menu" th:attr="data-tabs-content= ${submenu.id} + '-tabs'">
+				  	<div th:id="${category.id}" th:each="category : ${submenu.categories}" 
+				  		th:class="'tabs-panel '+ (${categoryStat.first}?'is-active':'')"> 		
+						<th:block th:replace="fragments/category :: categoryFrag (${category},1)" />
+				  	</div>
+				</div>	
+			</div>	
+		</th:block>
+	</div>
+  </body>
+</html>

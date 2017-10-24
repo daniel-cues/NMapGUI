@@ -122,7 +122,7 @@ function maximizeAction() {
 }
 
 function performPost() {
-	updateOngoing()
+	updateOngoing();
 	updateFinished();
 		
 }
@@ -225,7 +225,7 @@ function stopUpdating(){
 
 function scriptFilter() {
 	// Declare variables
-	var input, filter, li, a, i, categories;
+	var input, filter, li, a, categories;
 	input = document.getElementById("scriptFilter");
 	filter = input.value.toLowerCase();
 	categories = $("#scriptList > li");

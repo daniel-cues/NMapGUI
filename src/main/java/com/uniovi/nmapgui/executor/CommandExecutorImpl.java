@@ -1,6 +1,11 @@
 package com.uniovi.nmapgui.executor;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.StringReader;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -8,10 +13,14 @@ import java.util.Date;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Unmarshaller;
 
-import com.uniovi.nmapgui.model.*;
+import com.uniovi.nmapgui.model.Command;
+import com.uniovi.nmapgui.model.ExecutionObjectFactory;
+import com.uniovi.nmapgui.model.Scan;
+import com.uniovi.nmapgui.model.ScriptHelp;
 import com.uniovi.nmapgui.util.TransInfoHtml;
 
 public class CommandExecutorImpl  implements CommandExecutor{
@@ -160,12 +169,16 @@ public class CommandExecutorImpl  implements CommandExecutor{
 		        while ((sCurrentLine = br.readLine()) != null) {
 		            sb.append(sCurrentLine);
 		    }		
-	        JAXBContext jaxbContext = JAXBContext.newInstance(Scan.class);
+	        
+	        JAXBContext jaxbContext = JAXBContext.newInstance(ExecutionObjectFactory.class);
 	        Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
 	        StringReader reader = new StringReader(sb.toString());
-	        Scan scan = (Scan) unmarshaller.unmarshal(reader);
+	        Object execution = unmarshaller.unmarshal(reader);
 		    cmd.getOutput().setXml(TransInfoHtml.transformToHtml(sb.toString()));
-		    cmd.getOutput().setScan(scan);
+		    if (execution instanceof Scan)
+		    	cmd.getOutput().setScan((Scan) execution);
+		    else if (execution instanceof ScriptHelp)
+		    	cmd.getOutput().setScriptHelp((ScriptHelp) execution);
 
 		} catch (Exception e) {
 			e.printStackTrace();

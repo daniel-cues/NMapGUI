@@ -7,6 +7,8 @@ public class Output {
 	private String xml="";
 	private String filename;
 	private Scan scan = new Scan();
+	private ScriptHelp scriptHelp = new ScriptHelp();
+
 	private String id =  "el3-"+Math.abs(new Random().nextInt());
 
     public String getText() {
@@ -48,6 +50,14 @@ public class Output {
 
 	public void setScan(Scan scan) {
 		this.scan = scan;
+	}
+
+	public ScriptHelp getScriptHelp() {
+		return scriptHelp;
+	}
+
+	public void setScriptHelp(ScriptHelp scriptHelp) {
+		this.scriptHelp = scriptHelp;
 	}
 
 }

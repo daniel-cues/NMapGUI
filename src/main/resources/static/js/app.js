@@ -1,5 +1,6 @@
 $(document).ready(function() {
 	$(document).foundation();
+	CollapsibleLists.apply();
 	stopUpdating();
 	startUpdating();
 });
@@ -30,11 +31,32 @@ $(function() {
 	$(".vertical_menu label").click(
 		function() {
 			var option = $(this).children("code").text();
-			if(!$('#command').val().includes(option)){
-				$('#command').val(option + " " + $('#command').val());
+			if(!$("#command").val().includes(option)){
+				$("#command").val(option + " " + $("#command").val());
 			}
 			else{
-				$('#command').val($('#command').val().replace(option+" ",''));
+				$("#command").val($("#command").val().replace(option+" ",""));
+			}
+		});
+});
+
+
+$(function() {
+	$("#scriptList li li .scriptTooltip").click(
+		function() {
+			var option = $(this).clone().children().remove().end().text().replace(/\s/g, "");
+			if(!$("#command").val().includes(option)){
+				if($("#command").val().includes("--script")){
+					$("#command").val($("#command").val().replace("--script ","--script "+option+","));
+				}
+				else{
+					$("#command").val("--script "+option + " " + $("#command").val());
+				}				
+			}
+			else{
+				$("#command").val($("#command").val().replace(option+",",""));
+				$("#command").val($("#command").val().replace(","+option,""));
+				$("#command").val($("#command").val().replace("--script "+option,""));
 			}
 		});
 });
@@ -44,14 +66,14 @@ $(function() {
 	$(".vertical_menu select").change(
 		function() {
 			var select  = $(this).get(0);
-			var options = select.options
+			var options = select.options;
 			var option  = options[select.selectedIndex].value;
 			
 			for(var i=0; i<options.length; i++){
-				$('#command').val($('#command').val().replace(options[i].value+" ",''));
+				$("#command").val($("#command").val().replace(options[i].value+" ",""));
 			}
 			if(option!=="none")	
-				$('#command').val(option + " " + $('#command').val());
+				$("#command").val(option + " " + $("#command").val());
 			
 		});
 });
@@ -100,7 +122,7 @@ function maximizeAction() {
 }
 
 function performPost() {
-	updateOngoing()
+	updateOngoing();
 	updateFinished();
 		
 }
@@ -201,3 +223,35 @@ function stopUpdating(){
 	}
 }
 
+function scriptFilter() {
+	// Declare variables
+	var input, filter, li, a, categories;
+	input = document.getElementById("scriptFilter");
+	filter = input.value.toLowerCase();
+	categories = $("#scriptList > li");
+
+	// Loop through all list items, and hide those who don't match the search query   
+
+	for (var i = 0; i < categories.length; i++) {
+		var scripts = categories.eq(i).find("li");
+		var remove = true;
+		var last = 0;
+		for (var j = 0; j < scripts.length; j++) {
+			scripts.eq(j).removeClass("lastScript");
+			if (scripts[j]["textContent"].toLowerCase().indexOf(filter) > -1) {
+				scripts[j].style.display = "";
+				remove = false;
+				last=j;
+			} else {
+				scripts[j].style.display = "none";
+			}
+		}
+		scripts.eq(last).addClass("lastScript");
+		if (remove){
+			categories[i].style.display="none";
+		}
+		else {
+			categories[i].style.display= "";
+		}
+	}
+}

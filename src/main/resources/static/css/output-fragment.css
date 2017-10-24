@@ -104,7 +104,6 @@
 	color: limegreen;
     unicode-bidi: embed;
     font-family: monospace;
-    white-space: pre;
     font-weight: 900;
 }
 .result .closed{

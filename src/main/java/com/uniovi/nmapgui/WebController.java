@@ -7,6 +7,8 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
+
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -29,13 +31,21 @@ public class WebController implements CommandExecutorObserver{
 	private List<Command> finishedCommands = new ArrayList<Command>();
 	private Command command;
 	private boolean finishedCommandQueued=false;
+	private InitialConfigurator config = new InitialConfigurator();
+
 	
+	@PostConstruct
+	public void init(){
+		config.configure();
+	}
 	
     @GetMapping("/nmap")
     public String command(Model model) {
     	
     	command = new Command();
     	model.addAttribute("command", command);
+    	model.addAttribute("scriptCategories", config.getScriptCategories());
+    	model.addAttribute("menu", config.getMenu());
     	model.addAttribute("commands", ongoingCommands);
     	model.addAttribute("commands", finishedCommands);
     	finishedCommandQueued=true;
@@ -46,13 +56,10 @@ public class WebController implements CommandExecutorObserver{
     public String command(Model model, @RequestParam String code) {
     	command =  new Command(code);
     	ongoingCommands.add(0,command);
-    	CommandExecutor executor = new CommandExecutorImpl(command);
-    	executor.addObserver(this);
-    	executor.execute();
+    	executeCommand(command);
     	model.addAttribute("command", command);
     	model.addAttribute("commands", ongoingCommands);
-
-
+    	
         return "fragments/contents :: ongoing";
     }
     
@@ -116,6 +123,12 @@ public class WebController implements CommandExecutorObserver{
     	ongoingCommands.remove(cmd);
     	finishedCommands.add(0,cmd);
     	finishedCommandQueued = true;
+    }
+    
+    public void executeCommand(Command command){
+    	CommandExecutor executor = new CommandExecutorImpl(command);
+    	executor.addObserver(this);
+    	executor.execute();
     }
 
 }

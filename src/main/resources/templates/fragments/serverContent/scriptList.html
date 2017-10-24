@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  </head>
+  <body>
+    <th:block th:fragment="scriptList" class="serverContent">
+    	<input type="text" id="scriptFilter" onkeyup="scriptFilter()" placeholder="Search for script..."></input>
+		<ul class="collapsibleList insideScroll" id="scriptList">
+		    <li th:each="cat : ${scriptCategories}"  th:inline="text">
+		    	[[${cat.key}]]
+		        <ul>
+		            <li class="file" th:each="script : ${cat.value}" th:inline="text">
+			            <div class="scriptTooltip">[[${script.name}]]<span class="tooltiptext" th:text="${script.description}"></span>
+						</div>
+		            </li>
+		        </ul>
+		    </li>
+		</ul>
+  	</th:block>
+  </body>
+</html>

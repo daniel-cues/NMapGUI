@@ -9,7 +9,7 @@
 [![Discord](https://img.shields.io/discord/357162772108148736.svg?colorB=7282ea)](https://discord.gg/5s6kUA6)
 
 
-NMapGUI is an advanced graphical user interface for NMap network analysis tool. It allows to extend and ease the typical usage of NMap by providen a visual and fast interface with the application
+NMapGUI is an advanced graphical user interface for NMap network analysis tool. It allows to extend and ease the typical usage of NMap by providing a visual and fast interface with the application
 
 If you have any questions about NMapGUI usage or want to get in contact with me, please visit:
 
@@ -25,7 +25,7 @@ If you have any questions about NMapGUI usage or want to get in contact with me,
 * Interactive traceroute graph output
 * Saving output as XML.
 * Output minimizing, maximizing and deleting.
-* Menu to find most of nmap options.
+* Menu to find most of nmap options and your system's scripts.
 * Start and stop the webapp at any moment.
 
 ### Zenmap vs NMapGUI 
@@ -33,6 +33,7 @@ If you have any questions about NMapGUI usage or want to get in contact with me,
 | ---: | :---: | :---: |
 | __Multiple parallel commands__ | :no_entry_sign: | :white_check_mark:|
 | __Option menu__ | :no_entry_sign: | :white_check_mark: |
+| __ᴺᴱᵂ System's script list__ | :no_entry_sign: | :white_check_mark: |
 | __Automatic HTML report__ | :no_entry_sign: | :white_check_mark:|
 | __Pretty interface__ | :poop: | :white_check_mark:|
 | __Graph output__ | :white_check_mark: | :sparkles::white_check_mark::sparkles: |
@@ -61,7 +62,7 @@ On progress: Menu creation
 
 For the moment, you will have to execute the jar file. If you have java properly configured in your system, it should work just by double-clicking the jar file. Otherwise, you will have to launch it with your console. For that I recommend the following command on Linux: 
  
-`nohup java -jar nmapGUI-0.5.1-snapshot.jar $`   
+`nohup java -jar nmapGUI-0.6-snapshot.jar $`   
 
 as it will let you close the console and still use the app.
 

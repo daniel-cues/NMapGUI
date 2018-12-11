@@ -6,6 +6,7 @@
 [![Codecov](https://codecov.io/gh/danicuestasuarez/NMapGUI/branch/develop/graph/badge.svg)](https://codecov.io/gh/danicuestasuarez/NMapGUI)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/37479ced18a04d4e8f1c38753b22003c)](https://www.codacy.com/app/danicuestasuarez/NMapGUI?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=danicuestasuarez/NMapGUI&amp;utm_campaign=Badge_Grade)
 [![Issues](https://img.shields.io/github/issues-raw/danicuestasuarez/NMapGUI.svg)](https://github.com/danicuestasuarez/NMapGUI/issues)
+[![Rawsec's CyberSecurity Inventory](https://inventory.rawsec.ml/img/badges/Rawsec-inventoried-FF5050_flat.svg)](http://inventory.rawsec.ml/tools.html#NMapGUI)
 [![Discord](https://img.shields.io/discord/357162772108148736.svg?colorB=7282ea)](https://discord.gg/5s6kUA6)
 
 

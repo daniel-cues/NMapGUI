@@ -11,6 +11,8 @@
 
 NMapGUI is an advanced graphical user interface for NMap network analysis tool. It allows to extend and ease the typical usage of NMap by providing a visual and fast interface with the application
 
+**THIS PROJECT IS CURRENTLY UNMAINTAINED** 
+
 **- For the moment Java8 is required. Later versions not supported (Issue #25) -**
 
 If you have any questions about NMapGUI usage or want to get in contact with me, please visit:
